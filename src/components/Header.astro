@@ -1,0 +1,80 @@
+---
+import { siteConfig } from '../site.config';
+import { withBase } from '../lib/url';
+
+const pathname = Astro.url.pathname;
+const isActive = (path: string) =>
+  pathname === path || (path !== withBase() && pathname.startsWith(path));
+const domainLinks = siteConfig.domains.map((domain) => ({
+  label: domain.shortName,
+  href: withBase(`${domain.key}/`),
+}));
+---
+
+<header class="site-header" data-pagefind-ignore>
+  <div class="header-inner">
+    <a
+      class="brand"
+      href={withBase()}
+      aria-label={`${siteConfig.name} — Trang chủ`}
+    >
+      <span class="brand-mark" aria-hidden="true">KA</span>
+      <span>{siteConfig.name}</span>
+    </a>
+
+    <nav class="desktop-nav" aria-label="Điều hướng chính">
+      <a
+        href={withBase()}
+        aria-current={isActive(withBase()) ? 'page' : undefined}>Trang chủ</a
+      >
+      {
+        domainLinks.map((link) => (
+          <a
+            href={link.href}
+            aria-current={isActive(link.href) ? 'page' : undefined}
+          >
+            {link.label}
+          </a>
+        ))
+      }
+      <span class="nav-future" title="Sẽ có trong Phase 3">Khám phá</span>
+      <a
+        class="nav-search"
+        href={withBase('search/')}
+        aria-current={isActive(withBase('search/')) ? 'page' : undefined}
+      >
+        Tìm kiếm
+      </a>
+    </nav>
+
+    <details class="nav-menu">
+      <summary>Danh mục</summary>
+      <nav aria-label="Điều hướng chính">
+        <a
+          href={withBase()}
+          aria-current={isActive(withBase()) ? 'page' : undefined}>Trang chủ</a
+        >
+        {
+          domainLinks.map((link) => {
+            return (
+              <a
+                href={link.href}
+                aria-current={isActive(link.href) ? 'page' : undefined}
+              >
+                {link.label}
+              </a>
+            );
+          })
+        }
+        <span class="nav-future" title="Sẽ có trong Phase 3">Khám phá</span>
+        <a
+          class="nav-search"
+          href={withBase('search/')}
+          aria-current={isActive(withBase('search/')) ? 'page' : undefined}
+        >
+          Tìm kiếm
+        </a>
+      </nav>
+    </details>
+  </div>
+</header>

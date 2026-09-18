@@ -1,0 +1,78 @@
+---
+import ArticleCard from '../components/ArticleCard.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getPublishedArticles } from '../lib/articles';
+import { withBase } from '../lib/url';
+import { siteConfig } from '../site.config';
+
+const articles = await getPublishedArticles();
+---
+
+<BaseLayout canonicalPath={withBase()}>
+  <section class="hero page-shell">
+    <p class="eyebrow">
+      Kho tri thức mở · 5 lĩnh vực · {articles.length} bài viết
+    </p>
+    <h1>Đọc sâu. Truy nguồn. Giữ khoảng cách với điều chưa biết.</h1>
+    <p class="hero-lead">
+      Knowledge Atlas xuất bản trực tiếp nội dung Markdown trong repository
+      thành một thư viện tĩnh, nhẹ và có thể đọc mà không cần JavaScript.
+    </p>
+    <div class="hero-actions">
+      <a class="button" href={withBase('search/')}>Tìm kiếm toàn bộ</a>
+      <a class="text-link" href="#domains"
+        >Khám phá 5 lĩnh vực <span aria-hidden="true">↓</span></a
+      >
+    </div>
+  </section>
+
+  <section
+    class="page-shell section-block"
+    id="domains"
+    aria-labelledby="domains-title"
+  >
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">Lĩnh vực</p>
+        <h2 id="domains-title">Năm lối vào cùng một kho dữ liệu</h2>
+      </div>
+      <p>
+        Mỗi lĩnh vực giữ ngữ cảnh và cách phân loại riêng; không gộp các thang
+        tier thành một điểm chung.
+      </p>
+    </div>
+    <div class="domain-grid">
+      {
+        siteConfig.domains.map((domain, index) => {
+          const count = articles.filter(
+            (article) => article.data.domain === domain.key,
+          ).length;
+          return (
+            <a
+              class="domain-card"
+              href={withBase(`${domain.key}/`)}
+              style={`--accent: ${domain.accent}`}
+            >
+              <span class="domain-index">0{index + 1}</span>
+              <h3>{domain.name}</h3>
+              <p>{domain.description}</p>
+              <span class="domain-count">{count} bài viết →</span>
+            </a>
+          );
+        })
+      }
+    </div>
+  </section>
+
+  <section class="page-shell section-block" aria-labelledby="recent-title">
+    <div class="section-heading compact">
+      <div>
+        <p class="eyebrow">Gợi ý bắt đầu</p>
+        <h2 id="recent-title">Các bài đọc đầu tiên</h2>
+      </div>
+    </div>
+    <div class="article-list">
+      {articles.slice(0, 6).map((article) => <ArticleCard article={article} />)}
+    </div>
+  </section>
+</BaseLayout>

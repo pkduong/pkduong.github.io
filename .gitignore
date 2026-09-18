@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.astro/
+.npm-cache/
+playwright-report/
+test-results/
+.lighthouseci/
+.DS_Store
+

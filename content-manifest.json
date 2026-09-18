@@ -1,0 +1,178 @@
+[
+  {
+    "sourcePath": "1.ai/1-LLM_GPT-full.md",
+    "id": "ART-AI-LLM-GPT-FULL",
+    "title": "LLM / GPT — Hiểu Từ Gốc Đến Ứng Dụng",
+    "slug": "1-llm-gpt-full",
+    "domain": "ai",
+    "order": 10
+  },
+  {
+    "sourcePath": "1.ai/2-AI-vs-Traditional-Programming.md",
+    "id": "ART-AI-VS-TRADITIONAL-PROGRAMMING",
+    "title": "AI vs Traditional Programming — Hiểu Từ Gốc",
+    "slug": "2-ai-vs-traditional-programming",
+    "domain": "ai",
+    "order": 20
+  },
+  {
+    "sourcePath": "1.ai/3-RAG-Retrieval-Augmented-Generation.md",
+    "id": "ART-AI-RAG-RETRIEVAL-AUGMENTED-GENERATION",
+    "title": "RAG – Retrieval Augmented Generation: Kết Nối AI Với Dữ Liệu Riêng Của Bạn",
+    "slug": "3-rag-retrieval-augmented-generation",
+    "domain": "ai",
+    "order": 30
+  },
+  {
+    "sourcePath": "1.ai/best-practice/1-overview.md",
+    "id": "ART-AI-BEST-PRACTICE-OVERVIEW",
+    "title": "AI Engineer không phải chỉ biết Prompt hay LLM",
+    "slug": "best-practice-1-overview",
+    "domain": "ai",
+    "order": 101
+  },
+  {
+    "sourcePath": "1.ai/best-practice/2-as-team-member.md",
+    "id": "ART-AI-BEST-PRACTICE-TEAM-MEMBER",
+    "title": "Áp dụng AI vào dự án max4-web: Đừng dùng AI như công cụ viết code, hãy dùng như một kỹ sư trong team",
+    "slug": "best-practice-2-as-team-member",
+    "domain": "ai",
+    "order": 102
+  },
+  {
+    "sourcePath": "1.ai/best-practice/3-AI-assisted-software-development.md",
+    "id": "ART-AI-BEST-PRACTICE-SOFTWARE-DEVELOPMENT",
+    "title": "AI-assisted software development",
+    "slug": "best-practice-3-ai-assisted-software-development",
+    "domain": "ai",
+    "order": 103
+  },
+  {
+    "sourcePath": "1.ai/best-practice/4-Spec-Driven-Development.md",
+    "id": "ART-AI-BEST-PRACTICE-SDD",
+    "title": "Spec Driven Development: Cách Team Engineering Hiện Đại Làm Việc Với AI",
+    "slug": "best-practice-4-spec-driven-development",
+    "domain": "ai",
+    "order": 104
+  },
+  {
+    "sourcePath": "1.ai/best-practice/5-Software-Engineering-Future.md",
+    "id": "ART-AI-BEST-PRACTICE-FUTURE",
+    "title": "Tương Lai Software Engineering Trong Thời AI Coding Agents",
+    "slug": "best-practice-5-software-engineering-future",
+    "domain": "ai",
+    "order": 105
+  },
+  {
+    "sourcePath": "1.ai/best-practice/6-as-Power-User.md",
+    "id": "ART-AI-BEST-PRACTICE-POWER-USER",
+    "title": "Dùng AI Như Power User: Context, Prompt, và Iterate Hiệu Quả",
+    "slug": "best-practice-6-as-power-user",
+    "domain": "ai",
+    "order": 106
+  },
+  {
+    "sourcePath": "1.ai/best-practice/7-Code-Refactoring.md",
+    "id": "ART-AI-BEST-PRACTICE-REFACTORING",
+    "title": "AI Code Refactoring — Làm sạch bên trong, giữ nguyên bên ngoài",
+    "slug": "best-practice-7-code-refactoring",
+    "domain": "ai",
+    "order": 107
+  },
+  {
+    "sourcePath": "1.ai/best-practice/8-AI-in-Software-Development-full-SDLC.md",
+    "id": "ART-AI-BEST-PRACTICE-SDLC",
+    "title": "AI in Software Development — Từ Code Generation Đến Toàn Bộ SDLC",
+    "slug": "best-practice-8-ai-in-software-development-full-sdlc",
+    "domain": "ai",
+    "order": 108
+  },
+  {
+    "sourcePath": "1.ai/best-practice/9-Claude-Code-Common-Workflows.md",
+    "id": "ART-AI-BEST-PRACTICE-CLAUDE-WORKFLOWS",
+    "title": "Claude Code - Common Workflows",
+    "slug": "best-practice-9-claude-code-common-workflows",
+    "domain": "ai",
+    "order": 109
+  },
+  {
+    "sourcePath": "1.ai/best-practice/10-AI-Code-Review.md",
+    "id": "ART-AI-BEST-PRACTICE-CODE-REVIEW",
+    "title": "AI Code Review — Part 1: Tổng quan & Workflow thực chiến",
+    "slug": "best-practice-10-ai-code-review",
+    "domain": "ai",
+    "order": 110
+  },
+  {
+    "sourcePath": "2.ufo/ufo.md",
+    "id": "ART-UFO-OVERVIEW",
+    "title": "UFO / UAP",
+    "slug": "ufo",
+    "domain": "ufo",
+    "order": 1
+  },
+  {
+    "sourcePath": "2.ufo/01-Government-Programs.md",
+    "id": "ART-UFO-GOVERNMENT-PROGRAMS",
+    "title": "Government Programs & Official Archives — UFO/UAP",
+    "slug": "01-government-programs",
+    "domain": "ufo",
+    "order": 10
+  },
+  {
+    "sourcePath": "2.ufo/02-Landmark-Incidents.md",
+    "id": "ART-UFO-LANDMARK-INCIDENTS",
+    "title": "Landmark Incidents — UFO/UAP",
+    "slug": "02-landmark-incidents",
+    "domain": "ufo",
+    "order": 20
+  },
+  {
+    "sourcePath": "2.ufo/03-Key-Figures.md",
+    "id": "ART-UFO-KEY-FIGURES",
+    "title": "Key Figures — UFO/UAP",
+    "slug": "03-key-figures",
+    "domain": "ufo",
+    "order": 30
+  },
+  {
+    "sourcePath": "2.ufo/04-Technical-Keywords-Concepts.md",
+    "id": "ART-UFO-TECHNICAL-KEYWORDS",
+    "title": "Technical Keywords & Concepts — UFO/UAP",
+    "slug": "04-technical-keywords-concepts",
+    "domain": "ufo",
+    "order": 40
+  },
+  {
+    "sourcePath": "3.meta/meta.md",
+    "id": "ART-META-OVERVIEW",
+    "title": "Vật lý & Siêu hình học",
+    "slug": "meta",
+    "domain": "meta",
+    "order": 1
+  },
+  {
+    "sourcePath": "4.psychic/psychic.md",
+    "id": "ART-PSYCHIC-OVERVIEW",
+    "title": "Tâm linh & Cận tâm lý",
+    "slug": "psychic",
+    "domain": "psychic",
+    "order": 1
+  },
+  {
+    "sourcePath": "5.ling-tinh/8-baihoc-tamly.md",
+    "id": "ART-MISC-EIGHT-PSYCHOLOGY-LESSONS",
+    "title": "🧠 8 bài học Machiavelli: Tâm lý con người, quyền lực và tự lực",
+    "slug": "8-baihoc-tamly",
+    "domain": "misc",
+    "order": 10
+  },
+  {
+    "sourcePath": "5.ling-tinh/critical-thinking.md",
+    "id": "ART-MISC-CRITICAL-THINKING",
+    "title": "🧭 8 nguyên tắc Tư duy phản biện: Bộ lọc thực tại trước mê cung UAP, Huyền học và Lượng tử",
+    "slug": "critical-thinking",
+    "domain": "misc",
+    "order": 20
+  }
+]

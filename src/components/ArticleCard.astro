@@ -1,0 +1,20 @@
+---
+import type { ArticleEntry } from '../lib/articles';
+import { articlePath } from '../lib/url';
+
+interface Props {
+  article: ArticleEntry;
+}
+
+const { article } = Astro.props;
+---
+
+<article class="article-card">
+  <p class="card-eyebrow">Bài đọc</p>
+  <h2>
+    <a href={articlePath(article.data.domain, article.data.slug)}
+      >{article.data.title}</a
+    >
+  </h2>
+  <p class="source-path">Nguồn: <code>{article.data.sourcePath}</code></p>
+</article>

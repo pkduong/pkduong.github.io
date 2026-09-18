@@ -1,0 +1,47 @@
+{
+  "name": "ufo-data-knowledge-atlas",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24 <25",
+    "npm": ">=11 <12"
+  },
+  "scripts": {
+    "dev": "node --env-file=.env ./node_modules/astro/bin/astro.mjs dev",
+    "content:migrate": "node scripts/migrate-content.mjs",
+    "content:validate": "node scripts/validate-content.mjs",
+    "format": "prettier --write astro.config.mjs eslint.config.js playwright.config.ts vitest.config.ts src scripts tests *.json README.md .github/workflows/*.yml",
+    "format:check": "prettier --check astro.config.mjs eslint.config.js playwright.config.ts vitest.config.ts src scripts tests *.json README.md .github/workflows/*.yml",
+    "lint": "eslint .",
+    "typecheck": "node --env-file=.env ./node_modules/astro/bin/astro.mjs check",
+    "validate": "npm run format:check && npm run lint && npm run typecheck && npm run content:validate",
+    "test": "vitest run --configLoader native --pool threads",
+    "test:e2e": "playwright test",
+    "test:e2e:smoke": "playwright test --grep @smoke",
+    "test:lighthouse": "node scripts/lighthouse-check.mjs",
+    "build": "node --env-file=.env ./node_modules/astro/bin/astro.mjs build && pagefind --site dist --force-language vi && node scripts/verify-build.mjs",
+    "preview": "node --env-file=.env ./node_modules/astro/bin/astro.mjs preview"
+  },
+  "dependencies": {
+    "@astrojs/markdown-satteri": "0.4.1",
+    "astro": "7.3.3",
+    "esbuild": "npm:esbuild-wasm@0.28.2"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.9",
+    "@axe-core/playwright": "4.13.0",
+    "@eslint/js": "9.39.2",
+    "@lhci/cli": "0.15.1",
+    "@playwright/test": "1.63.0",
+    "eslint": "9.39.2",
+    "eslint-plugin-astro": "1.6.0",
+    "globals": "17.12.0",
+    "pagefind": "1.5.2",
+    "prettier": "3.9.8",
+    "prettier-plugin-astro": "0.14.1",
+    "typescript": "5.9.3",
+    "typescript-eslint": "8.67.0",
+    "vitest": "5.0.1"
+  }
+}

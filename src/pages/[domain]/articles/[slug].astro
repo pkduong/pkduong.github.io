@@ -1,0 +1,60 @@
+---
+import type { GetStaticPaths } from 'astro';
+import { render } from 'astro:content';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+import TableOfContents from '../../../components/TableOfContents.astro';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { getPublishedArticles, type ArticleEntry } from '../../../lib/articles';
+import { articlePath, withBase } from '../../../lib/url';
+import { getDomain, type DomainConfig } from '../../../site.config';
+
+type Props = { article: ArticleEntry; domain: DomainConfig };
+
+export const getStaticPaths = (async () => {
+  const articles = await getPublishedArticles();
+  return articles.map((article) => {
+    const domain = getDomain(article.data.domain);
+    if (!domain) throw new Error(`Unknown domain: ${article.data.domain}`);
+    return {
+      params: { domain: article.data.domain, slug: article.data.slug },
+      props: { article, domain },
+    };
+  });
+}) satisfies GetStaticPaths;
+
+const { article, domain } = Astro.props;
+const { Content, headings } = await render(article);
+const canonicalPath = articlePath(article.data.domain, article.data.slug);
+---
+
+<BaseLayout
+  title={article.data.title}
+  canonicalPath={canonicalPath}
+  indexForSearch
+>
+  <div class="page-shell article-page">
+    <Breadcrumbs
+      items={[
+        { label: domain.name, href: withBase(`${domain.key}/`) },
+        { label: article.data.title },
+      ]}
+    />
+    <header class="article-header" style={`--accent: ${domain.accent}`}>
+      <p class="eyebrow">{domain.name} · Bài đọc</p>
+      <h1 data-pagefind-meta="title">{article.data.title}</h1>
+      <p class="source-path">
+        Nguồn Markdown: <code>{article.data.sourcePath}</code>
+      </p>
+    </header>
+    <div class="reading-grid">
+      <TableOfContents headings={headings} />
+      <article
+        class="prose"
+        data-pagefind-body
+        data-pagefind-meta={`domain:${domain.key},kind:article`}
+      >
+        <Content />
+      </article>
+    </div>
+  </div>
+</BaseLayout>

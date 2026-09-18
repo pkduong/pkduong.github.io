@@ -1,0 +1,205 @@
+---
+import ArticleCard from '../components/ArticleCard.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getPublishedArticles } from '../lib/articles';
+import { withBase } from '../lib/url';
+import { siteConfig } from '../site.config';
+
+const articles = await getPublishedArticles();
+const searchUrl = withBase('search/');
+---
+
+<BaseLayout title="Tìm kiếm" canonicalPath={searchUrl}>
+  <div class="page-shell search-page">
+    <Breadcrumbs items={[{ label: 'Tìm kiếm' }]} />
+    <header class="page-header">
+      <p class="eyebrow">Pagefind · chỉ mục tĩnh</p>
+      <h1>Tìm trong toàn bộ kho tri thức</h1>
+      <p>
+        Tìm theo tiêu đề, đề mục và nội dung tiếng Việt. Không có truy vấn nào
+        được gửi tới máy chủ.
+      </p>
+    </header>
+
+    <section
+      class="search-panel"
+      data-search-root
+      data-pagefind-src={withBase('pagefind/pagefind.js')}
+      data-base={withBase()}
+    >
+      <form class="search-form" action={searchUrl} method="get" role="search">
+        <label for="search-query">Từ khóa</label>
+        <div class="search-controls">
+          <input
+            id="search-query"
+            name="q"
+            type="search"
+            autocomplete="off"
+            required
+          />
+          <button class="button" type="submit">Tìm kiếm</button>
+        </div>
+      </form>
+      <p
+        class="search-status"
+        role="status"
+        aria-live="polite"
+        data-search-status
+      >
+        Nhập từ khóa để bắt đầu.
+      </p>
+      <ol class="search-results" data-search-results></ol>
+      <noscript>
+        <p class="notice">
+          JavaScript đang tắt. Bạn vẫn có thể duyệt toàn bộ danh mục bên dưới.
+        </p>
+      </noscript>
+    </section>
+
+    <section
+      class="fallback-directory"
+      data-search-fallback
+      aria-labelledby="fallback-title"
+    >
+      <div class="section-heading compact">
+        <div>
+          <p class="eyebrow">Danh mục dự phòng</p>
+          <h2 id="fallback-title">Duyệt tất cả bài viết</h2>
+        </div>
+        <p>
+          Nếu chỉ mục tìm kiếm không tải được, các liên kết này vẫn hoạt động.
+        </p>
+      </div>
+      {
+        siteConfig.domains.map((domain) => {
+          const domainArticles = articles.filter(
+            (article) => article.data.domain === domain.key,
+          );
+          return (
+            <section
+              class="fallback-domain"
+              aria-labelledby={`fallback-${domain.key}`}
+            >
+              <h3 id={`fallback-${domain.key}`}>{domain.name}</h3>
+              <div class="article-list">
+                {domainArticles.map((article) => (
+                  <ArticleCard article={article} />
+                ))}
+              </div>
+            </section>
+          );
+        })
+      }
+    </section>
+  </div>
+</BaseLayout>
+
+<script is:inline>
+  (() => {
+    const root = document.querySelector('[data-search-root]');
+    if (!(root instanceof HTMLElement)) return;
+    const form = root.querySelector('form');
+    const input = root.querySelector('input[type="search"]');
+    const status = root.querySelector('[data-search-status]');
+    const results = root.querySelector('[data-search-results]');
+    const fallback = document.querySelector('[data-search-fallback]');
+    if (
+      !(form instanceof HTMLFormElement) ||
+      !(input instanceof HTMLInputElement)
+    )
+      return;
+    if (
+      !(status instanceof HTMLElement) ||
+      !(results instanceof HTMLOListElement)
+    )
+      return;
+
+    const base = root.dataset.base || '/';
+    const pagefindSrc = root.dataset.pagefindSrc;
+    let pagefindPromise;
+
+    const withBase = (url) => {
+      if (!url || /^(?:[a-z][a-z\d+.-]*:|\/\/|#)/i.test(url)) return url;
+      const cleanBase = base.endsWith('/') ? base : `${base}/`;
+      if (url.startsWith(cleanBase)) return url;
+      return `${cleanBase}${url.replace(/^\/+/, '')}`;
+    };
+
+    const plainText = (html) =>
+      html
+        .replace(/<[^>]*>/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim();
+
+    const getPagefind = async () => {
+      if (!pagefindSrc) throw new Error('Thiếu đường dẫn chỉ mục.');
+      pagefindPromise ||= import(pagefindSrc);
+      return pagefindPromise;
+    };
+
+    const runSearch = async (query, updateUrl = true) => {
+      const value = query.trim();
+      results.replaceChildren();
+      if (!value) {
+        status.textContent = 'Nhập từ khóa để bắt đầu.';
+        fallback?.removeAttribute('hidden');
+        return;
+      }
+      status.textContent = 'Đang tìm kiếm…';
+      try {
+        const pagefind = await getPagefind();
+        const response = await pagefind.search(value);
+        const data = await Promise.all(
+          response.results.slice(0, 30).map((result) => result.data()),
+        );
+        for (const item of data) {
+          const li = document.createElement('li');
+          const article = document.createElement('article');
+          const heading = document.createElement('h2');
+          const link = document.createElement('a');
+          const meta = document.createElement('p');
+          const excerpt = document.createElement('p');
+          const href = withBase(item.url);
+          link.href = href;
+          link.textContent = item.meta.title || item.url;
+          const domain = item.meta.domain || '';
+          const kind = item.meta.kind || 'article';
+          meta.className = 'search-meta';
+          meta.textContent = [domain, kind, href].filter(Boolean).join(' · ');
+          excerpt.textContent = plainText(item.excerpt || '');
+          heading.append(link);
+          article.append(heading, meta, excerpt);
+          li.append(article);
+          results.append(li);
+        }
+        status.textContent = `${data.length} kết quả cho “${value}”.`;
+        fallback?.setAttribute('hidden', '');
+        if (updateUrl) {
+          const url = new URL(window.location.href);
+          url.searchParams.set('q', value);
+          history.pushState({ q: value }, '', url);
+        }
+      } catch (error) {
+        console.error(error);
+        status.textContent =
+          'Không tải được chỉ mục tìm kiếm. Hãy dùng danh mục liên kết bên dưới.';
+        fallback?.removeAttribute('hidden');
+      }
+    };
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      void runSearch(input.value);
+    });
+    window.addEventListener('popstate', () => {
+      const query = new URL(window.location.href).searchParams.get('q') || '';
+      input.value = query;
+      void runSearch(query, false);
+    });
+
+    const initial = new URL(window.location.href).searchParams.get('q') || '';
+    input.value = initial;
+    if (initial) void runSearch(initial, false);
+  })();
+</script>
