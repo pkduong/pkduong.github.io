@@ -7,11 +7,9 @@ kind: "article"
 language: "vi"
 status: "published"
 order: 108
-sourcePath: "1.ai/best-practice/8-AI-in-Software-Development-full-SDLC.md"
+sourcePath: "3.ai/best-practice/8-AI-in-Software-Development-full-SDLC.md"
 legacy: true
 ---
-# AI in Software Development — Từ Code Generation Đến Toàn Bộ SDLC
-
 ## 🎯 Mục Tiêu Bài Viết
 
 Hiểu rõ AI đang thay đổi vòng đời phát triển phần mềm như thế nào — không chỉ viết code, mà xuyên suốt từ requirement đến maintenance.

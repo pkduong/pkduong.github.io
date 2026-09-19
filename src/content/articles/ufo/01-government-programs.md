@@ -5,7 +5,7 @@ domain: "ufo"
 kind: "article"
 status: "published"
 order: 10
-sourcePath: "2.ufo/01-Government-Programs.md"
+sourcePath: "1.ufo/01-Government-Programs.md"
 legacy: true
 title: "Government Programs & Official Archives — UFO/UAP"
 section: "01"

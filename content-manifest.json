@@ -1,6 +1,6 @@
 [
   {
-    "sourcePath": "1.ai/1-LLM_GPT-full.md",
+    "sourcePath": "3.ai/1-LLM_GPT-full.md",
     "id": "ART-AI-LLM-GPT-FULL",
     "title": "LLM / GPT — Hiểu Từ Gốc Đến Ứng Dụng",
     "slug": "1-llm-gpt-full",
@@ -8,7 +8,7 @@
     "order": 10
   },
   {
-    "sourcePath": "1.ai/2-AI-vs-Traditional-Programming.md",
+    "sourcePath": "3.ai/2-AI-vs-Traditional-Programming.md",
     "id": "ART-AI-VS-TRADITIONAL-PROGRAMMING",
     "title": "AI vs Traditional Programming — Hiểu Từ Gốc",
     "slug": "2-ai-vs-traditional-programming",
@@ -16,7 +16,7 @@
     "order": 20
   },
   {
-    "sourcePath": "1.ai/3-RAG-Retrieval-Augmented-Generation.md",
+    "sourcePath": "3.ai/3-RAG-Retrieval-Augmented-Generation.md",
     "id": "ART-AI-RAG-RETRIEVAL-AUGMENTED-GENERATION",
     "title": "RAG – Retrieval Augmented Generation: Kết Nối AI Với Dữ Liệu Riêng Của Bạn",
     "slug": "3-rag-retrieval-augmented-generation",
@@ -24,7 +24,7 @@
     "order": 30
   },
   {
-    "sourcePath": "1.ai/best-practice/1-overview.md",
+    "sourcePath": "3.ai/best-practice/1-overview.md",
     "id": "ART-AI-BEST-PRACTICE-OVERVIEW",
     "title": "AI Engineer không phải chỉ biết Prompt hay LLM",
     "slug": "best-practice-1-overview",
@@ -32,7 +32,7 @@
     "order": 101
   },
   {
-    "sourcePath": "1.ai/best-practice/2-as-team-member.md",
+    "sourcePath": "3.ai/best-practice/2-as-team-member.md",
     "id": "ART-AI-BEST-PRACTICE-TEAM-MEMBER",
     "title": "Áp dụng AI vào dự án max4-web: Đừng dùng AI như công cụ viết code, hãy dùng như một kỹ sư trong team",
     "slug": "best-practice-2-as-team-member",
@@ -40,7 +40,7 @@
     "order": 102
   },
   {
-    "sourcePath": "1.ai/best-practice/3-AI-assisted-software-development.md",
+    "sourcePath": "3.ai/best-practice/3-AI-assisted-software-development.md",
     "id": "ART-AI-BEST-PRACTICE-SOFTWARE-DEVELOPMENT",
     "title": "AI-assisted software development",
     "slug": "best-practice-3-ai-assisted-software-development",
@@ -48,7 +48,7 @@
     "order": 103
   },
   {
-    "sourcePath": "1.ai/best-practice/4-Spec-Driven-Development.md",
+    "sourcePath": "3.ai/best-practice/4-Spec-Driven-Development.md",
     "id": "ART-AI-BEST-PRACTICE-SDD",
     "title": "Spec Driven Development: Cách Team Engineering Hiện Đại Làm Việc Với AI",
     "slug": "best-practice-4-spec-driven-development",
@@ -56,7 +56,7 @@
     "order": 104
   },
   {
-    "sourcePath": "1.ai/best-practice/5-Software-Engineering-Future.md",
+    "sourcePath": "3.ai/best-practice/5-Software-Engineering-Future.md",
     "id": "ART-AI-BEST-PRACTICE-FUTURE",
     "title": "Tương Lai Software Engineering Trong Thời AI Coding Agents",
     "slug": "best-practice-5-software-engineering-future",
@@ -64,7 +64,7 @@
     "order": 105
   },
   {
-    "sourcePath": "1.ai/best-practice/6-as-Power-User.md",
+    "sourcePath": "3.ai/best-practice/6-as-Power-User.md",
     "id": "ART-AI-BEST-PRACTICE-POWER-USER",
     "title": "Dùng AI Như Power User: Context, Prompt, và Iterate Hiệu Quả",
     "slug": "best-practice-6-as-power-user",
@@ -72,7 +72,7 @@
     "order": 106
   },
   {
-    "sourcePath": "1.ai/best-practice/7-Code-Refactoring.md",
+    "sourcePath": "3.ai/best-practice/7-Code-Refactoring.md",
     "id": "ART-AI-BEST-PRACTICE-REFACTORING",
     "title": "AI Code Refactoring — Làm sạch bên trong, giữ nguyên bên ngoài",
     "slug": "best-practice-7-code-refactoring",
@@ -80,7 +80,7 @@
     "order": 107
   },
   {
-    "sourcePath": "1.ai/best-practice/8-AI-in-Software-Development-full-SDLC.md",
+    "sourcePath": "3.ai/best-practice/8-AI-in-Software-Development-full-SDLC.md",
     "id": "ART-AI-BEST-PRACTICE-SDLC",
     "title": "AI in Software Development — Từ Code Generation Đến Toàn Bộ SDLC",
     "slug": "best-practice-8-ai-in-software-development-full-sdlc",
@@ -88,7 +88,7 @@
     "order": 108
   },
   {
-    "sourcePath": "1.ai/best-practice/9-Claude-Code-Common-Workflows.md",
+    "sourcePath": "3.ai/best-practice/9-Claude-Code-Common-Workflows.md",
     "id": "ART-AI-BEST-PRACTICE-CLAUDE-WORKFLOWS",
     "title": "Claude Code - Common Workflows",
     "slug": "best-practice-9-claude-code-common-workflows",
@@ -96,7 +96,7 @@
     "order": 109
   },
   {
-    "sourcePath": "1.ai/best-practice/10-AI-Code-Review.md",
+    "sourcePath": "3.ai/best-practice/10-AI-Code-Review.md",
     "id": "ART-AI-BEST-PRACTICE-CODE-REVIEW",
     "title": "AI Code Review — Part 1: Tổng quan & Workflow thực chiến",
     "slug": "best-practice-10-ai-code-review",
@@ -104,7 +104,7 @@
     "order": 110
   },
   {
-    "sourcePath": "2.ufo/ufo.md",
+    "sourcePath": "1.ufo/ufo.md",
     "id": "ART-UFO-OVERVIEW",
     "title": "UFO / UAP",
     "slug": "ufo",
@@ -112,7 +112,7 @@
     "order": 1
   },
   {
-    "sourcePath": "2.ufo/01-Government-Programs.md",
+    "sourcePath": "1.ufo/01-Government-Programs.md",
     "id": "ART-UFO-GOVERNMENT-PROGRAMS",
     "title": "Government Programs & Official Archives — UFO/UAP",
     "slug": "01-government-programs",
@@ -120,7 +120,7 @@
     "order": 10
   },
   {
-    "sourcePath": "2.ufo/02-Landmark-Incidents.md",
+    "sourcePath": "1.ufo/02-Landmark-Incidents.md",
     "id": "ART-UFO-LANDMARK-INCIDENTS",
     "title": "Landmark Incidents — UFO/UAP",
     "slug": "02-landmark-incidents",
@@ -128,7 +128,7 @@
     "order": 20
   },
   {
-    "sourcePath": "2.ufo/03-Key-Figures.md",
+    "sourcePath": "1.ufo/03-Key-Figures.md",
     "id": "ART-UFO-KEY-FIGURES",
     "title": "Key Figures — UFO/UAP",
     "slug": "03-key-figures",
@@ -136,7 +136,7 @@
     "order": 30
   },
   {
-    "sourcePath": "2.ufo/04-Technical-Keywords-Concepts.md",
+    "sourcePath": "1.ufo/04-Technical-Keywords-Concepts.md",
     "id": "ART-UFO-TECHNICAL-KEYWORDS",
     "title": "Technical Keywords & Concepts — UFO/UAP",
     "slug": "04-technical-keywords-concepts",
@@ -144,7 +144,7 @@
     "order": 40
   },
   {
-    "sourcePath": "3.meta/meta.md",
+    "sourcePath": "2.meta/meta.md",
     "id": "ART-META-OVERVIEW",
     "title": "Vật lý & Siêu hình học",
     "slug": "meta",
@@ -152,27 +152,27 @@
     "order": 1
   },
   {
-    "sourcePath": "4.psychic/psychic.md",
+    "sourcePath": "4.soul/soul.md",
     "id": "ART-PSYCHIC-OVERVIEW",
-    "title": "Tâm linh & Cận tâm lý",
-    "slug": "psychic",
-    "domain": "psychic",
+    "title": "SOUL — Studies Of the Unseen Life",
+    "slug": "soul",
+    "domain": "soul",
     "order": 1
   },
   {
-    "sourcePath": "5.ling-tinh/8-baihoc-tamly.md",
+    "sourcePath": "5.ling/8-baihoc-tamly.md",
     "id": "ART-MISC-EIGHT-PSYCHOLOGY-LESSONS",
     "title": "🧠 8 bài học Machiavelli: Tâm lý con người, quyền lực và tự lực",
     "slug": "8-baihoc-tamly",
-    "domain": "misc",
+    "domain": "ling",
     "order": 10
   },
   {
-    "sourcePath": "5.ling-tinh/critical-thinking.md",
+    "sourcePath": "5.ling/dont-believe-in-yourself.md",
     "id": "ART-MISC-CRITICAL-THINKING",
-    "title": "🧭 8 nguyên tắc Tư duy phản biện: Bộ lọc thực tại trước mê cung UAP, Huyền học và Lượng tử",
-    "slug": "critical-thinking",
-    "domain": "misc",
+    "title": "Đừng tin chính mình: 8 cái bẫy của bộ não và cách Critical Thinking giải cứu bạn",
+    "slug": "dont-believe-in-yourself",
+    "domain": "ling",
     "order": 20
   }
 ]

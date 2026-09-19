@@ -1,178 +1,200 @@
 [
   {
-    "sourcePath": "1.ai/1-LLM_GPT-full.md",
-    "destinationPath": "src/content/articles/ai/1-llm-gpt-full.md",
-    "sourceSha256": "a30b0bc94121601de9413aec304cb023eb3a4ceafa4ca52acdcc2730331bd76c",
-    "sourceFrontmatterSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    "bodySha256": "a30b0bc94121601de9413aec304cb023eb3a4ceafa4ca52acdcc2730331bd76c",
-    "migratedSha256": "de2b9c7b8d52196d65a52ad10d3e9138fdbb206a1045e4e4e0efd39364089884"
-  },
-  {
-    "sourcePath": "1.ai/2-AI-vs-Traditional-Programming.md",
-    "destinationPath": "src/content/articles/ai/2-ai-vs-traditional-programming.md",
-    "sourceSha256": "e90e23782a4f5448f263fb3562002d377e6385cca25b921ad9ce3808d30fb2c8",
-    "sourceFrontmatterSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    "bodySha256": "e90e23782a4f5448f263fb3562002d377e6385cca25b921ad9ce3808d30fb2c8",
-    "migratedSha256": "1ad39a101cf4f74bbf16111a18ea1d91b6b4b0a8c070a4c5c470e5447910fbe6"
-  },
-  {
-    "sourcePath": "1.ai/3-RAG-Retrieval-Augmented-Generation.md",
-    "destinationPath": "src/content/articles/ai/3-rag-retrieval-augmented-generation.md",
-    "sourceSha256": "e19bc01cf7a1db3816d20ad0244ac328b914ce24c5ed62634b538a21a412d972",
-    "sourceFrontmatterSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    "bodySha256": "e19bc01cf7a1db3816d20ad0244ac328b914ce24c5ed62634b538a21a412d972",
-    "migratedSha256": "e6b66daf1dbd63714ed080b33aff4f4dd798099db129ef716d0d47d2b09af027"
-  },
-  {
-    "sourcePath": "1.ai/best-practice/1-overview.md",
-    "destinationPath": "src/content/articles/ai/best-practice-1-overview.md",
-    "sourceSha256": "90b67b0599cda5550cfab02e9ba1984b10c0c2cd502af8bfcbff44fa7d71aa5c",
-    "sourceFrontmatterSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    "bodySha256": "90b67b0599cda5550cfab02e9ba1984b10c0c2cd502af8bfcbff44fa7d71aa5c",
-    "migratedSha256": "ea76223c8227659e943ce11efa50a23692c3678f8e627d33b75b1b094bdcd2e0"
-  },
-  {
-    "sourcePath": "1.ai/best-practice/10-AI-Code-Review.md",
-    "destinationPath": "src/content/articles/ai/best-practice-10-ai-code-review.md",
-    "sourceSha256": "ceca4eb9f56988a8a75171af10c205e9b2c94147544547fe762166cf8dd86bfd",
-    "sourceFrontmatterSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    "bodySha256": "ceca4eb9f56988a8a75171af10c205e9b2c94147544547fe762166cf8dd86bfd",
-    "migratedSha256": "ff44bc705c9af17945631c92cefea902b2aa1397294946e45e1c98b677c67d93"
-  },
-  {
-    "sourcePath": "1.ai/best-practice/2-as-team-member.md",
-    "destinationPath": "src/content/articles/ai/best-practice-2-as-team-member.md",
-    "sourceSha256": "0b165a497a2ef6b760c2dc703739663e4413f0e7ac169779a77d5883de87012b",
-    "sourceFrontmatterSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    "bodySha256": "0b165a497a2ef6b760c2dc703739663e4413f0e7ac169779a77d5883de87012b",
-    "migratedSha256": "4aa68d91a3933bcef4c33068064914aeaa0085782fb69620886c533b0f05d1d0"
-  },
-  {
-    "sourcePath": "1.ai/best-practice/3-AI-assisted-software-development.md",
-    "destinationPath": "src/content/articles/ai/best-practice-3-ai-assisted-software-development.md",
-    "sourceSha256": "510e97dfada4b83af03d78644407d71920aade3c25adc7858a94de66883f1835",
-    "sourceFrontmatterSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    "bodySha256": "510e97dfada4b83af03d78644407d71920aade3c25adc7858a94de66883f1835",
-    "migratedSha256": "1e5b45a0e098145a39bb0a65e9db83d0b9adbe94063c327081ac402efab5cd37"
-  },
-  {
-    "sourcePath": "1.ai/best-practice/4-Spec-Driven-Development.md",
-    "destinationPath": "src/content/articles/ai/best-practice-4-spec-driven-development.md",
-    "sourceSha256": "45d5ca7786387e0f72491d79bfecc18269927f4bf61bfc21e5700cd0f21a1535",
-    "sourceFrontmatterSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    "bodySha256": "45d5ca7786387e0f72491d79bfecc18269927f4bf61bfc21e5700cd0f21a1535",
-    "migratedSha256": "e04a4c2fed6b0fe94a6cf5a300da9bdaaf18ee072f35af63566c074bae66fb5f"
-  },
-  {
-    "sourcePath": "1.ai/best-practice/5-Software-Engineering-Future.md",
-    "destinationPath": "src/content/articles/ai/best-practice-5-software-engineering-future.md",
-    "sourceSha256": "a8c6e0146b58217a68b1c11ccb5561a78b86d2e65970fd95ab33c55e5e1ac3b7",
-    "sourceFrontmatterSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    "bodySha256": "a8c6e0146b58217a68b1c11ccb5561a78b86d2e65970fd95ab33c55e5e1ac3b7",
-    "migratedSha256": "19c6e375c19bd9fe2670d7b06d8ca2876825558b1f78fb2150682c848d48af27"
-  },
-  {
-    "sourcePath": "1.ai/best-practice/6-as-Power-User.md",
-    "destinationPath": "src/content/articles/ai/best-practice-6-as-power-user.md",
-    "sourceSha256": "a363a1b7f23472075533eb3b8733f32b88f6af190e5562b3dab3c68d8358c704",
-    "sourceFrontmatterSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    "bodySha256": "a363a1b7f23472075533eb3b8733f32b88f6af190e5562b3dab3c68d8358c704",
-    "migratedSha256": "c3fb0d35d439dc7a5918720ef03d38528d0f20f7388b0ccae339fac70a88af7a"
-  },
-  {
-    "sourcePath": "1.ai/best-practice/7-Code-Refactoring.md",
-    "destinationPath": "src/content/articles/ai/best-practice-7-code-refactoring.md",
-    "sourceSha256": "252185f7b11ebdcd160250ab75df9ba519efd0389b96e8fa6dc2d4dbadcda286",
-    "sourceFrontmatterSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    "bodySha256": "252185f7b11ebdcd160250ab75df9ba519efd0389b96e8fa6dc2d4dbadcda286",
-    "migratedSha256": "639ef840c4db82536b7534f1ea24a678c6b174235617f9617ce780cfc0c8a5db"
-  },
-  {
-    "sourcePath": "1.ai/best-practice/8-AI-in-Software-Development-full-SDLC.md",
-    "destinationPath": "src/content/articles/ai/best-practice-8-ai-in-software-development-full-sdlc.md",
-    "sourceSha256": "aac2af4ce78654ef55aff8290bfcabccfaf6824741eac352e77c9df6c888da73",
-    "sourceFrontmatterSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    "bodySha256": "aac2af4ce78654ef55aff8290bfcabccfaf6824741eac352e77c9df6c888da73",
-    "migratedSha256": "32001d1e34abee003eeb21c2ca1b8c29ae2be223da5f75b79765ff7334d7bfba"
-  },
-  {
-    "sourcePath": "1.ai/best-practice/9-Claude-Code-Common-Workflows.md",
-    "destinationPath": "src/content/articles/ai/best-practice-9-claude-code-common-workflows.md",
-    "sourceSha256": "5e6ebfc58e18d28515e149a82980301a015f3ae7e8c89f99636897f173ce929f",
-    "sourceFrontmatterSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    "bodySha256": "5e6ebfc58e18d28515e149a82980301a015f3ae7e8c89f99636897f173ce929f",
-    "migratedSha256": "36fc6decc1e9160d09d7562bd61db1a8e997a893cb45b8894d8d92e2ce00ea85"
-  },
-  {
-    "sourcePath": "2.ufo/01-Government-Programs.md",
+    "sourcePath": "1.ufo/01-Government-Programs.md",
     "destinationPath": "src/content/articles/ufo/01-government-programs.md",
+    "titleH1Removed": false,
     "sourceSha256": "bed5fb600c7205e735f9c509c4801b59c1cbc2a68671d33906c83d29082710fb",
     "sourceFrontmatterSha256": "780274055b101a8db663e4eca2e497f271a5e8df65556d5af15f8fa29a96efe7",
     "bodySha256": "7da2c62c9265560d9bcad94cbff3a9c045205c12059540f6ec8cd5056793307f",
-    "migratedSha256": "5b49e1bc3c5bc4ac2d7d9ce84023127d2a7f7981ee9e36eee1ecb61f6318c9c4"
+    "migratedSha256": "35e1f829804f421070ed239f490482c143944f56c941ff00b9a19109b5e6ee07"
   },
   {
-    "sourcePath": "2.ufo/02-Landmark-Incidents.md",
+    "sourcePath": "1.ufo/02-Landmark-Incidents.md",
     "destinationPath": "src/content/articles/ufo/02-landmark-incidents.md",
+    "titleH1Removed": false,
     "sourceSha256": "8826239d01d13acac30872f78ab50991e23418ab87a9846efbd3a6c7baa9e3a7",
     "sourceFrontmatterSha256": "73b9caebd1a8373017429da66753eb096e1045c09ad8b58a7139694a025cd164",
     "bodySha256": "557a98b9fcebbf649caeade388428ce4b2adc955500761745bcce708c549ba60",
-    "migratedSha256": "3879f2db919998a486a2fbacce82a4b0e32810368d8f6a0c3d6562538c6f8d0f"
+    "migratedSha256": "921b2be26fb7dd4ca1424e70902511e879fbd80e931c53a52ac56333196fc46e"
   },
   {
-    "sourcePath": "2.ufo/03-Key-Figures.md",
+    "sourcePath": "1.ufo/03-Key-Figures.md",
     "destinationPath": "src/content/articles/ufo/03-key-figures.md",
+    "titleH1Removed": false,
     "sourceSha256": "d4586e8369f84fb5f49d2ada42812170c5e52d8033a15684ad40e3ca59d195ef",
     "sourceFrontmatterSha256": "3669213599f0c0c8ea70ed1872f68356ebb714dac6f492d2d4f5c8aba5fb06f2",
     "bodySha256": "5d2c657b4f4b4199ed69c78bb4e8b1f6d07dcce0112a11693ee76e006058bfca",
-    "migratedSha256": "f3164cb0007ef042db109e66ec6c933b3dc04fd5817c257d2f83b643eed1a745"
+    "migratedSha256": "d74d116135a2f4d58070ffea21fbb28650962787501936aa672ac63970129ca0"
   },
   {
-    "sourcePath": "2.ufo/04-Technical-Keywords-Concepts.md",
+    "sourcePath": "1.ufo/04-Technical-Keywords-Concepts.md",
     "destinationPath": "src/content/articles/ufo/04-technical-keywords-concepts.md",
+    "titleH1Removed": false,
     "sourceSha256": "253e98d8c2aea37bbd8c81a9f860c79a63c5441d8ac9d9147a4f601faef68040",
     "sourceFrontmatterSha256": "9869ca24ee6b44991487200cabf182937b10b4caa05c1b3db70af213326fa02f",
     "bodySha256": "d48c3385d7cc148348730a76ef7ac4cdf2865a3959ae32e4bb26ceb31b13427e",
-    "migratedSha256": "c53767f46470f5dbc8b3cee97adb5fdfe80c5c424e5b555ac752eb118488c93d"
+    "migratedSha256": "1dfd358d4b22e0c09a02cacca8d69a38b36c2ecff09290550d01d8d167347510"
   },
   {
-    "sourcePath": "2.ufo/ufo.md",
+    "sourcePath": "1.ufo/ufo.md",
     "destinationPath": "src/content/articles/ufo/ufo.md",
+    "titleH1Removed": false,
     "sourceSha256": "bef72f5a23507c04711b9a6a2dd9e20e0c36dbd5660c2b2cf0b0708ae05ee59b",
     "sourceFrontmatterSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "bodySha256": "bef72f5a23507c04711b9a6a2dd9e20e0c36dbd5660c2b2cf0b0708ae05ee59b",
-    "migratedSha256": "0c85775c90279949f31200ab9b936350e5e7f545dc65e59e6498ccb87ffaac8d"
+    "migratedSha256": "2519e93c7e56d071db7a89f00efea4ba2651f0cbe05f16a2aa698f76e03e7fa5"
   },
   {
-    "sourcePath": "3.meta/meta.md",
+    "sourcePath": "2.meta/meta.md",
     "destinationPath": "src/content/articles/meta/meta.md",
-    "sourceSha256": "aa7feb8f0b56f9b9f6fae3cd9154c3f97306723997b0fecce4a736985dd455cb",
+    "titleH1Removed": false,
+    "sourceSha256": "da404b69bd4a3fbf17d9acc23076771a9cb598ffb1859b14348aa5c8c3d18f18",
     "sourceFrontmatterSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    "bodySha256": "aa7feb8f0b56f9b9f6fae3cd9154c3f97306723997b0fecce4a736985dd455cb",
-    "migratedSha256": "2a76cf7d51460b8e751265b522ac070aef2fdee4ae86302e0d1b6809bc7aeaf8"
+    "bodySha256": "da404b69bd4a3fbf17d9acc23076771a9cb598ffb1859b14348aa5c8c3d18f18",
+    "migratedSha256": "7e31b59ec08a0d1e95caed85b0417fc92e271ca1d226567c3dc1a3d43adbf1db"
   },
   {
-    "sourcePath": "4.psychic/psychic.md",
-    "destinationPath": "src/content/articles/psychic/psychic.md",
-    "sourceSha256": "729dd35218aacc01d045355488ea60f7bdec7eaa0cd8e052f1703a8acf3018ab",
+    "sourcePath": "3.ai/1-LLM_GPT-full.md",
+    "destinationPath": "src/content/articles/ai/1-llm-gpt-full.md",
+    "titleH1Removed": true,
+    "sourceSha256": "a30b0bc94121601de9413aec304cb023eb3a4ceafa4ca52acdcc2730331bd76c",
     "sourceFrontmatterSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    "bodySha256": "729dd35218aacc01d045355488ea60f7bdec7eaa0cd8e052f1703a8acf3018ab",
-    "migratedSha256": "08080b5517265f4923de31726c0658c93183986e8044e92370b61736f9c81824"
+    "bodySha256": "3b809d02775dc3073ffe01ef3928b6daea29b3a5c8dc00518c4bf630e1dd3b35",
+    "migratedSha256": "c7551a87486487f64cf1d0867fe3c813526ce9a1a24c8c74f07734bc74e91680"
   },
   {
-    "sourcePath": "5.ling-tinh/8-baihoc-tamly.md",
-    "destinationPath": "src/content/articles/misc/8-baihoc-tamly.md",
+    "sourcePath": "3.ai/2-AI-vs-Traditional-Programming.md",
+    "destinationPath": "src/content/articles/ai/2-ai-vs-traditional-programming.md",
+    "titleH1Removed": true,
+    "sourceSha256": "e90e23782a4f5448f263fb3562002d377e6385cca25b921ad9ce3808d30fb2c8",
+    "sourceFrontmatterSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bodySha256": "d9d99d87bd7456eb1a333546475aa4509375732c2cca8166b0f5ad2d038fe3dd",
+    "migratedSha256": "ebba366f2dd0ad946b90a8e733919d43d3c8e39627521a34209a829e6a4ac3db"
+  },
+  {
+    "sourcePath": "3.ai/3-RAG-Retrieval-Augmented-Generation.md",
+    "destinationPath": "src/content/articles/ai/3-rag-retrieval-augmented-generation.md",
+    "titleH1Removed": true,
+    "sourceSha256": "e19bc01cf7a1db3816d20ad0244ac328b914ce24c5ed62634b538a21a412d972",
+    "sourceFrontmatterSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bodySha256": "24ac851f5669d8a992436f8b41a2937e713fa41ecdd5ac27517cf396093d616e",
+    "migratedSha256": "8cc0b00ea6f6a2485b5cdaf799896acb64a2115543618c921da9ea1f56d87d6e"
+  },
+  {
+    "sourcePath": "3.ai/best-practice/1-overview.md",
+    "destinationPath": "src/content/articles/ai/best-practice-1-overview.md",
+    "titleH1Removed": true,
+    "sourceSha256": "90b67b0599cda5550cfab02e9ba1984b10c0c2cd502af8bfcbff44fa7d71aa5c",
+    "sourceFrontmatterSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bodySha256": "acb8307fb33dc175294e65749c39dc0aa30dc07a8c5208356f71852335e56a40",
+    "migratedSha256": "caf85b593df0f5b2897fa2762a3afc72d146fa0a654f3fc59134e7e52b759207"
+  },
+  {
+    "sourcePath": "3.ai/best-practice/10-AI-Code-Review.md",
+    "destinationPath": "src/content/articles/ai/best-practice-10-ai-code-review.md",
+    "titleH1Removed": true,
+    "sourceSha256": "ceca4eb9f56988a8a75171af10c205e9b2c94147544547fe762166cf8dd86bfd",
+    "sourceFrontmatterSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bodySha256": "e79ee1fbbdea5ae7817fe52c03e954f3942593e3a5c23b05e0ec5498b44a0661",
+    "migratedSha256": "f1e42a8ba4a7570f01cdb6af4d35bc545832265e81f9fddb51f6ce4a4e430329"
+  },
+  {
+    "sourcePath": "3.ai/best-practice/2-as-team-member.md",
+    "destinationPath": "src/content/articles/ai/best-practice-2-as-team-member.md",
+    "titleH1Removed": true,
+    "sourceSha256": "0b165a497a2ef6b760c2dc703739663e4413f0e7ac169779a77d5883de87012b",
+    "sourceFrontmatterSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bodySha256": "08e4803c5846cc00749ffb396371a649856e9cf0bccd20e93de3abbcb0e0fbad",
+    "migratedSha256": "b1dfa655b20989f4297ebf2773b662f7ef3f9ec1a6b4f2548460c8bfad178467"
+  },
+  {
+    "sourcePath": "3.ai/best-practice/3-AI-assisted-software-development.md",
+    "destinationPath": "src/content/articles/ai/best-practice-3-ai-assisted-software-development.md",
+    "titleH1Removed": true,
+    "sourceSha256": "510e97dfada4b83af03d78644407d71920aade3c25adc7858a94de66883f1835",
+    "sourceFrontmatterSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bodySha256": "3ef8375199419f3381859aad04a68beb8c92c0567050b37281668900b9f2d9b9",
+    "migratedSha256": "ecb43b9ade6e56e23c92d8f1de157b6eb3c1369f91c6ecbe9f76139ff530bf4b"
+  },
+  {
+    "sourcePath": "3.ai/best-practice/4-Spec-Driven-Development.md",
+    "destinationPath": "src/content/articles/ai/best-practice-4-spec-driven-development.md",
+    "titleH1Removed": true,
+    "sourceSha256": "45d5ca7786387e0f72491d79bfecc18269927f4bf61bfc21e5700cd0f21a1535",
+    "sourceFrontmatterSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bodySha256": "c2348d559f23928b0202c48fa402da903ea2c852f603ac693af708a7419fc972",
+    "migratedSha256": "8e812fb199c9e3763fb127be6c1041d22ee239291ae9a414ec82b5e8a1c27ec5"
+  },
+  {
+    "sourcePath": "3.ai/best-practice/5-Software-Engineering-Future.md",
+    "destinationPath": "src/content/articles/ai/best-practice-5-software-engineering-future.md",
+    "titleH1Removed": true,
+    "sourceSha256": "a8c6e0146b58217a68b1c11ccb5561a78b86d2e65970fd95ab33c55e5e1ac3b7",
+    "sourceFrontmatterSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bodySha256": "943ad33907f36ff35f86959ed8b7689da50fc27962b3b9b1036b76a1ba788cb7",
+    "migratedSha256": "14e6853ad85ca565540e09407b70687dd855f74b490d10a990f5d14cf6bf0928"
+  },
+  {
+    "sourcePath": "3.ai/best-practice/6-as-Power-User.md",
+    "destinationPath": "src/content/articles/ai/best-practice-6-as-power-user.md",
+    "titleH1Removed": true,
+    "sourceSha256": "a363a1b7f23472075533eb3b8733f32b88f6af190e5562b3dab3c68d8358c704",
+    "sourceFrontmatterSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bodySha256": "aa6749603f4b64deeb652b00c510e207286d6d39373ebcc38cf50d292bd3ad03",
+    "migratedSha256": "c4cacf4caf5b359d706ee22dfdc6c0657db67aa7357626d1a5c7f1e471207cdd"
+  },
+  {
+    "sourcePath": "3.ai/best-practice/7-Code-Refactoring.md",
+    "destinationPath": "src/content/articles/ai/best-practice-7-code-refactoring.md",
+    "titleH1Removed": true,
+    "sourceSha256": "252185f7b11ebdcd160250ab75df9ba519efd0389b96e8fa6dc2d4dbadcda286",
+    "sourceFrontmatterSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bodySha256": "b7a675c0882d3b6a2fc60388fed083a32dd86c40e97151669c0ccf4a9e6f1d90",
+    "migratedSha256": "40ce12485778ec6e66e692b6a156664ac8e1c3ce15a0b43cc3d478f174880d7f"
+  },
+  {
+    "sourcePath": "3.ai/best-practice/8-AI-in-Software-Development-full-SDLC.md",
+    "destinationPath": "src/content/articles/ai/best-practice-8-ai-in-software-development-full-sdlc.md",
+    "titleH1Removed": true,
+    "sourceSha256": "aac2af4ce78654ef55aff8290bfcabccfaf6824741eac352e77c9df6c888da73",
+    "sourceFrontmatterSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bodySha256": "cc40e8c69365b8f6f34a8de3108950587fd3ff81f220b0ad917c97da2b6de4fa",
+    "migratedSha256": "abecd8f4db7227ee817c6653abc9ac0902af459832d06c92b7dceb2516614618"
+  },
+  {
+    "sourcePath": "3.ai/best-practice/9-Claude-Code-Common-Workflows.md",
+    "destinationPath": "src/content/articles/ai/best-practice-9-claude-code-common-workflows.md",
+    "titleH1Removed": true,
+    "sourceSha256": "5e6ebfc58e18d28515e149a82980301a015f3ae7e8c89f99636897f173ce929f",
+    "sourceFrontmatterSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bodySha256": "3438727dbcc5b98a6a75058460ca7edd99d8a41b8729459f014557fdbce50faa",
+    "migratedSha256": "439e035f31909f3bc1c3279f1b3ed057d9e95519b6f03da3d973ae757c513594"
+  },
+  {
+    "sourcePath": "4.soul/soul.md",
+    "destinationPath": "src/content/articles/soul/soul.md",
+    "titleH1Removed": false,
+    "sourceSha256": "032b81da2c484b8895a79b4aa1d96e765e2aeeb45876e11fdd7f315595a92044",
+    "sourceFrontmatterSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bodySha256": "032b81da2c484b8895a79b4aa1d96e765e2aeeb45876e11fdd7f315595a92044",
+    "migratedSha256": "fd2810d83879ecee8fc1ec955ec8c968d4b13fe106f13d1d15d0f40ce1d1046c"
+  },
+  {
+    "sourcePath": "5.ling/8-baihoc-tamly.md",
+    "destinationPath": "src/content/articles/ling/8-baihoc-tamly.md",
+    "titleH1Removed": false,
     "sourceSha256": "d4439dc61d8e972d61aa5ad559dad9d4444325f6013af2167d434fd4b047a7ba",
     "sourceFrontmatterSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "bodySha256": "d4439dc61d8e972d61aa5ad559dad9d4444325f6013af2167d434fd4b047a7ba",
-    "migratedSha256": "315a56250e96293219ea2b9d6561bbb7f4870530257d82c9535cae0a35c8caf2"
+    "migratedSha256": "f96c0aa9c97e465d3bf02262f2480622e50a9da4cb4937c978848cc52553cefb"
   },
   {
-    "sourcePath": "5.ling-tinh/critical-thinking.md",
-    "destinationPath": "src/content/articles/misc/critical-thinking.md",
-    "sourceSha256": "15c0cba42a5421070c37196438e567c10f51d8a42049569bbf704e8ca1288c7f",
+    "sourcePath": "5.ling/dont-believe-in-yourself.md",
+    "destinationPath": "src/content/articles/ling/dont-believe-in-yourself.md",
+    "titleH1Removed": true,
+    "sourceSha256": "faf84771ea91382be2f8efb1b106eb68cb1a72b319404a6880587eff27c222cf",
     "sourceFrontmatterSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    "bodySha256": "15c0cba42a5421070c37196438e567c10f51d8a42049569bbf704e8ca1288c7f",
-    "migratedSha256": "247d8bab8744cc79b4d7d9df41a6005deb279dfcd1995c5601e5090da87dc9a6"
+    "bodySha256": "15268555f4acd3cac34aa4994fd5ab57c233eefca2efeb6681ffa64a6054c17d",
+    "migratedSha256": "80526dc26d1f105a6584b66b9e098fac718ce7e0de789a50182e4de6d3f8c128"
   }
 ]

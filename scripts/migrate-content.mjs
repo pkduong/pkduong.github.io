@@ -29,12 +29,31 @@ function yamlString(value) {
   return JSON.stringify(value);
 }
 
+function normalizeMatchingTitleHeading(body, title) {
+  const match = body.match(
+    /^(?:\uFEFF)?[ \t]{0,3}#[ \t]+([^\r\n]+)(?:\r?\n|$)/,
+  );
+  if (!match || match[1].trim() !== title) {
+    return { body, titleH1Removed: false };
+  }
+
+  const withoutHeading = body.slice(match[0].length);
+  return {
+    body: withoutHeading.replace(/^[ \t]*\r?\n/, ''),
+    titleH1Removed: true,
+  };
+}
+
 function destinationFor(item) {
   return join(outputRoot, item.domain, `${item.slug}.md`);
 }
 
 function renderArticle(item, original) {
-  const { frontmatter, body } = splitFrontmatter(original);
+  const { frontmatter, body: sourceBody } = splitFrontmatter(original);
+  const { body, titleH1Removed } = normalizeMatchingTitleHeading(
+    sourceBody,
+    item.title,
+  );
   const generated = [
     `id: ${yamlString(item.id)}`,
     ...(hasYamlKey(frontmatter, 'title')
@@ -57,6 +76,7 @@ function renderArticle(item, original) {
     content: `---\n${combinedFrontmatter}\n---\n${body}`,
     body,
     sourceFrontmatter: frontmatter,
+    titleH1Removed,
   };
 }
 
@@ -131,6 +151,7 @@ function checksumReport(entries) {
       destinationPath: entry.destination
         .slice(root.length + 1)
         .replaceAll('\\', '/'),
+      titleH1Removed: entry.titleH1Removed,
       ...entry.checksums,
     })),
     null,
@@ -146,7 +167,7 @@ async function writeMigration(entries) {
   await mkdir(dirname(checksumPath), { recursive: true });
   await writeFile(checksumPath, checksumReport(entries), 'utf8');
 
-  const sourcePdf = join(root, '1.ai', 'best-practice', 'SDD-Ebook.pdf');
+  const sourcePdf = join(root, '3.ai', 'best-practice', 'SDD-Ebook.pdf');
   const publicPdf = join(
     root,
     'public',

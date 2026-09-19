@@ -7,11 +7,9 @@ kind: "article"
 language: "vi"
 status: "published"
 order: 104
-sourcePath: "1.ai/best-practice/4-Spec-Driven-Development.md"
+sourcePath: "3.ai/best-practice/4-Spec-Driven-Development.md"
 legacy: true
 ---
-# Spec Driven Development: Cách Team Engineering Hiện Đại Làm Việc Với AI
-
 > 📄 **Tải ebook gốc:** [Spec-Driven-Development-Ebook.pdf](/assets/docs/6-it-va-cong-viec/ai/best-practice/Spec-Driven-Development-Ebook.pdf)
 
 ---

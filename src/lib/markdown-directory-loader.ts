@@ -48,7 +48,7 @@ function posixPath(path: string): string {
 
 export function markdownDirectoryLoader(directory: string): Loader {
   return {
-    name: 'knowledge-atlas-markdown-directory',
+    name: 'project-knowledge-disclosure-markdown-directory',
     async load({ config, store, parseData, renderMarkdown, generateDigest }) {
       const root = fileURLToPath(config.root);
       const base = resolve(root, directory);

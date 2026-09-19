@@ -2,12 +2,12 @@
 id: "ART-MISC-EIGHT-PSYCHOLOGY-LESSONS"
 title: "🧠 8 bài học Machiavelli: Tâm lý con người, quyền lực và tự lực"
 slug: "8-baihoc-tamly"
-domain: "misc"
+domain: "ling"
 kind: "article"
 language: "vi"
 status: "published"
 order: 10
-sourcePath: "5.ling-tinh/8-baihoc-tamly.md"
+sourcePath: "5.ling/8-baihoc-tamly.md"
 legacy: true
 ---
 Chào bạn, mình đã bóc tách toàn bộ nội dung chính bài viết về "8 bài học Machiavelli" từ file HTML bạn cung cấp và chuyển đổi sang định dạng Markdown.

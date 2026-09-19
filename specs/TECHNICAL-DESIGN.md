@@ -1,9 +1,9 @@
-# Technical Design — Static Knowledge Atlas
+# Technical Design — Project Knowledge Disclosure
 
 > Trạng thái: Proposed  
 > Phiên bản: 1.0  
 > Nguồn yêu cầu: [`/spec.md`](../spec.md)  
-> Chuẩn thực hiện: [`/1.ai/best-practice/4-Spec-Driven-Development.md`](../1.ai/best-practice/4-Spec-Driven-Development.md)
+> Chuẩn thực hiện: [`/3.ai/best-practice/4-Spec-Driven-Development.md`](../3.ai/best-practice/4-Spec-Driven-Development.md)
 
 ## 0. Cách dùng tài liệu này
 
@@ -27,13 +27,13 @@ Người sở hữu repo cần xuất bản 5 nhóm tri thức đang lưu bằng
 
 Năm domain hiện tại:
 
-| Mã | Thư mục nguồn hiện tại | Tên hiển thị mặc định | Slug |
-|---|---|---|---|
-| `ai` | `1.ai/` | AI & Software Engineering | `ai` |
-| `ufo` | `2.ufo/` | UFO / UAP | `ufo` |
-| `meta` | `3.meta/` | Vật lý & Siêu hình học | `meta` |
-| `psychic` | `4.psychic/` | Tâm linh & Cận tâm lý | `psychic` |
-| `misc` | `5.ling-tinh/` | Linh tinh | `misc` |
+| Mã        | Thư mục nguồn hiện tại | Tên hiển thị mặc định                                 | Slug      |
+| --------- | ---------------------- | ----------------------------------------------------- | --------- |
+| `ufo`     | `1.ufo/`               | U.F.O / UAP — Unidentified Anomalous Phenomena        | `ufo`     |
+| `meta`    | `2.meta/`              | META — Metaphysics, Existence & Alternative Realities | `meta`    |
+| `ai`      | `3.ai/`                | A.I — Artificial Intelligence & Future Cognition      | `ai`      |
+| `soul`    | `4.soul/`              | SOUL — Studies Of the Unseen Life                     | `soul`    |
+| `ling`    | `5.ling/`              | L.I.N.G — Life, Insights, Notes & Growth              | `ling`    |
 
 ### BR-002 — Nội dung phải truy vấn được
 
@@ -71,7 +71,7 @@ Mỗi lần push nhánh mặc định, CI phải validate nội dung, test, buil
 Tại thời điểm viết spec:
 
 - repo có 22 file Markdown nội dung trong 5 domain;
-- chỉ 4 file dataset thuộc `2.ufo/` có YAML frontmatter;
+- chỉ 4 file dataset thuộc `1.ufo/` có YAML frontmatter;
 - nhiều file là bài tổng hợp dài chứa nhiều thực thể dưới heading, chưa phải một-record-một-file;
 - nội dung có bảng, blockquote, fenced code/diagram và nhiều external links;
 - không có application scaffold, package manager lockfile hay pipeline deploy;
@@ -100,6 +100,8 @@ Hệ quả thiết kế:
 **Actor:** độc giả.  
 **Main flow:** đọc mục lục → nhảy tới heading → mở nguồn tham khảo → đi theo related record.  
 **Exception:** relation hoặc local link không tồn tại phải bị chặn ở build-time, không để thành link chết production.
+
+**Legacy title normalization:** Nếu body nguồn bắt đầu bằng H1 trùng tuyệt đối với `title` canonical trong manifest, migration MUST dùng title canonical cho header trang và loại đúng H1 đầu tiên khỏi body render để không lặp tựa đề. Các H1 khác title MUST được giữ nguyên nhằm bảo toàn tài liệu legacy; bài mới SHOULD có đúng một H1 đầu file trùng title manifest.
 
 ### UC-003 — Tìm kiếm và lọc
 
@@ -194,21 +196,21 @@ Business semantics và validators MUST nằm ngoài UI component. Component khô
 
 ### 4.4 Công nghệ
 
-| Concern | Lựa chọn | Rule |
-|---|---|---|
-| Runtime/build | Node LTS + npm | Pin `engines`, commit `package-lock.json`, CI dùng `npm ci` |
-| Site generator | Astro, static output | Không dùng SSR adapter |
-| Language | TypeScript strict | Không dùng `any` trừ adapter được ghi lý do |
-| Styling | CSS variables + component-scoped CSS | Không cần framework CSS ở v1 |
-| Schema | Zod/content schema | Structural + semantic validation khi build |
-| Search | Pagefind post-build | Static index; không gửi dữ liệu tới dịch vụ search |
-| Map | Leaflet | Chỉ hydrate tại route Explore; attribution bắt buộc |
-| Timeline/range | Native range controls hoặc component nhỏ tự viết | Không thêm noUiSlider nếu native đáp ứng AC/accessibility |
-| Graph | Cytoscape.js | Lazy-load; deterministic layout option cho test |
-| PDF | PDF.js lazy-loaded | Có fallback link; không bundle/load trên trang không có PDF |
-| Unit/component test | Vitest + Testing Library | Test business query trước UI |
-| E2E | Playwright | Chromium tối thiểu; desktop + mobile critical flows |
-| Quality | ESLint, Prettier, markdownlint, Lighthouse CI | Cùng command local và CI |
+| Concern             | Lựa chọn                                         | Rule                                                        |
+| ------------------- | ------------------------------------------------ | ----------------------------------------------------------- |
+| Runtime/build       | Node LTS + npm                                   | Pin `engines`, commit `package-lock.json`, CI dùng `npm ci` |
+| Site generator      | Astro, static output                             | Không dùng SSR adapter                                      |
+| Language            | TypeScript strict                                | Không dùng `any` trừ adapter được ghi lý do                 |
+| Styling             | CSS variables + component-scoped CSS             | Không cần framework CSS ở v1                                |
+| Schema              | Zod/content schema                               | Structural + semantic validation khi build                  |
+| Search              | Pagefind post-build                              | Static index; không gửi dữ liệu tới dịch vụ search          |
+| Map                 | Leaflet                                          | Chỉ hydrate tại route Explore; attribution bắt buộc         |
+| Timeline/range      | Native range controls hoặc component nhỏ tự viết | Không thêm noUiSlider nếu native đáp ứng AC/accessibility   |
+| Graph               | Cytoscape.js                                     | Lazy-load; deterministic layout option cho test             |
+| PDF                 | PDF.js lazy-loaded                               | Có fallback link; không bundle/load trên trang không có PDF |
+| Unit/component test | Vitest + Testing Library                         | Test business query trước UI                                |
+| E2E                 | Playwright                                       | Chromium tối thiểu; desktop + mobile critical flows         |
+| Quality             | ESLint, Prettier, markdownlint, Lighthouse CI    | Cùng command local và CI                                    |
 
 Không pin version bằng suy đoán trong spec. Khi bootstrap, agent MUST chọn latest stable tương thích Node LTS tại thời điểm implement, lưu version chính xác trong lockfile và ghi vào ADR nếu phải chọn version cũ.
 
@@ -265,18 +267,18 @@ Migration SHOULD dùng thao tác giữ history nếu repo đã được Git init
 
 ### 6.1 Ubiquitous language
 
-| Entity/value object | Ý nghĩa |
-|---|---|
-| `Domain` | Một trong 5 vùng tri thức cấp cao |
-| `Article` | Bài dài/legacy; đơn vị xuất bản nhưng không nhất thiết là một thực thể nghiên cứu |
-| `Record` | Hồ sơ nguyên tử có ID ổn định, kind, metadata và relations |
-| `Claim` | Phát biểu trong record; v1 lưu trong prose, không tự chấm đúng/sai |
-| `SourceRef` | Nguồn hỗ trợ/truy vết cho record |
-| `TierScheme` | Hệ quy chiếu định nghĩa ý nghĩa các tier trong một domain |
-| `Relation` | Cạnh có kiểu từ một record tới một record khác |
-| `GeoPoint` | Vị trí có tọa độ, nhãn và precision tùy chọn |
-| `DateRange` | Khoảng thời gian có thể không chính xác đến ngày |
-| `AssetRef` | PDF/image/local artifact hoặc URL ngoài |
+| Entity/value object | Ý nghĩa                                                                           |
+| ------------------- | --------------------------------------------------------------------------------- |
+| `Domain`            | Một trong 5 vùng tri thức cấp cao                                                 |
+| `Article`           | Bài dài/legacy; đơn vị xuất bản nhưng không nhất thiết là một thực thể nghiên cứu |
+| `Record`            | Hồ sơ nguyên tử có ID ổn định, kind, metadata và relations                        |
+| `Claim`             | Phát biểu trong record; v1 lưu trong prose, không tự chấm đúng/sai                |
+| `SourceRef`         | Nguồn hỗ trợ/truy vết cho record                                                  |
+| `TierScheme`        | Hệ quy chiếu định nghĩa ý nghĩa các tier trong một domain                         |
+| `Relation`          | Cạnh có kiểu từ một record tới một record khác                                    |
+| `GeoPoint`          | Vị trí có tọa độ, nhãn và precision tùy chọn                                      |
+| `DateRange`         | Khoảng thời gian có thể không chính xác đến ngày                                  |
+| `AssetRef`          | PDF/image/local artifact hoặc URL ngoài                                           |
 
 ### 6.2 Schema chung
 
@@ -284,17 +286,17 @@ Mỗi file trong `articles` MUST có:
 
 ```yaml
 ---
-id: "ART-AI-SDD"
-title: "Spec Driven Development"
-slug: "spec-driven-development"
-domain: "ai"
-kind: "article"
-summary: "Mô tả ngắn dùng cho card và search result."
-language: "vi"
-status: "published"
+id: 'ART-AI-SDD'
+title: 'Spec Driven Development'
+slug: 'spec-driven-development'
+domain: 'ai'
+kind: 'article'
+summary: 'Mô tả ngắn dùng cho card và search result.'
+language: 'vi'
+status: 'published'
 order: 40
-tags: ["software-engineering", "sdd"]
-updatedAt: "2026-09-19"
+tags: ['software-engineering', 'sdd']
+updatedAt: '2026-09-19'
 ---
 ```
 
@@ -302,37 +304,37 @@ Mỗi file trong `records` MUST/SHOULD theo schema:
 
 ```yaml
 ---
-id: "INC-UFO-VARGINHA-1996"       # MUST, unique, immutable
-title: "Sự kiện Varginha"
-slug: "varginha-1996"             # MUST, unique trong domain/kind
-domain: "ufo"                      # MUST
-kind: "incident"                   # MUST
-summary: "..."                     # MUST, 40–240 ký tự
-language: "vi"                     # MUST
-status: "published"                # draft | published | archived
-tags: ["radar", "witness"]
-tierScheme: "ufo-source-v1"        # MUST nếu có tier
-tier: 2                             # integer 1..5, meaning depends on scheme
+id: 'INC-UFO-VARGINHA-1996' # MUST, unique, immutable
+title: 'Sự kiện Varginha'
+slug: 'varginha-1996' # MUST, unique trong domain/kind
+domain: 'ufo' # MUST
+kind: 'incident' # MUST
+summary: '...' # MUST, 40–240 ký tự
+language: 'vi' # MUST
+status: 'published' # draft | published | archived
+tags: ['radar', 'witness']
+tierScheme: 'ufo-source-v1' # MUST nếu có tier
+tier: 2 # integer 1..5, meaning depends on scheme
 date:
-  from: "1996-01-20"               # YYYY | YYYY-MM | YYYY-MM-DD
-  to: "1996-01-20"                 # optional; from <= to
-  display: "20/01/1996"            # optional human wording
+  from: '1996-01-20' # YYYY | YYYY-MM | YYYY-MM-DD
+  to: '1996-01-20' # optional; from <= to
+  display: '20/01/1996' # optional human wording
 geo:
   - lat: -21.55
     lng: -45.43
-    label: "Varginha, Brazil"
-    precision: "city"              # exact | site | city | region | unknown
+    label: 'Varginha, Brazil'
+    precision: 'city' # exact | site | city | region | unknown
 relations:
-  - targetId: "PER-JAMES-FOX"
-    type: "documented-by"
+  - targetId: 'PER-JAMES-FOX'
+    type: 'documented-by'
 sources:
-  - id: "SRC-EXAMPLE-001"
-    title: "Tên tài liệu"
-    url: "https://example.org/document"
-    sourceType: "official-record"
-    accessedAt: "2026-09-19"
+  - id: 'SRC-EXAMPLE-001'
+    title: 'Tên tài liệu'
+    url: 'https://example.org/document'
+    sourceType: 'official-record'
+    accessedAt: '2026-09-19'
 assets: []
-updatedAt: "2026-09-19"
+updatedAt: '2026-09-19'
 ---
 ```
 
@@ -418,19 +420,21 @@ Lỗi phải in: error code, file, field, bad value và cách sửa ngắn.
 
 ## 7. Routes và information architecture
 
-| Route | Chức năng |
-|---|---|
-| `/` | Giới thiệu, 5 domain, featured/recent content |
-| `/<domain>/` | Landing và facet summary của domain |
-| `/<domain>/articles/<slug>/` | Legacy/long-form article |
-| `/<domain>/<kind>/<slug>/` | Normalized record detail |
-| `/search/` | Full-text search + facets |
-| `/explore/map/` | Map + date/filter panel |
-| `/explore/graph/` | Knowledge graph |
-| `/about/methodology/` | Tier schemes, source policy, limitations |
-| `/404.html` | Static not-found page |
+| Route                        | Chức năng                                     |
+| ---------------------------- | --------------------------------------------- |
+| `/`                          | Giới thiệu, 5 domain, featured/recent content |
+| `/<domain>/`                 | Landing và facet summary của domain           |
+| `/<domain>/articles/<slug>/` | Legacy/long-form article                      |
+| `/<domain>/<kind>/<slug>/`   | Normalized record detail                      |
+| `/search/`                   | Full-text search + facets                     |
+| `/explore/map/`              | Map + date/filter panel                       |
+| `/explore/graph/`            | Knowledge graph                               |
+| `/about/methodology/`        | Tier schemes, source policy, limitations      |
+| `/404.html`                  | Static not-found page                         |
 
 Header MUST có Home, 5 domain, Explore, Search. Mobile dùng menu có keyboard/focus behavior chuẩn. Breadcrumb được render server-side.
+
+Thứ tự hiển thị 5 domain trong header và homepage là `ufo → meta → ai → soul → ling`. Số hồ sơ hiển thị (`01`–`05`) là mã cố định theo domain, không được đánh lại theo vị trí card. Route legacy `/psychic/` MUST redirect sang `/soul/`.
 
 GitHub Pages subpath:
 
@@ -482,8 +486,19 @@ Output MUST deterministic: sort by `id`, stable object field order where generat
 
 ```ts
 type GraphProjection = {
-  nodes: Array<{ id: string; label: string; href: string; domain: Domain; kind: RecordKind }>;
-  edges: Array<{ id: string; source: string; target: string; type: RelationType }>;
+  nodes: Array<{
+    id: string;
+    label: string;
+    href: string;
+    domain: Domain;
+    kind: RecordKind;
+  }>;
+  edges: Array<{
+    id: string;
+    source: string;
+    target: string;
+    type: RelationType;
+  }>;
 };
 ```
 
@@ -592,9 +607,9 @@ Mobile: body → sources/assets → related records. PDF viewer chỉ khởi t�
 
 ### Nội dung và navigation
 
-- **AC-001:** Given một legacy Markdown hợp lệ thuộc một trong 5 domain, when build hoàn tất, then có một route HTML đọc được với title, body, breadcrumb và canonical URL.
+- **AC-001:** Given một legacy Markdown hợp lệ thuộc một trong 5 domain, when build hoàn tất, then có một route HTML đọc được với title, body, breadcrumb và canonical URL; H1 đầu file trùng title chỉ xuất hiện một lần ở header trang.
 - **AC-002:** Given JavaScript bị tắt, when mở homepage/domain/article, then người dùng vẫn điều hướng và đọc toàn bộ nội dung cốt lõi.
-- **AC-003:** Given content có bảng, blockquote, fenced code và Unicode tiếng Việt, when render, then không mất dữ liệu, không vỡ chiều ngang viewport 375 px.
+- **AC-003:** Given content có bảng, blockquote, fenced code và Unicode tiếng Việt, when render, then không mất dữ liệu, không vỡ chiều ngang viewport 375 px; cột chỉ mục có header `#` co theo nội dung thay vì nhận chiều rộng mặc định của cột dữ liệu.
 - **AC-004:** Given repo deploy ở project subpath, when click internal link hoặc load local asset, then URL giữ đúng base path và không 404 vì root-relative path.
 
 ### Schema và validation
@@ -640,14 +655,14 @@ Mobile: body → sources/assets → related records. PDF viewer chỉ khởi t�
 
 Tên test SHOULD chứa AC ID, ví dụ `AC-031-date-range-overlap.test.ts`.
 
-| Test layer | Phạm vi | AC chính |
-|---|---|---|
-| Unit | date bounds, filter algebra, URL state, relation projection, tier rules | 011, 013, 021, 023, 031, 040 |
-| Content contract | fixtures valid/invalid, duplicate ID, broken relation/link/asset | 010–012 |
-| Component | filters, marker popup, graph list, PDF fallback, keyboard | 022–024, 032–044 |
-| E2E | home → domain → article; search; map; graph; responsive dossier | 001–004, 020, 030–044 |
-| Build/deploy | clean build, base path preview, projection snapshot | 004, 013, 050–052 |
-| Lighthouse/a11y | representative home/article/explore route | 053 |
+| Test layer       | Phạm vi                                                                 | AC chính                     |
+| ---------------- | ----------------------------------------------------------------------- | ---------------------------- |
+| Unit             | date bounds, filter algebra, URL state, relation projection, tier rules | 011, 013, 021, 023, 031, 040 |
+| Content contract | fixtures valid/invalid, duplicate ID, broken relation/link/asset        | 010–012                      |
+| Component        | filters, marker popup, graph list, PDF fallback, keyboard               | 022–024, 032–044             |
+| E2E              | home → domain → article; search; map; graph; responsive dossier         | 001–004, 020, 030–044        |
+| Build/deploy     | clean build, base path preview, projection snapshot                     | 004, 013, 050–052            |
+| Lighthouse/a11y  | representative home/article/explore route                               | 053                          |
 
 Required test fixtures:
 
@@ -855,16 +870,16 @@ Một release phase chỉ Done khi toàn bộ exit AC của phase pass trên art
 
 ## 17. Risks và biện pháp
 
-| Risk | Tác động | Mitigation |
-|---|---|---|
-| Monolithic docs không đủ metadata | Map/graph sai hoặc rỗng | Publish legacy trước; normalize thủ công theo vertical slice |
-| Tier khác nghĩa giữa domain | Gây hiểu sai nhận thức | `tierScheme` bắt buộc, filter theo scheme, disclaimer cố định |
-| Graph quá nhiều node | UI rối/chậm | Default filter, node cap, lazy load, list fallback |
-| PDF/CORS bên ngoài | Viewer lỗi | Ưu tiên local legal asset; luôn có external link fallback |
-| GitHub Pages subpath | Link/asset 404 | URL helper + E2E với `/ufo-data/` |
-| Client JSON lớn dần | Tải chậm | Projection tối thiểu, gzip budget, split theo domain |
-| Agent bịa metadata khi migration | Sai dữ liệu nghiên cứu | Unknown stays absent; review sources; validation không ép field không cần thiết |
-| Dependency drift | Build không tái lập | lockfile, `npm ci`, Renovate/Dependabot tùy chọn |
+| Risk                              | Tác động                | Mitigation                                                                      |
+| --------------------------------- | ----------------------- | ------------------------------------------------------------------------------- |
+| Monolithic docs không đủ metadata | Map/graph sai hoặc rỗng | Publish legacy trước; normalize thủ công theo vertical slice                    |
+| Tier khác nghĩa giữa domain       | Gây hiểu sai nhận thức  | `tierScheme` bắt buộc, filter theo scheme, disclaimer cố định                   |
+| Graph quá nhiều node              | UI rối/chậm             | Default filter, node cap, lazy load, list fallback                              |
+| PDF/CORS bên ngoài                | Viewer lỗi              | Ưu tiên local legal asset; luôn có external link fallback                       |
+| GitHub Pages subpath              | Link/asset 404          | URL helper + E2E với `/ufo-data/`                                               |
+| Client JSON lớn dần               | Tải chậm                | Projection tối thiểu, gzip budget, split theo domain                            |
+| Agent bịa metadata khi migration  | Sai dữ liệu nghiên cứu  | Unknown stays absent; review sources; validation không ép field không cần thiết |
+| Dependency drift                  | Build không tái lập     | lockfile, `npm ci`, Renovate/Dependabot tùy chọn                                |
 
 ---
 
@@ -872,16 +887,16 @@ Một release phase chỉ Done khi toàn bộ exit AC của phase pass trên art
 
 Các câu hỏi này không chặn Phase 1; nếu owner chưa quyết định, coding agent dùng default dưới đây và ghi config thay vì hard-code:
 
-| Decision | Default |
-|---|---|
-| GitHub owner/repository URL | Lấy từ CI environment; local dùng `http://localhost` |
-| Tên thương hiệu | `Knowledge Atlas` |
-| Ngôn ngữ UI | Tiếng Việt; metadata sẵn đường mở rộng i18n nhưng chưa làm locale routes |
-| Default theme | Theo system preference |
-| Tile provider | OpenStreetMap public tiles cho dữ liệu nhỏ, đúng usage policy và attribution; đổi provider qua config |
-| Analytics | Không có |
-| Comment system | Không có |
-| Raw HTML Markdown | Tắt |
+| Decision                    | Default                                                                                               |
+| --------------------------- | ----------------------------------------------------------------------------------------------------- |
+| GitHub owner/repository URL | Lấy từ CI environment; local dùng `http://localhost`                                                  |
+| Tên thương hiệu             | `PKD \| Project Knowledge Disclosure`                                                                 |
+| Ngôn ngữ UI                 | Tiếng Việt; metadata sẵn đường mở rộng i18n nhưng chưa làm locale routes                              |
+| Default theme               | Theo system preference                                                                                |
+| Tile provider               | OpenStreetMap public tiles cho dữ liệu nhỏ, đúng usage policy và attribution; đổi provider qua config |
+| Analytics                   | Không có                                                                                              |
+| Comment system              | Không có                                                                                              |
+| Raw HTML Markdown           | Tắt                                                                                                   |
 
 Nếu một quyết định mở làm thay đổi schema, URL public, privacy hoặc chi phí vận hành, agent phải tạo ADR và yêu cầu owner xác nhận trước implementation tương ứng.
 

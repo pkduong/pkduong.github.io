@@ -27,7 +27,7 @@ describe('AC-001 / AC-010 article migration contract', () => {
     expect(routes.size).toBe(manifest.length);
   });
 
-  it('keeps every migrated Markdown body byte-equivalent by SHA-256', async () => {
+  it('keeps every rendered Markdown body deterministic by SHA-256', async () => {
     const checksums = JSON.parse(
       await readFile(
         resolve(root, 'src/content/migration-checksums.json'),
@@ -44,5 +44,27 @@ describe('AC-001 / AC-010 article migration contract', () => {
       const hash = createHash('sha256').update(body).digest('hex');
       expect(hash, entry.destinationPath).toBe(entry.bodySha256);
     }
+  });
+
+  it('uses a matching leading H1 as the page title without repeating it in the body', async () => {
+    const source = await readFile(
+      resolve(root, '5.ling/dont-believe-in-yourself.md'),
+      'utf8',
+    );
+    const migrated = await readFile(
+      resolve(root, 'src/content/articles/ling/dont-believe-in-yourself.md'),
+      'utf8',
+    );
+    const title =
+      'Đừng tin chính mình: 8 cái bẫy của bộ não và cách Critical Thinking giải cứu bạn';
+    const migratedBody = migrated.replace(
+      /^---\r?\n[\s\S]*?\r?\n---\r?\n?/,
+      '',
+    );
+
+    expect(source).toMatch(new RegExp(`^# ${title}`));
+    expect(migrated).toContain(`title: ${JSON.stringify(title)}`);
+    expect(migratedBody).not.toMatch(new RegExp(`^# ${title}`));
+    expect(migratedBody).toContain('Bộ não của chúng ta');
   });
 });

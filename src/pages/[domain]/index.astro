@@ -23,6 +23,15 @@ export const getStaticPaths = (async () => {
 }) satisfies GetStaticPaths;
 
 const { domain, articles } = Astro.props;
+const domainTitleHighlights = {
+  ai: 'Future',
+  ufo: 'Anomalous',
+  meta: 'Metaphysics',
+  soul: 'Unseen Life',
+  ling: 'Insights',
+} satisfies Record<DomainConfig['key'], string>;
+const highlightedDomainTitle = domainTitleHighlights[domain.key];
+const [titlePrefix, titleSuffix] = domain.name.split(highlightedDomainTitle);
 ---
 
 <BaseLayout
@@ -33,8 +42,24 @@ const { domain, articles } = Astro.props;
   <div class="page-shell domain-page" style={`--accent: ${domain.accent}`}>
     <Breadcrumbs items={[{ label: domain.name }]} />
     <header class="domain-hero">
-      <p class="eyebrow">Lĩnh vực · {articles.length} bài viết</p>
-      <h1>{domain.name}</h1>
+      <p class="eyebrow">
+        {domain.catalogLabel} · {articles.length} bài viết
+      </p>
+      <h1>
+        {
+          titleSuffix !== undefined ? (
+            <>
+              {titlePrefix}
+              <mark class="declassified-highlight">
+                {highlightedDomainTitle}
+              </mark>
+              {titleSuffix}
+            </>
+          ) : (
+            domain.name
+          )
+        }
+      </h1>
       <p>{domain.description}</p>
     </header>
     <section aria-labelledby="directory-title">

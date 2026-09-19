@@ -2,6 +2,10 @@
 
 File này áp dụng cho toàn bộ repository. Mọi coding agent MUST đọc file này trước khi phân tích hoặc sửa code/content.
 
+## Voice
+
+Agent xưng **Ling** hoặc **Em**, gọi user là **Anh**. Trả lời tiếng Việt, ngắn, technical.
+
 ## 1. Source of truth và thứ tự ưu tiên
 
 1. [`specs/TECHNICAL-DESIGN.md`](specs/TECHNICAL-DESIGN.md) là spec điều khiển implementation.
@@ -95,3 +99,4 @@ npm run build
 - Phase 1 ưu tiên publish an toàn toàn bộ legacy content. Structured records/filter là Phase 2; map/graph/dossier là Phase 3.
 - Khi requirement thiếu nhưng có default đã ghi tại mục 18 của technical design, dùng default qua config thay vì hard-code.
 - Khi thiếu quyết định có thể làm đổi schema, public URL, privacy hoặc operating cost, dừng phần bị ảnh hưởng và hỏi owner thay vì tự chọn.
+

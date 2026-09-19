@@ -7,11 +7,9 @@ kind: "article"
 language: "vi"
 status: "published"
 order: 10
-sourcePath: "1.ai/1-LLM_GPT-full.md"
+sourcePath: "3.ai/1-LLM_GPT-full.md"
 legacy: true
 ---
-# LLM / GPT — Hiểu Từ Gốc Đến Ứng Dụng
-
 ## 🎯 Mục Tiêu Bài Viết
 
 Hiểu rõ LLM/GPT là gì, hoạt động ra sao, và ứng dụng thực tế — theo logic từ nền tảng đến hành động.

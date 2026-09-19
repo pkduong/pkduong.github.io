@@ -7,11 +7,9 @@ kind: "article"
 language: "vi"
 status: "published"
 order: 30
-sourcePath: "1.ai/3-RAG-Retrieval-Augmented-Generation.md"
+sourcePath: "3.ai/3-RAG-Retrieval-Augmented-Generation.md"
 legacy: true
 ---
-# RAG – Retrieval Augmented Generation: Kết Nối AI Với Dữ Liệu Riêng Của Bạn
-
 ## Bài toán: 500 GB tài liệu, 1 AI assistant
 
 Công ty bạn có 500 GB tài liệu nội bộ. Nhiệm vụ: xây dựng AI assistant có thể trả lời câu hỏi về những tài liệu này.

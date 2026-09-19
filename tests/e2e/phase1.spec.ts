@@ -10,14 +10,24 @@ test('@smoke AC-001 AC-002 AC-003 reader can navigate and read without JavaScrip
   });
   const page = await context.newPage();
   await page.goto('./');
-  await expect(page.getByRole('heading', { level: 1 })).toContainText(
-    'Đọc sâu',
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText(
+    'Đọc sâu. Tỉnh thức. Vượt mọi giới hạn.',
   );
-  await page.locator('.domain-card').filter({ hasText: 'UFO / UAP' }).click();
-  await expect(page.getByRole('heading', { level: 1 })).toHaveText('UFO / UAP');
+  await expect(
+    page.getByRole('link', { name: /Project Knowledge Disclosure/ }),
+  ).toBeVisible();
+  await page
+    .locator('.domain-card')
+    .filter({ hasText: 'U.F.O / UAP — Unidentified Anomalous Phenomena' })
+    .click();
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText(
+    'U.F.O / UAP — Unidentified Anomalous Phenomena',
+  );
   await page.getByRole('link', { name: /Government Programs/ }).click();
   await expect(page.locator('.prose')).toContainText('Project Sign');
-  await expect(page.getByLabel('Breadcrumb')).toContainText('UFO / UAP');
+  await expect(page.getByLabel('Breadcrumb')).toContainText(
+    'U.F.O / UAP — Unidentified Anomalous Phenomena',
+  );
   expect(
     await page.evaluate(
       () => document.documentElement.scrollWidth <= window.innerWidth,
@@ -42,6 +52,29 @@ test('@smoke AC-004 every generated internal URL keeps the project base path', a
   expect(internalUrls.length).toBeGreaterThan(5);
   expect(internalUrls.every((url) => url?.startsWith(expectedPrefix))).toBe(
     true,
+  );
+});
+
+test('@smoke AC-004 renamed published article redirects to its new canonical route', async ({
+  page,
+}) => {
+  await page.goto('./ling/articles/critical-thinking/');
+  await expect(page).toHaveURL(/\/ling\/articles\/dont-believe-in-yourself\/$/);
+  await expect(page.getByRole('heading', { level: 1 })).toContainText(
+    'Đừng tin chính mình',
+  );
+});
+
+test('@smoke AC-001 AC-004 legacy psychic route redirects to the highlighted SOUL page', async ({
+  page,
+}) => {
+  await page.goto('./psychic/');
+  await expect(page).toHaveURL(/\/soul\/$/);
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText(
+    'SOUL — Studies Of the Unseen Life',
+  );
+  await expect(page.locator('h1 .declassified-highlight')).toHaveText(
+    'Unseen Life',
   );
 });
 

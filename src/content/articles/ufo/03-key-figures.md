@@ -5,7 +5,7 @@ domain: "ufo"
 kind: "article"
 status: "published"
 order: 30
-sourcePath: "2.ufo/03-Key-Figures.md"
+sourcePath: "1.ufo/03-Key-Figures.md"
 legacy: true
 title: "Key Figures — UFO/UAP (nhân vật, phi công, claimant, báo chí)"
 section: "03"

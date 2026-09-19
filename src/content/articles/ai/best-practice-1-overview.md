@@ -7,11 +7,9 @@ kind: "article"
 language: "vi"
 status: "published"
 order: 101
-sourcePath: "1.ai/best-practice/1-overview.md"
+sourcePath: "3.ai/best-practice/1-overview.md"
 legacy: true
 ---
-# AI Engineer không phải chỉ biết Prompt hay LLM
-
 > Sau khi xem một video chia sẻ về lộ trình AI Engineer, mình nhận ra một điều thú vị:
 >
 > **Rất nhiều người nghĩ AI Engineer = biết gọi API ChatGPT.**

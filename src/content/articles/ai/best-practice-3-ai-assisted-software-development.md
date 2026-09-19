@@ -7,11 +7,9 @@ kind: "article"
 language: "vi"
 status: "published"
 order: 103
-sourcePath: "1.ai/best-practice/3-AI-assisted-software-development.md"
+sourcePath: "3.ai/best-practice/3-AI-assisted-software-development.md"
 legacy: true
 ---
-# AI-assisted software development
-
 ## 🎯 Mục Tiêu Bài Viết
 
 Hiểu cách đưa AI vào quy trình phát triển phần mềm một cách có kiểm soát — không chỉ để sinh code nhanh hơn, mà còn để AI hiểu đúng business logic, tuân thủ convention, lập kế hoạch rõ ràng và tự chứng minh rằng code mới không làm thay đổi hành vi cũ.

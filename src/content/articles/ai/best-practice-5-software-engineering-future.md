@@ -7,11 +7,9 @@ kind: "article"
 language: "vi"
 status: "published"
 order: 105
-sourcePath: "1.ai/best-practice/5-Software-Engineering-Future.md"
+sourcePath: "3.ai/best-practice/5-Software-Engineering-Future.md"
 legacy: true
 ---
-# Tương Lai Software Engineering Trong Thời AI Coding Agents
-
 ## Khi AI viết code nhanh hơn, vấn đề thật sự nằm ở đâu?
 
 AI coding agents đang thay đổi căn bản cách build software. Code có thể được viết nhanh hơn 10x, thậm chí 100x. Nhưng khi tốc độ viết code tăng vọt, câu hỏi không còn là "code nhanh không?" mà là **biết nên build cái gì, build đúng không, có hợp pháp không, có market không, có thiết kế tốt không**.

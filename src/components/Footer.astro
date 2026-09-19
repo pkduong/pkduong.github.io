@@ -1,11 +1,13 @@
 ---
 import { withBase } from '../lib/url';
+import { siteConfig } from '../site.config';
 ---
 
 <footer class="site-footer" data-pagefind-ignore>
   <div class="footer-inner">
     <p>
-      <strong>Knowledge Atlas</strong> — Markdown trong Git là nguồn dữ liệu gốc.
+      <strong>{siteConfig.shortName} · {siteConfig.name}</strong> — Markdown trong
+      Git là nguồn dữ liệu gốc.
     </p>
     <p><a href={withBase('search/')}>Tìm trong toàn bộ kho tri thức</a></p>
   </div>

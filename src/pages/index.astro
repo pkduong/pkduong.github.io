@@ -6,23 +6,38 @@ import { withBase } from '../lib/url';
 import { siteConfig } from '../site.config';
 
 const articles = await getPublishedArticles();
+const taglineParts = siteConfig.tagline.split('Tỉnh thức');
 ---
 
 <BaseLayout canonicalPath={withBase()}>
   <section class="hero page-shell">
-    <p class="eyebrow">
-      Kho tri thức mở · 5 lĩnh vực · {articles.length} bài viết
-    </p>
-    <h1>Đọc sâu. Truy nguồn. Giữ khoảng cách với điều chưa biết.</h1>
-    <p class="hero-lead">
-      Knowledge Atlas xuất bản trực tiếp nội dung Markdown trong repository
-      thành một thư viện tĩnh, nhẹ và có thể đọc mà không cần JavaScript.
-    </p>
-    <div class="hero-actions">
-      <a class="button" href={withBase('search/')}>Tìm kiếm toàn bộ</a>
-      <a class="text-link" href="#domains"
-        >Khám phá 5 lĩnh vực <span aria-hidden="true">↓</span></a
-      >
+    <div class="hero-file">
+      <div class="file-meta" aria-label="Thông tin kho lưu trữ">
+        <span>Kho lưu trữ: PKD // Public access</span>
+        <span>Chế độ trình bày: Giải mật</span>
+      </div>
+      <p class="eyebrow">
+        Kho dữ liệu mở · 5 lĩnh vực · {articles.length} tài liệu
+      </p>
+      <h1>
+        {taglineParts[0]}<mark class="declassified-highlight">Tỉnh thức</mark>{
+          taglineParts[1]
+        }
+      </h1>
+      <p class="hero-lead">
+        Góc nhìn đa chiều về những điều khó lý giải: từ hiện tượng dị thường
+        ngoài không gian đến chiều sâu tâm thức con người.
+      </p>
+      <div class="redaction-row" aria-hidden="true">
+        <span></span><span></span><span></span>
+      </div>
+      <div class="hero-actions">
+        <a class="button" href={withBase('search/')}>Truy xuất kho tài liệu</a>
+        <a class="text-link" href="#domains"
+          >Mở danh mục lĩnh vực <span aria-hidden="true">↓</span></a
+        >
+      </div>
+      <span class="declassified-stamp" aria-hidden="true">Declassified</span>
     </div>
   </section>
 
@@ -33,17 +48,13 @@ const articles = await getPublishedArticles();
   >
     <div class="section-heading">
       <div>
-        <p class="eyebrow">Lĩnh vực</p>
-        <h2 id="domains-title">Năm lối vào cùng một kho dữ liệu</h2>
+        <p class="eyebrow">Mục lục kho lưu trữ</p>
+        <h2 id="domains-title">Năm lối vào kho dữ liệu giới hạn</h2>
       </div>
-      <p>
-        Mỗi lĩnh vực giữ ngữ cảnh và cách phân loại riêng; không gộp các thang
-        tier thành một điểm chung.
-      </p>
     </div>
     <div class="domain-grid">
       {
-        siteConfig.domains.map((domain, index) => {
+        siteConfig.domains.map((domain) => {
           const count = articles.filter(
             (article) => article.data.domain === domain.key,
           ).length;
@@ -53,8 +64,13 @@ const articles = await getPublishedArticles();
               href={withBase(`${domain.key}/`)}
               style={`--accent: ${domain.accent}`}
             >
-              <span class="domain-index">0{index + 1}</span>
-              <h3>{domain.name}</h3>
+              <span class="domain-index">{domain.catalogNumber}</span>
+              <span class="domain-status">{domain.catalogLabel}</span>
+              <h3 aria-label={domain.name}>
+                {domain.cardTitleLines.map((line) => (
+                  <span>{line}</span>
+                ))}
+              </h3>
               <p>{domain.description}</p>
               <span class="domain-count">{count} bài viết →</span>
             </a>
@@ -67,8 +83,8 @@ const articles = await getPublishedArticles();
   <section class="page-shell section-block" aria-labelledby="recent-title">
     <div class="section-heading compact">
       <div>
-        <p class="eyebrow">Gợi ý bắt đầu</p>
-        <h2 id="recent-title">Các bài đọc đầu tiên</h2>
+        <p class="eyebrow">Tài liệu tuyển chọn</p>
+        <h2 id="recent-title">Bắt đầu truy xuất</h2>
       </div>
     </div>
     <div class="article-list">

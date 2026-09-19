@@ -7,11 +7,9 @@ kind: "article"
 language: "vi"
 status: "published"
 order: 106
-sourcePath: "1.ai/best-practice/6-as-Power-User.md"
+sourcePath: "3.ai/best-practice/6-as-Power-User.md"
 legacy: true
 ---
-# Dùng AI Như Power User: Context, Prompt, và Iterate Hiệu Quả
-
 ## AI mạnh hơn, nhưng kết quả phụ thuộc vào cách bạn dùng
 
 AI năm 2026 mạnh hơn nhiều so với thời mới xuất hiện. Nhưng kết quả tốt hay dở phụ thuộc rất nhiều vào cách bạn dùng nó. Người mới thường hỏi AI như hỏi Google: prompt ngắn, thiếu bối cảnh, mong AI tự đoán. Người dùng giỏi thì xem AI như một **"trợ lý thông minh nhưng chưa biết gì về mình"**, nên họ cung cấp đủ context, tài liệu, tiêu chí đánh giá và yêu cầu AI suy nghĩ kỹ trước khi trả lời.

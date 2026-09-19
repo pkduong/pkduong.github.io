@@ -1,6 +1,7 @@
 import { defineConfig } from 'astro/config';
 import { satteri } from '@astrojs/markdown-satteri';
 import {
+  rehypeCompactIndexTables,
   rehypeExternalLinks,
   rehypeHeadingAnchors,
   remarkBasePathLinks,
@@ -15,6 +16,12 @@ export default defineConfig({
   site,
   base,
   trailingSlash: 'always',
+  redirects: {
+    '/ling/articles/critical-thinking/':
+      '/ling/articles/dont-believe-in-yourself/',
+    '/psychic/': '/soul/',
+    '/psychic/articles/psychic/': '/soul/articles/soul/',
+  },
   markdown: {
     syntaxHighlight: {
       type: 'shiki',
@@ -22,7 +29,11 @@ export default defineConfig({
     },
     processor: satteri({
       mdastPlugins: [remarkBasePathLinks({ base }), remarkEscapeRawHtml()],
-      hastPlugins: [rehypeExternalLinks(), rehypeHeadingAnchors()],
+      hastPlugins: [
+        rehypeExternalLinks(),
+        rehypeHeadingAnchors(),
+        rehypeCompactIndexTables(),
+      ],
     }),
   },
   vite: {

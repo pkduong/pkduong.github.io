@@ -6,7 +6,7 @@ const articleBase = z.object({
   id: z.string().regex(/^ART-[A-Z0-9-]{3,76}$/),
   title: z.string().min(1),
   slug: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/),
-  domain: z.enum(['ai', 'ufo', 'meta', 'psychic', 'misc']),
+  domain: z.enum(['ai', 'ufo', 'meta', 'soul', 'ling']),
   kind: z.literal('article'),
   language: z.literal('vi'),
   status: z.enum(['draft', 'published', 'archived']),

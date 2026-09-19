@@ -7,11 +7,9 @@ kind: "article"
 language: "vi"
 status: "published"
 order: 107
-sourcePath: "1.ai/best-practice/7-Code-Refactoring.md"
+sourcePath: "3.ai/best-practice/7-Code-Refactoring.md"
 legacy: true
 ---
-# AI Code Refactoring — Làm sạch bên trong, giữ nguyên bên ngoài
-
 > AI code refactoring không thêm chức năng mới — nó **cải thiện bên trong** để code dễ đọc, dễ bảo trì, và sạch hơn mà vẫn giữ nguyên behavior.
 
 ---

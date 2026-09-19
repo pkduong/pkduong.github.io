@@ -1,11 +1,14 @@
-export const domainKeys = ['ai', 'ufo', 'meta', 'psychic', 'misc'] as const;
+export const domainKeys = ['ai', 'ufo', 'meta', 'soul', 'ling'] as const;
 
 export type DomainKey = (typeof domainKeys)[number];
 
 export type DomainConfig = {
   key: DomainKey;
   name: string;
+  cardTitleLines: readonly string[];
   shortName: string;
+  catalogNumber: string;
+  catalogLabel: string;
   description: string;
   sourceDirectory: string;
   accent: string;
@@ -16,52 +19,86 @@ export const deploymentConfig = {
 } as const;
 
 export const siteConfig = {
-  name: 'Knowledge Atlas',
+  name: 'Project Knowledge Disclosure',
+  shortName: 'PKD',
+  tagline: 'Đọc sâu. Tỉnh thức. Vượt mọi giới hạn.',
   description:
-    'Kho tri thức tĩnh được xuất bản trực tiếp từ Markdown trong Git.',
+    'Không gian giải mã và lưu trữ dữ liệu về hiện tượng lạ, ranh giới khoa học và bản chất thực tại.',
   repositoryName: 'ufo-data',
   domains: [
     {
-      key: 'ai',
-      name: 'AI & Software Engineering',
-      shortName: 'AI',
-      description:
-        'Nền tảng AI, quy trình phát triển phần mềm và thực hành kỹ thuật.',
-      sourceDirectory: '1.ai',
-      accent: '#5144cf',
-    },
-    {
       key: 'ufo',
-      name: 'UFO / UAP',
-      shortName: 'UFO / UAP',
+      name: 'U.F.O / UAP — Unidentified Anomalous Phenomena',
+      cardTitleLines: [
+        'U.F.O / UAP —',
+        'Unidentified',
+        'Anomalous',
+        'Phenomena',
+      ],
+      shortName: 'U.F.O',
+      catalogNumber: '01',
+      catalogLabel: 'Danh mục đã giải mật',
       description:
-        'Chương trình, sự kiện, nhân vật và thuật ngữ nghiên cứu UFO / UAP.',
-      sourceDirectory: '2.ufo',
-      accent: '#1b7f75',
+        'Hồ sơ giải mật, hiện tượng dị thường trên bầu trời và những dấu vết vượt khỏi giới hạn khoa học thông thường.',
+      sourceDirectory: '1.ufo',
+      accent: '#838985',
     },
     {
       key: 'meta',
-      name: 'Vật lý & Siêu hình học',
-      shortName: 'Meta',
-      description: 'Các ràng buộc vật lý, giả thuyết và khung nhận thức.',
-      sourceDirectory: '3.meta',
-      accent: '#a04b73',
+      name: 'META — Metaphysics, Existence & Alternative Realities',
+      cardTitleLines: [
+        'META —',
+        'Metaphysics,',
+        'Existence &',
+        'Alternative Realities',
+      ],
+      shortName: 'META',
+      catalogNumber: '02',
+      catalogLabel: 'Danh mục bất khả tri',
+      description:
+        'Thước đo của các định luật tự nhiên, biên giới vật lý học và bản thể luận về không-thời gian.',
+      sourceDirectory: '2.meta',
+      accent: '#aaa39a',
     },
     {
-      key: 'psychic',
-      name: 'Tâm linh & Cận tâm lý',
-      shortName: 'Psychic',
-      description: 'Hệ phái, nghiên cứu cận tâm lý và hồ sơ hiện tượng.',
-      sourceDirectory: '4.psychic',
-      accent: '#8a5a24',
+      key: 'ai',
+      name: 'A.I — Artificial Intelligence & Future Cognition',
+      cardTitleLines: [
+        'A.I —',
+        'Artificial Intelligence &',
+        'Future Cognition',
+      ],
+      shortName: 'A.I',
+      catalogNumber: '03',
+      catalogLabel: 'Danh mục nguy hiểm',
+      description:
+        'Ranh giới ý thức máy, bước tiến AGI và tương lai của nhận thức nhân tạo.',
+      sourceDirectory: '3.ai',
+      accent: '#9c9c98',
     },
     {
-      key: 'misc',
-      name: 'Ling',
-      shortName: 'Ling',
-      description: 'Tâm lý học, Tư duy phản biện, và các ghi chép khác.',
-      sourceDirectory: '5.ling-tinh',
-      accent: '#47627a',
+      key: 'soul',
+      name: 'SOUL — Studies Of the Unseen Life',
+      cardTitleLines: ['SOUL — Studies', 'Of the Unseen Life'],
+      shortName: 'SOUL',
+      catalogNumber: '04',
+      catalogLabel: 'Danh mục dị biệt',
+      description:
+        'Khảo cứu cổ thư huyền học, cận tâm lý học thực nghiệm và những giới hạn chưa được giải mã của siêu thức con người.',
+      sourceDirectory: '4.soul',
+      accent: '#8d8982',
+    },
+    {
+      key: 'ling',
+      name: 'L.I.N.G — Life, Insights, Notes & Growth',
+      cardTitleLines: ['L.I.N.G —', 'Life, Insights,', 'Notes & Growth'],
+      shortName: 'L.I.N.G',
+      catalogNumber: '05',
+      catalogLabel: 'Danh mục ngoại biên',
+      description:
+        'Những lát cắt đời sống, tư duy con người và điều đọng lại sau từng trang sách, thước phim',
+      sourceDirectory: '5.ling',
+      accent: '#747b80',
     },
   ] satisfies DomainConfig[],
 } as const;

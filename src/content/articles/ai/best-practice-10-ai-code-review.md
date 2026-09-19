@@ -7,11 +7,9 @@ kind: "article"
 language: "vi"
 status: "published"
 order: 110
-sourcePath: "1.ai/best-practice/10-AI-Code-Review.md"
+sourcePath: "3.ai/best-practice/10-AI-Code-Review.md"
 legacy: true
 ---
-# AI Code Review — Part 1: Tổng quan & Workflow thực chiến
-
 > AI code review không thay thế con người — nó xử lý phần **routine** để human tập trung vào phần **thinking**.
 
 ---

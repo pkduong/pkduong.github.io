@@ -9,7 +9,7 @@ Ba kho dùng chung một kỷ luật: **Tier của bản ghi ≠ sự thật c�
 ```
 [Ba kho]
 ├── UAP (ufo.md)     — chương trình, ca cảm biến, nhân chứng
-├── Tâm linh (psychic/)   — cổ thư, lab psi, ca NDE/CORT
+├── Tâm linh (soul/)      — cổ thư, lab psi, ca NDE/CORT
 └── Vật lý (meta/)       — ràng buộc định luật + trời quan sát + cầu nối có kiểm soát
 ```
 

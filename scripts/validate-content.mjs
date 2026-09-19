@@ -4,13 +4,7 @@ import { fileURLToPath } from 'node:url';
 import { buildMigrationPlan, checkMigration } from './migrate-content.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const domainDirectories = [
-  '1.ai',
-  '2.ufo',
-  '3.meta',
-  '4.psychic',
-  '5.ling-tinh',
-];
+const domainDirectories = ['1.ufo', '2.meta', '3.ai', '4.soul', '5.ling'];
 const allowedLegacyRoutes = new Set([
   '/ai/2026/04/01/ai-tools-for-engineers.html',
   '/ai/2026/04/02/ai-vs-traditional-programming.html',

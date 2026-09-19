@@ -7,11 +7,9 @@ kind: "article"
 language: "vi"
 status: "published"
 order: 102
-sourcePath: "1.ai/best-practice/2-as-team-member.md"
+sourcePath: "3.ai/best-practice/2-as-team-member.md"
 legacy: true
 ---
-# Áp dụng AI vào dự án max4-web: Đừng dùng AI như công cụ viết code, hãy dùng như một kỹ sư trong team
-
 Cách áp dụng AI hiệu quả nhất cho **max4-web** không phải là yêu cầu AI:
 
 > "Hãy implement task này giúp tôi."

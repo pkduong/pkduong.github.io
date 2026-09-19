@@ -5,7 +5,7 @@ domain: "ufo"
 kind: "article"
 status: "published"
 order: 20
-sourcePath: "2.ufo/02-Landmark-Incidents.md"
+sourcePath: "1.ufo/02-Landmark-Incidents.md"
 legacy: true
 title: "Landmark Incidents — UFO/UAP type-specimens (radar, sensor, trace)"
 section: "02"

@@ -7,11 +7,9 @@ kind: "article"
 language: "vi"
 status: "published"
 order: 20
-sourcePath: "1.ai/2-AI-vs-Traditional-Programming.md"
+sourcePath: "3.ai/2-AI-vs-Traditional-Programming.md"
 legacy: true
 ---
-# AI vs Traditional Programming — Hiểu Từ Gốc
-
 ## 🎯 Mục Tiêu Bài Viết
 
 Hiểu rõ sự khác biệt cốt lõi giữa AI Programming và Traditional Programming — để biết khi nào dùng cái nào và vì sao AI lại hoạt động theo cách "khó giải thích".

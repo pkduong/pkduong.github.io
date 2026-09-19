@@ -5,7 +5,7 @@ domain: "ufo"
 kind: "article"
 status: "published"
 order: 40
-sourcePath: "2.ufo/04-Technical-Keywords-Concepts.md"
+sourcePath: "1.ufo/04-Technical-Keywords-Concepts.md"
 legacy: true
 title: "Technical Keywords & Concepts — UFO/UAP"
 section: "04"

@@ -7,7 +7,7 @@ kind: "article"
 language: "vi"
 status: "published"
 order: 1
-sourcePath: "2.ufo/ufo.md"
+sourcePath: "1.ufo/ufo.md"
 legacy: true
 ---
 # Structure:

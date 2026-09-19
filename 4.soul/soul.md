@@ -79,18 +79,18 @@ Chấm **loại nguồn / phương pháp**, không chấm “hiện tượng có
 
 Type-specimen theo **lớp bằng chứng**. Từ khóa gồm cả giả thuyết phản biện. Không viết claim phổ thông như đã chốt.
 
-| Mã Hồ sơ | Loại hiện tượng | Địa điểm & Thời gian | Nguồn dữ liệu & tính chất bằng chứng |
-| --- | --- | --- | --- |
-| **CAS-MED-01** | Cross-Correspondences (thông linh đối chiếu) | Cambridge / SPR (1901–1930s) | Nhiều medium độc lập (Piper, Verrall, Holland); mảnh cổ điển Hy Lạp ghép nghĩa; type-specimen SPR |
-| **CAS-REI-02** | CORT / trí nhớ tiền kiếp (Shanti Devi) | Delhi–Mathura, Ấn Độ (1935–1936) | Ủy ban ~15 người gắn Gandhi, báo cáo 1936 ủng hộ; **Bal Chand Nahata** bác. Pre-DOPS, không phải protocol Stevenson |
-| **CAS-RSPK-03** | Poltergeist có đo lường (Rosenheim) | Rosenheim, CHLB Đức (1967–1968) | Physicist F. Karger (Max Planck), công ty điện, cảnh sát; lệch điện/điện thoại theo cô lập. Mạnh hơn Enfield về cảm biến |
-| **CAS-OBE-04** | OBE lab (Miss Z) | Charles Tart, 1968 | Mục tiêu 5 chữ số trên kệ; một hit được báo cáo; mẫu cực nhỏ, khó tái lập |
-| **CAS-RV-05** | Remote viewing Sao Mộc (Ingo Swann) | SRI, 27/04/1973 | Transcript CREST; nhắc “ring-like” trước Voyager 1 (1979). Pioneer 10 (12/1973) không xác nhận vành. Tranh cãi (Oberg: loại suy từ Sao Thổ). **Không** phải mù đôi nghiệp vụ |
-| **CAS-RV-06** | RV lab (*Nature* 1974) | Targ & Puthoff, SRI | Paper đồng duyệt; target phong bì/tọa độ. Type-specimen protocol; chỉ trích sensory leakage / optional stopping đi kèm |
-| **CAS-POL-07** | Poltergeist (Enfield) | London, 1977–1979 | SPR (Playfair, Grosse); WPC Carolyn Heeps ký biên bản ghế dịch. Janet Hodgson sau này thừa nhận *một phần* giả. Giữ residual, không thần thánh hóa |
-| **CAS-NDE-08** | NDE phẫu thuật (Pam Reynolds) | Barrow Neurological, Phoenix, 08/1991 | Spetzler; hypothermic standstill, EEG phẳng, BAER clicks. Phần **veridical** (cưa xương, hội thoại) Sabom đặt *trước* standstill; Augustine/Woerlee: anesthesia awareness. Không viết “não chết khi thấy cưa” |
-| **CAS-NDE-09** | NDE tiến cứu (van Lommel) | Hà Lan, *Lancet* 2001 | 344 BN ngưng tim; ~12% NDE; ca hàm giả (dentures) hay được trích như veridical. Cohort, không phải một ca EEG phẳng |
-| **CAS-MYS-10** | Mystical experience lab (Griffiths) | Johns Hopkins, 2006 | Psilocybin, double-blind; Hood/M-scale. Tier 2 protocol cho *trải nghiệm*; không xác nhận bản thể luận truyền thống |
+| Mã Hồ sơ        | Loại hiện tượng                              | Địa điểm & Thời gian                  | Nguồn dữ liệu & tính chất bằng chứng                                                                                                                                                                          |
+| --------------- | -------------------------------------------- | ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **CAS-MED-01**  | Cross-Correspondences (thông linh đối chiếu) | Cambridge / SPR (1901–1930s)          | Nhiều medium độc lập (Piper, Verrall, Holland); mảnh cổ điển Hy Lạp ghép nghĩa; type-specimen SPR                                                                                                             |
+| **CAS-REI-02**  | CORT / trí nhớ tiền kiếp (Shanti Devi)       | Delhi–Mathura, Ấn Độ (1935–1936)      | Ủy ban ~15 người gắn Gandhi, báo cáo 1936 ủng hộ; **Bal Chand Nahata** bác. Pre-DOPS, không phải protocol Stevenson                                                                                           |
+| **CAS-RSPK-03** | Poltergeist có đo lường (Rosenheim)          | Rosenheim, CHLB Đức (1967–1968)       | Physicist F. Karger (Max Planck), công ty điện, cảnh sát; lệch điện/điện thoại theo cô lập. Mạnh hơn Enfield về cảm biến                                                                                      |
+| **CAS-OBE-04**  | OBE lab (Miss Z)                             | Charles Tart, 1968                    | Mục tiêu 5 chữ số trên kệ; một hit được báo cáo; mẫu cực nhỏ, khó tái lập                                                                                                                                     |
+| **CAS-RV-05**   | Remote viewing Sao Mộc (Ingo Swann)          | SRI, 27/04/1973                       | Transcript CREST; nhắc “ring-like” trước Voyager 1 (1979). Pioneer 10 (12/1973) không xác nhận vành. Tranh cãi (Oberg: loại suy từ Sao Thổ). **Không** phải mù đôi nghiệp vụ                                  |
+| **CAS-RV-06**   | RV lab (*Nature* 1974)                       | Targ & Puthoff, SRI                   | Paper đồng duyệt; target phong bì/tọa độ. Type-specimen protocol; chỉ trích sensory leakage / optional stopping đi kèm                                                                                        |
+| **CAS-POL-07**  | Poltergeist (Enfield)                        | London, 1977–1979                     | SPR (Playfair, Grosse); WPC Carolyn Heeps ký biên bản ghế dịch. Janet Hodgson sau này thừa nhận *một phần* giả. Giữ residual, không thần thánh hóa                                                            |
+| **CAS-NDE-08**  | NDE phẫu thuật (Pam Reynolds)                | Barrow Neurological, Phoenix, 08/1991 | Spetzler; hypothermic standstill, EEG phẳng, BAER clicks. Phần **veridical** (cưa xương, hội thoại) Sabom đặt *trước* standstill; Augustine/Woerlee: anesthesia awareness. Không viết “não chết khi thấy cưa” |
+| **CAS-NDE-09**  | NDE tiến cứu (van Lommel)                    | Hà Lan, *Lancet* 2001                 | 344 BN ngưng tim; ~12% NDE; ca hàm giả (dentures) hay được trích như veridical. Cohort, không phải một ca EEG phẳng                                                                                           |
+| **CAS-MYS-10**  | Mystical experience lab (Griffiths)          | Johns Hopkins, 2006                   | Psilocybin, double-blind; Hood/M-scale. Tier 2 protocol cho *trải nghiệm*; không xác nhận bản thể luận truyền thống                                                                                           |
 
 **Không đưa vào bảng chính:** Fatima/Medjugorje (thần học đại chúng); Scole (kiểm soát yếu); Ra Material (Tier 5); Skinwalker/AAWSAP (kho UAP).
 
@@ -278,3 +278,101 @@ filename: `tamlinh/05-Key-Figures.md`
 > *Quy tắc: mỗi ô 1–3 câu + citation. Không viết tiểu luận bản thể luận. Không đồng nhất “chưa giải” với “linh hồn / PK đã chứng minh”."*
 
 filename: `tamlinh/06-Technical-Keywords.md`
+
+## 08. Bô sung:
+
+Việc đưa New Age vào chuyên mục **SOUL** là hoàn toàn hợp lý, vì New Age chính là **cây cầu nối trực tiếp giữa huyền học tâm thức và hiện tượng UAP/thực thể ngoài Trái Đất**.
+
+Trong hệ thống dữ liệu của anh, thay vì xem New Age như mê tín hoang đường, hệ thống sẽ lưu trữ nó dưới tư cách: **Hồ sơ Xã hội học Tôn giáo Mới (New Religious Movements - NRM) & Ý thức Phi quy ước (Exo-Consciousness / Psychotronics)**.
+
+---
+
+### 1. Giải mã giao thức CE-5 của Dr. Steven Greer
+
+#### **Bản chất của CE-5 (Close Encounters of the 5th Kind)**
+
+Thuật ngữ gốc của J. Allen Hynek chỉ dừng lại ở CE-1 đến CE-3 (nhìn thấy, tương tác vật lý, thấy thực thể). CE-4 là bị bắt cóc. **Dr. Steven Greer** tự mở rộng ra **CE-5: Cuộc tiếp xúc chủ động do con người khởi xướng thông qua giao tiếp bằng ý thức** (Human-Initiated Contact Events - HICE).
+
+#### **Vì sao lại "vừa thiền tâm linh, vừa kết nối người ngoài hành tinh"?**
+
+Cách tiếp cận này dựa trên 3 tiền đề lý thuyết kết hợp giữa Cận tâm lý học và Giả thuyết Đa chiều (Interdimensional Hypothesis):
+
+1. **Ý thức là trường phi cục bộ (Non-local Consciousness):** Ý thức không sinh ra từ não bộ mà là bản chất nền tảng của vũ trụ (tương đồng với *Advaita Vedānta* hay giả thuyết trường lượng tử). Khi con người vào trạng thái thiền định sâu, khoảng cách không-thời gian bị xóa bỏ.
+2. **Kỹ thuật định vị nhận thức (Coherent Thought Sequencing - CTS):** Người tham gia dùng thiền nhóm đồng bộ, phát ra ý niệm chào đón và dùng năng lực tương tự *Remote Viewing (Thấu thị)* để "phát tín hiệu vector tọa độ" trong tâm trí tới các thực thể.
+
+
+3. **Thực thể phi vật lý / Siêu chiều (Interdimensional Beings):** Greer và các nhánh New Age cho rằng các nền văn minh tiên tiến không di chuyển bằng phi thuyền kim loại thuần túy, mà di chuyển qua các chiều không gian bằng tần số dao động ý thức. Do đó, muốn kết nối với họ phải dùng sóng tâm trí thay vì sóng radio thông thường.
+
+#### **Định vị CE-5 trong Epistemic Matrix (Thang đo dữ liệu của anh)**
+
+* **Phân loại:** `Tier 5` (Lore / Hệ thực hành phong trào mới) giao thoa với `Tier 3` (Hồ sơ thực địa).
+
+
+* **Đánh giá khách quan:**
+* *Điểm ghi nhận:* Giao thức mở, hàng chục nghìn người thực hành thực địa, thúc đẩy góc nhìn kết hợp giữa tâm thức và UAP.
+* *Phản biện lưu trữ:* Lỗ hổng kiểm soát thực nghiệm (Sensory leakage, confirmation bias). Các hiện tượng ánh sáng trên trời dễ bị nhầm lẫn với vệ tinh (Starlink), pháo sáng, máy bay hoặc hiện tượng ảo ảnh quang học; thiếu dữ liệu radar/cảm biến đồng bộ tại chỗ.
+
+
+* **Quy tắc Cross-ref:** Gắn thẻ liên kết chéo `[Cross-ref: Kho U.F.O / UAP]`.
+
+---
+
+#### 2. Cập nhật nhánh New Age vào Cây Thư tịch (Mục 02)
+
+Trong file `soul.md`, anh bổ sung thêm nhánh con vào phần `Modern Syntheses (TK 19–20)` hoặc tạo một nhánh riêng:
+
+```text
+├── Modern Syntheses & New Age Movement
+│   ├── Channeling Traditions (Kênh truyền thông linh hiện đại)
+│   │     ├── Seth Material (Jane Roberts) — Nền tảng triết học thực tại đa chiều
+│   │     ├── A Course in Miracles (ACIM - Helen Schucman) — Tâm lý học tâm linh
+│   │     └── The Law of One / Ra Material (L/L Research) — Cấu trúc mật độ ý thức & liên hành tinh
+│   ├── Exo-Consciousness & Ufological Spiritualism (Tâm thức liên hành tinh)
+│   │     ├── CSETI / CE-5 Protocols (Dr. Steven Greer)
+│   │     ├── Ashtar Command & Galactic Lore (Xã hội học tín ngưỡng UFO)
+│   │     └── Transpersonal Ufology (Jacques Vallée, John Keel — cầu nối lý tính)
+│   └── Human Potential & Neo-Shamanism
+│         ├── Monroe Institute (Hemi-Sync / Gateway Process)
+│         ├── Esalen Institute & Transpersonal Psychology (Stanislav Grof)
+│         └── Ayahuasca / Psychedelic Neo-Shamanism (Terence McKenna)
+
+```
+
+---
+
+#### 3. Bổ sung Key Figures (Nhân vật chủ chốt của New Age)
+
+Thêm các nhân vật này vào mục **05. Key Figures** theo đúng tiêu chuẩn hồ sơ độc lập:
+
+* **Dr. Steven Greer (1955– ):**
+* *Vai trò:* Cựu bác sĩ cấp cứu; sáng lập CSETI (1990) và The Disclosure Project (2001).
+* *Đóng góp:* Phổ biến giao thức CE-5; tổ chức cuộc họp báo giải mật chấn động tại National Press Club (2001) với hàng trăm nhân chứng quân sự/chính phủ.
+* *Phản biện:* Bị giới nghiên cứu phản ứng vì các gói tour CE-5 thương mại đắt đỏ và thiếu bằng chứng cảm biến vật lý độc lập.
+
+* **Jane Roberts (1929–1984):**
+* *Đóng góp:* Tác giả bộ sách *Seth Material*. Được coi là hình mẫu kinh điển nhất của hiện tượng thông linh (channeling) thời hiện đại, định hình tư duy "bạn tự tạo ra thực tại của chính mình".
+
+* **Don Elkins & Carla Rueckert (L/L Research):**
+* *Đóng góp:* Nhóm thực hiện 106 phiên hỏi đáp *The Ra Material (The Law of One)* từ 1981–1984. Được coi là văn bản channeling phức tạp và có hệ thống nhất về vũ trụ học và các chiều kích mật độ ý thức.
+
+
+* **Stanislav Grof (1931– ):**
+* *Vai trò:* Bác sĩ tâm thần học, người đặt nền móng cho *Tâm lý học xuyên cá nhân (Transpersonal Psychology)*.
+* *Đóng góp:* Nghiên cứu lâm sàng về trạng thái ý thức phi thường qua liệu pháp Holotropic Breathwork và chất thức thần.
+
+
+---
+
+#### 4. Bổ sung Landmark Cases (Vụ việc điển hình của New Age)
+
+Đưa vào bảng **04. Landmark Case Files**:
+
+| Mã Hồ sơ       | Loại hiện tượng                            | Thời gian & Địa điểm    | Nguồn dữ liệu & Tính chất bằng chứng                                                                                                     |
+| -------------- | ------------------------------------------ | ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| **CAS-CHA-11** | Channeling có đối soát (*The Ra Material*) | 1981–1984, Kentucky, Mỹ | 106 audio tapes và bản chép lời nguyên bản; hệ thống thuật ngữ nhất quán cao; mô hình vũ trụ học 7 mật độ. Thuộc Tier 5 về bản thể luận. |
+
+ |
+| **CAS-CE5-12** | Giao thức CE-5 thực địa (Greer / CSETI) | 1992–nay, Toàn cầu (Joshua Tree, MT Adams) | Video, hình ảnh hồng ngoại, lời khai nhóm; thiếu xác nhận từ radar độc lập; giải thích quy ước: vệ tinh quỹ đạo thấp/flare. |
+| **CAS-HAR-13** | Sự kiện Hội tụ Điều hòa (Harmonic Convergence) | 16–17/08/1987, Toàn cầu | Sự kiện thiền định toàn cầu quy mô lớn đầu tiên của phong trào New Age; mốc văn hóa xã hội học quan trọng kết nối lịch Maya và tâm thức số đông. |
+
+---

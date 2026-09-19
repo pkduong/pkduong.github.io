@@ -7,11 +7,9 @@ kind: "article"
 language: "vi"
 status: "published"
 order: 109
-sourcePath: "1.ai/best-practice/9-Claude-Code-Common-Workflows.md"
+sourcePath: "3.ai/best-practice/9-Claude-Code-Common-Workflows.md"
 legacy: true
 ---
-# Claude Code - Common Workflows
-
 > Claude Code không chỉ là công cụ hỏi đáp về code — đây là **workflow tool** hỗ trợ đọc hiểu, sửa đổi, kiểm thử, review, tài liệu hóa và tự động hóa công việc phát triển phần mềm.
 
 ---

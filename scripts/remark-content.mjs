@@ -115,3 +115,29 @@ export function rehypeHeadingAnchors() {
     },
   };
 }
+
+function firstTableHeader(table) {
+  const head = table.children?.find(
+    (child) => child.type === 'element' && child.tagName === 'thead',
+  );
+  const row = head?.children?.find(
+    (child) => child.type === 'element' && child.tagName === 'tr',
+  );
+  return row?.children?.find(
+    (child) => child.type === 'element' && child.tagName === 'th',
+  );
+}
+
+export function rehypeCompactIndexTables() {
+  return {
+    name: 'compact-index-tables',
+    element: {
+      filter: ['table'],
+      visit(node, ctx) {
+        const firstHeader = firstTableHeader(node);
+        if (!firstHeader || ctx.textContent(firstHeader).trim() !== '#') return;
+        ctx.setProperty(node, 'className', ['has-compact-index']);
+      },
+    },
+  };
+}

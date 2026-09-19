@@ -18,8 +18,8 @@ const domainLinks = siteConfig.domains.map((domain) => ({
       href={withBase()}
       aria-label={`${siteConfig.name} — Trang chủ`}
     >
-      <span class="brand-mark" aria-hidden="true">KA</span>
-      <span>{siteConfig.name}</span>
+      <span class="brand-mark" aria-hidden="true">{siteConfig.shortName}</span>
+      <span class="brand-name">{siteConfig.name}</span>
     </a>
 
     <nav class="desktop-nav" aria-label="Điều hướng chính">
