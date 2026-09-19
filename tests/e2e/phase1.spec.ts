@@ -3,7 +3,12 @@ import { expect, test } from '@playwright/test';
 
 test('@smoke AC-001 AC-002 AC-003 reader can navigate and read without JavaScript', async ({
   browser,
-}) => {
+}, testInfo) => {
+  test.skip(
+    testInfo.project.name !== 'chromium-mobile',
+    'The no-JavaScript flow only needs one 375 px execution.',
+  );
+
   const context = await browser.newContext({
     javaScriptEnabled: false,
     viewport: { width: 375, height: 812 },
@@ -18,7 +23,12 @@ test('@smoke AC-001 AC-002 AC-003 reader can navigate and read without JavaScrip
   ).toBeVisible();
   await page
     .locator('.domain-card')
-    .filter({ hasText: 'U.F.O / UAP — Unidentified Anomalous Phenomena' })
+    .filter({
+      has: page.getByRole('heading', {
+        level: 3,
+        name: 'U.F.O / UAP — Unidentified Anomalous Phenomena',
+      }),
+    })
     .click();
   await expect(page.getByRole('heading', { level: 1 })).toHaveText(
     'U.F.O / UAP — Unidentified Anomalous Phenomena',
