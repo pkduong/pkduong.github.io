@@ -20,7 +20,8 @@ jobs:
       contents: read
       pages: write
     env:
-      BASE_PATH: /${{ github.event.repository.name }}
+      # User/org site owner.github.io is served at domain root; project sites use /repo-name.
+      BASE_PATH: ${{ github.event.repository.name == format('{0}.github.io', github.repository_owner) && '/' || format('/{0}', github.event.repository.name) }}
       SITE_URL: https://${{ github.repository_owner }}.github.io
       ASTRO_TELEMETRY_DISABLED: '1'
     steps:

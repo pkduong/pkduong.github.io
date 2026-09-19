@@ -45,7 +45,10 @@ Workflow `.github/workflows/pages.yml` validate, test, build, smoke-test dưới
 Owner cần cấu hình một lần trong repository:
 
 1. Vào **Settings → Pages → Build and deployment**.
-2. Chọn **Source: GitHub Actions**.
+2. Chọn **Source: GitHub Actions** (không dùng Deploy from a branch / Jekyll).
 3. Bảo đảm default branch là `main` (hoặc cập nhật trigger workflow nếu dùng branch khác).
+4. Trong tab **Actions**, theo dõi workflow **Validate and deploy GitHub Pages** — bỏ qua workflow **pages build and deployment** (Jekyll mặc định của GitHub).
+
+Repo dạng `username.github.io` được deploy ở domain root (`BASE_PATH=/`). Repo project khác dùng base `/<tên-repo>/`.
 
 Không cần secret, backend, database, Jekyll hay script generate menu thủ công.

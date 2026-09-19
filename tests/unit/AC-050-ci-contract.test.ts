@@ -22,6 +22,8 @@ describe('AC-050 / AC-051 / AC-052 CI and static deployment', () => {
     expect(workflow).toContain('needs: quality');
     expect(workflow).toContain('pages: write');
     expect(workflow).toContain('id-token: write');
+    expect(workflow).toContain('.github.io');
+    expect(workflow).toContain('BASE_PATH:');
   });
 
   it('uses Astro static output without a server adapter', async () => {

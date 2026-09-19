@@ -29,6 +29,10 @@ test('@smoke AC-001 AC-002 AC-003 reader can navigate and read without JavaScrip
 test('@smoke AC-004 every generated internal URL keeps the project base path', async ({
   page,
 }) => {
+  const rawBase = process.env.BASE_PATH || '/ufo-data';
+  const expectedPrefix =
+    rawBase === '/' ? '/' : `${rawBase.replace(/\/+$/, '')}/`;
+
   await page.goto('./');
   const internalUrls = await page
     .locator('a[href^="/"]')
@@ -36,7 +40,9 @@ test('@smoke AC-004 every generated internal URL keeps the project base path', a
       links.map((link) => (link as HTMLAnchorElement).getAttribute('href')),
     );
   expect(internalUrls.length).toBeGreaterThan(5);
-  expect(internalUrls.every((url) => url?.startsWith('/ufo-data/'))).toBe(true);
+  expect(internalUrls.every((url) => url?.startsWith(expectedPrefix))).toBe(
+    true,
+  );
 });
 
 test('@smoke AC-020 AC-022 Vietnamese search restores q from the URL', async ({
