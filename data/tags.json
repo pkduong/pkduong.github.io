@@ -1,0 +1,633 @@
+[
+  {
+    "id": "ai",
+    "label": "Trí tuệ nhân tạo",
+    "description": "Nội dung tổng quan về trí tuệ nhân tạo và hệ sinh thái liên quan.",
+    "articleCount": 8,
+    "domainCounts": {
+      "ai": 8
+    }
+  },
+  {
+    "id": "software-engineering",
+    "label": "Kỹ nghệ phần mềm",
+    "description": "Quy trình, thực hành và nguyên tắc xây dựng phần mềm.",
+    "articleCount": 5,
+    "domainCounts": {
+      "ai": 5
+    }
+  },
+  {
+    "id": "career",
+    "label": "Nghề nghiệp",
+    "description": "Tác động của công nghệ tới nghề nghiệp và định hướng chuyên môn.",
+    "articleCount": 3,
+    "domainCounts": {
+      "ai": 3
+    }
+  },
+  {
+    "id": "system-design",
+    "label": "Thiết kế hệ thống",
+    "description": "Kiến trúc và quyết định thiết kế cho hệ thống phần mềm.",
+    "articleCount": 3,
+    "domainCounts": {
+      "ai": 2,
+      "ling": 1
+    }
+  },
+  {
+    "id": "uap-incidents",
+    "label": "Sự kiện UFO/UAP",
+    "description": "Các sự kiện, quan sát hoặc vụ việc được ghi nhận liên quan UFO/UAP.",
+    "articleCount": 2,
+    "domainCounts": {
+      "ufo": 2
+    }
+  },
+  {
+    "id": "psychology",
+    "label": "Tâm lý học",
+    "description": "Khái niệm và quan sát về tâm trí, hành vi và tương tác con người.",
+    "articleCount": 2,
+    "domainCounts": {
+      "ling": 2
+    }
+  },
+  {
+    "id": "vibe-coding",
+    "label": "Vibe coding",
+    "description": "Cách tiếp cận lập trình có AI hỗ trợ trong quá trình tạo sản phẩm.",
+    "articleCount": 2,
+    "domainCounts": {
+      "ai": 2
+    }
+  },
+  {
+    "id": "agi",
+    "label": "AGI",
+    "description": "Khái niệm trí tuệ nhân tạo tổng quát.",
+    "articleCount": 1,
+    "domainCounts": {
+      "ai": 1
+    }
+  },
+  {
+    "id": "ai-2027",
+    "label": "AI 2027",
+    "description": "Kịch bản hoặc thảo luận gắn với mốc AI 2027.",
+    "articleCount": 1,
+    "domainCounts": {
+      "ai": 1
+    }
+  },
+  {
+    "id": "identity",
+    "label": "Bản sắc và đồng nhất",
+    "description": "Câu hỏi về điều kiện để một vật hoặc cá nhân được xem là cùng một thực thể qua biến đổi.",
+    "articleCount": 1,
+    "domainCounts": {
+      "meta": 1
+    }
+  },
+  {
+    "id": "big-tech",
+    "label": "Big Tech",
+    "description": "Các công ty công nghệ lớn và vai trò của họ trong hệ sinh thái AI.",
+    "articleCount": 1,
+    "domainCounts": {
+      "ai": 1
+    }
+  },
+  {
+    "id": "ai-bubble",
+    "label": "Bong bóng AI",
+    "description": "Thảo luận về định giá, kỳ vọng và rủi ro bong bóng quanh AI.",
+    "articleCount": 1,
+    "domainCounts": {
+      "ai": 1
+    }
+  },
+  {
+    "id": "parapsychology",
+    "label": "Cận tâm lý học",
+    "description": "Lĩnh vực nghiên cứu các hiện tượng được xem là vượt ngoài giải thích tâm lý thông thường.",
+    "articleCount": 1,
+    "domainCounts": {
+      "soul": 1
+    }
+  },
+  {
+    "id": "honorton",
+    "label": "Charles Honorton",
+    "description": "Nhà nghiên cứu được nhắc đến trong tài liệu và tổng quan về các nghiên cứu ESP.",
+    "articleCount": 1,
+    "domainCounts": {
+      "soul": 1
+    }
+  },
+  {
+    "id": "government-programs",
+    "label": "Chương trình chính phủ",
+    "description": "Chương trình, cơ quan hoặc hoạt động điều tra của chính phủ.",
+    "articleCount": 1,
+    "domainCounts": {
+      "ufo": 1
+    }
+  },
+  {
+    "id": "research-programs",
+    "label": "Chương trình nghiên cứu",
+    "description": "Các chương trình, đơn vị và dự án nghiên cứu được lập hồ sơ trong lĩnh vực SOUL.",
+    "articleCount": 1,
+    "domainCounts": {
+      "soul": 1
+    }
+  },
+  {
+    "id": "ci-cd",
+    "label": "CI/CD",
+    "description": "Tự động hóa tích hợp, kiểm tra và phân phối phần mềm.",
+    "articleCount": 1,
+    "domainCounts": {
+      "ai": 1
+    }
+  },
+  {
+    "id": "code-review",
+    "label": "Code review",
+    "description": "Kiểm tra, phản biện và cải thiện mã nguồn.",
+    "articleCount": 1,
+    "domainCounts": {
+      "ai": 1
+    }
+  },
+  {
+    "id": "coding-agents",
+    "label": "Coding agents",
+    "description": "Tác nhân AI hỗ trợ hoặc thực hiện công việc lập trình.",
+    "articleCount": 1,
+    "domainCounts": {
+      "ai": 1
+    }
+  },
+  {
+    "id": "theseus",
+    "label": "Con tàu Theseus",
+    "description": "Nghịch lý về đồng nhất của con tàu khi các bộ phận được thay thế dần theo thời gian.",
+    "articleCount": 1,
+    "domainCounts": {
+      "meta": 1
+    }
+  },
+  {
+    "id": "aerospace-technology",
+    "label": "Công nghệ hàng không vũ trụ",
+    "description": "Khái niệm và công nghệ liên quan đến hàng không, vũ trụ và cảm biến.",
+    "articleCount": 1,
+    "domainCounts": {
+      "ufo": 1
+    }
+  },
+  {
+    "id": "cucumber",
+    "label": "Cucumber",
+    "description": "Framework kiểm thử hành vi sử dụng Gherkin và step definitions.",
+    "articleCount": 1,
+    "domainCounts": {
+      "ling": 1
+    }
+  },
+  {
+    "id": "geopolitics",
+    "label": "Địa chính trị",
+    "description": "Tác động của công nghệ tới quan hệ và cạnh tranh giữa các quốc gia.",
+    "articleCount": 1,
+    "domainCounts": {
+      "ai": 1
+    }
+  },
+  {
+    "id": "power",
+    "label": "Động lực quyền lực",
+    "description": "Quan hệ lợi ích, ảnh hưởng, quyền lực và sự phụ thuộc giữa người với người.",
+    "articleCount": 1,
+    "domainCounts": {
+      "ling": 1
+    }
+  },
+  {
+    "id": "fine-tuning",
+    "label": "Fine-tuning",
+    "description": "Điều chỉnh mô hình đã huấn luyện cho nhiệm vụ hoặc dữ liệu cụ thể.",
+    "articleCount": 1,
+    "domainCounts": {
+      "ai": 1
+    }
+  },
+  {
+    "id": "uap-disclosure",
+    "label": "Giải mật và công bố UAP",
+    "description": "Hồ sơ, quy trình và hoạt động công bố hoặc giải mật tài liệu UFO/UAP.",
+    "articleCount": 1,
+    "domainCounts": {
+      "ufo": 1
+    }
+  },
+  {
+    "id": "gpt",
+    "label": "GPT",
+    "description": "Các mô hình hoặc hệ thống thuộc họ GPT.",
+    "articleCount": 1,
+    "domainCounts": {
+      "ai": 1
+    }
+  },
+  {
+    "id": "machine-learning",
+    "label": "Học máy",
+    "description": "Phương pháp và hệ thống học từ dữ liệu.",
+    "articleCount": 1,
+    "domainCounts": {
+      "ai": 1
+    }
+  },
+  {
+    "id": "java",
+    "label": "Java",
+    "description": "Ngôn ngữ và hệ sinh thái Java dùng trong phát triển hoặc kiểm thử phần mềm.",
+    "articleCount": 1,
+    "domainCounts": {
+      "ling": 1
+    }
+  },
+  {
+    "id": "junit",
+    "label": "JUnit",
+    "description": "Framework và nền tảng chạy kiểm thử Java.",
+    "articleCount": 1,
+    "domainCounts": {
+      "ling": 1
+    }
+  },
+  {
+    "id": "technical-concepts",
+    "label": "Khái niệm kỹ thuật",
+    "description": "Thuật ngữ, mô hình và khái niệm kỹ thuật được dùng trong nghiên cứu UFO/UAP.",
+    "articleCount": 1,
+    "domainCounts": {
+      "ufo": 1
+    }
+  },
+  {
+    "id": "testing",
+    "label": "Kiểm thử",
+    "description": "Phương pháp kiểm tra hành vi và chất lượng phần mềm.",
+    "articleCount": 1,
+    "domainCounts": {
+      "ai": 1
+    }
+  },
+  {
+    "id": "automation-testing",
+    "label": "Kiểm thử tự động",
+    "description": "Thực hành tự động hóa việc chạy và kiểm tra phần mềm.",
+    "articleCount": 1,
+    "domainCounts": {
+      "ling": 1
+    }
+  },
+  {
+    "id": "economics",
+    "label": "Kinh tế học",
+    "description": "Tác động kinh tế, chi phí và giá trị của công nghệ.",
+    "articleCount": 1,
+    "domainCounts": {
+      "ai": 1
+    }
+  },
+  {
+    "id": "ai-engineer",
+    "label": "Kỹ sư AI",
+    "description": "Vai trò và kỹ năng xây dựng hệ thống AI.",
+    "articleCount": 1,
+    "domainCounts": {
+      "ai": 1
+    }
+  },
+  {
+    "id": "programming",
+    "label": "Lập trình",
+    "description": "Thực hành và khái niệm xây dựng phần mềm bằng mã nguồn.",
+    "articleCount": 1,
+    "domainCounts": {
+      "ai": 1
+    }
+  },
+  {
+    "id": "epistemic-matrix",
+    "label": "Ma trận nhận thức luận",
+    "description": "Khung phân loại loại hồ sơ và mức độ kiểm soát phương pháp được mô tả trong thư viện SOUL.",
+    "articleCount": 1,
+    "domainCounts": {
+      "soul": 1
+    }
+  },
+  {
+    "id": "machiavelli",
+    "label": "Machiavelli",
+    "description": "Tư tưởng và bài học được quy chiếu tới Niccolò Machiavelli.",
+    "articleCount": 1,
+    "domainCounts": {
+      "ling": 1
+    }
+  },
+  {
+    "id": "maimonides",
+    "label": "Maimonides Dream Laboratory",
+    "description": "Phòng thí nghiệm nghiên cứu giấc mơ và ESP tại Maimonides Medical Center.",
+    "articleCount": 1,
+    "domainCounts": {
+      "soul": 1
+    }
+  },
+  {
+    "id": "maven",
+    "label": "Maven",
+    "description": "Công cụ quản lý build và dependency cho project Java.",
+    "articleCount": 1,
+    "domainCounts": {
+      "ling": 1
+    }
+  },
+  {
+    "id": "llm",
+    "label": "Mô hình ngôn ngữ lớn",
+    "description": "Mô hình ngôn ngữ lớn và cách chúng được xây dựng hoặc sử dụng.",
+    "articleCount": 1,
+    "domainCounts": {
+      "ai": 1
+    }
+  },
+  {
+    "id": "banking",
+    "label": "Ngân hàng",
+    "description": "Hệ thống, nghiệp vụ và ràng buộc kỹ thuật trong lĩnh vực ngân hàng.",
+    "articleCount": 1,
+    "domainCounts": {
+      "ling": 1
+    }
+  },
+  {
+    "id": "uap-research",
+    "label": "Nghiên cứu UFO/UAP",
+    "description": "Phương pháp, phạm vi và tài liệu nghiên cứu UFO/UAP.",
+    "articleCount": 1,
+    "domainCounts": {
+      "ufo": 1
+    }
+  },
+  {
+    "id": "esp",
+    "label": "Ngoại cảm (ESP)",
+    "description": "Khái niệm ngoại cảm được xem xét trong các nghiên cứu và tranh luận về hiện tượng dị thường.",
+    "articleCount": 1,
+    "domainCounts": {
+      "soul": 1
+    }
+  },
+  {
+    "id": "whistleblowers",
+    "label": "Người tố giác và người cung cấp thông tin",
+    "description": "Người công bố, cung cấp hoặc tường thuật thông tin gây tranh luận.",
+    "articleCount": 1,
+    "domainCounts": {
+      "ufo": 1
+    }
+  },
+  {
+    "id": "uap-figures",
+    "label": "Nhân vật UFO/UAP",
+    "description": "Nhân vật, phi công, nhà nghiên cứu, claimant hoặc người đưa tin liên quan UFO/UAP.",
+    "articleCount": 1,
+    "domainCounts": {
+      "ufo": 1
+    }
+  },
+  {
+    "id": "mass-witness",
+    "label": "Nhiều nhân chứng",
+    "description": "Báo cáo quan sát cùng hiện tượng từ nhiều nhân chứng.",
+    "articleCount": 1,
+    "domainCounts": {
+      "ufo": 1
+    }
+  },
+  {
+    "id": "page-object-model",
+    "label": "Page Object Model",
+    "description": "Mẫu tổ chức locator và thao tác UI trong kiểm thử trình duyệt.",
+    "articleCount": 1,
+    "domainCounts": {
+      "ling": 1
+    }
+  },
+  {
+    "id": "luu-2",
+    "label": "Pháo sáng LUU-2",
+    "description": "Pháo sáng LUU-2 được nhắc đến trong hồ sơ các ánh sáng Phoenix năm 1997.",
+    "articleCount": 1,
+    "domainCounts": {
+      "ufo": 1
+    }
+  },
+  {
+    "id": "uap-classification",
+    "label": "Phân loại UFO/UAP",
+    "description": "Cách phân loại thuật ngữ, hiện tượng và mức độ quan sát trong lĩnh vực UFO/UAP.",
+    "articleCount": 1,
+    "domainCounts": {
+      "ufo": 1
+    }
+  },
+  {
+    "id": "phoenix-lights",
+    "label": "Phoenix Lights",
+    "description": "Tên gọi của các chuỗi ánh sáng được báo cáo tại Arizona vào tháng 3 năm 1997.",
+    "articleCount": 1,
+    "domainCounts": {
+      "ufo": 1
+    }
+  },
+  {
+    "id": "workflow",
+    "label": "Quy trình làm việc",
+    "description": "Quy trình tổ chức và thực hiện công việc phát triển phần mềm.",
+    "articleCount": 1,
+    "domainCounts": {
+      "ai": 1
+    }
+  },
+  {
+    "id": "radar-sensor",
+    "label": "Radar và cảm biến",
+    "description": "Radar, cảm biến hoặc dữ liệu đo được trong hồ sơ UFO/UAP.",
+    "articleCount": 1,
+    "domainCounts": {
+      "ufo": 1
+    }
+  },
+  {
+    "id": "personal-boundaries",
+    "label": "Ranh giới cá nhân",
+    "description": "Ranh giới, sự tự chủ và cách bảo vệ vị thế cá nhân.",
+    "articleCount": 1,
+    "domainCounts": {
+      "ling": 1
+    }
+  },
+  {
+    "id": "selenium",
+    "label": "Selenium",
+    "description": "Công cụ tự động hóa trình duyệt và kiểm thử giao diện web.",
+    "articleCount": 1,
+    "domainCounts": {
+      "ling": 1
+    }
+  },
+  {
+    "id": "metaphysics",
+    "label": "Siêu hình học",
+    "description": "Câu hỏi về bản thể, thực tại và các khái niệm nằm ngoài mô tả thực nghiệm trực tiếp.",
+    "articleCount": 1,
+    "domainCounts": {
+      "meta": 1
+    }
+  },
+  {
+    "id": "solution-architect",
+    "label": "Solution Architect",
+    "description": "Vai trò kết nối bài toán kinh doanh, kiến trúc và quyết định kỹ thuật.",
+    "articleCount": 1,
+    "domainCounts": {
+      "ling": 1
+    }
+  },
+  {
+    "id": "sdd",
+    "label": "Spec-Driven Development",
+    "description": "Phát triển phần mềm dẫn dắt bởi đặc tả và acceptance criteria.",
+    "articleCount": 1,
+    "domainCounts": {
+      "ai": 1
+    }
+  },
+  {
+    "id": "krippner",
+    "label": "Stanley Krippner",
+    "description": "Nhà nghiên cứu được nhắc đến trong hồ sơ các nghiên cứu giấc mơ tại Maimonides.",
+    "articleCount": 1,
+    "domainCounts": {
+      "soul": 1
+    }
+  },
+  {
+    "id": "identified-event",
+    "label": "Sự kiện đã được nhận dạng",
+    "description": "Sự kiện hoặc phần quan sát có cách giải thích thông thường được nhận dạng trong hồ sơ.",
+    "articleCount": 1,
+    "domainCounts": {
+      "ufo": 1
+    }
+  },
+  {
+    "id": "dream-telepathy",
+    "label": "Telepathy trong giấc mơ",
+    "description": "Chủ đề nghiên cứu về sự tương ứng giữa mục tiêu từ xa và nội dung giấc mơ.",
+    "articleCount": 1,
+    "domainCounts": {
+      "soul": 1
+    }
+  },
+  {
+    "id": "cognitive-bias",
+    "label": "Thiên kiến nhận thức",
+    "description": "Các thiên lệch ảnh hưởng đến cách con người nhận thức và đánh giá thông tin.",
+    "articleCount": 1,
+    "domainCounts": {
+      "ling": 1
+    }
+  },
+  {
+    "id": "time",
+    "label": "Thời gian",
+    "description": "Các vấn đề về liên tục, biến đổi và đồng nhất theo thời gian.",
+    "articleCount": 1,
+    "domainCounts": {
+      "meta": 1
+    }
+  },
+  {
+    "id": "artificial-intelligence",
+    "label": "Trí tuệ nhân tạo",
+    "description": "Cách dùng AI trong học tập, phân tích và thực hành kỹ thuật.",
+    "articleCount": 1,
+    "domainCounts": {
+      "ling": 1
+    }
+  },
+  {
+    "id": "philosophy",
+    "label": "Triết học",
+    "description": "Câu hỏi và lập luận triết học được dùng để phân tích chủ đề của bài.",
+    "articleCount": 1,
+    "domainCounts": {
+      "meta": 1
+    }
+  },
+  {
+    "id": "system-thinking",
+    "label": "Tư duy hệ thống",
+    "description": "Cách phân tích tương tác và phụ thuộc trong một hệ thống.",
+    "articleCount": 1,
+    "domainCounts": {
+      "ai": 1
+    }
+  },
+  {
+    "id": "critical-thinking",
+    "label": "Tư duy phản biện",
+    "description": "Phương pháp kiểm tra lập luận, bằng chứng và giả định.",
+    "articleCount": 1,
+    "domainCounts": {
+      "ling": 1
+    }
+  },
+  {
+    "id": "mindset",
+    "label": "Tư duy và nhận thức",
+    "description": "Cách nhìn, thói quen tư duy và khung tự nhận thức.",
+    "articleCount": 1,
+    "domainCounts": {
+      "ling": 1
+    }
+  },
+  {
+    "id": "future",
+    "label": "Tương lai",
+    "description": "Dự báo và kịch bản về các khả năng tương lai.",
+    "articleCount": 1,
+    "domainCounts": {
+      "ai": 1
+    }
+  },
+  {
+    "id": "historical-cases",
+    "label": "Vụ việc lịch sử",
+    "description": "Các vụ việc được ghi nhận trong bối cảnh lịch sử cụ thể.",
+    "articleCount": 1,
+    "domainCounts": {
+      "ufo": 1
+    }
+  }
+]

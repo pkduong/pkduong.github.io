@@ -1,0 +1,562 @@
+<!DOCTYPE html><html lang="vi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Không gian giải mã và lưu trữ dữ liệu về hiện tượng lạ, ranh giới khoa học và bản chất thực tại."><meta name="generator" content="Astro v7.3.3"><meta name="theme-color" content="#f4f0e8" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#17191d" media="(prefers-color-scheme: dark)"><link rel="canonical" href="https://pkduong.github.io/ling/articles/setup-selenium-cucumber-tu-dau/"><title>Từ số 0 đến bài test Selenium + Cucumber đầu tiên · Project Knowledge Disclosure</title><link rel="stylesheet" href="/_astro/global.DqYwRiZX.css"></head><body><a class="skip-link" href="#main-content">Bỏ qua điều hướng</a><header class="site-header" data-pagefind-ignore><div class="header-inner"><a class="brand" href="/" aria-label="Project Knowledge Disclosure — Trang chủ"><span class="brand-mark" aria-hidden="true">PKD</span><span class="brand-name">Project Knowledge Disclosure</span></a><nav class="desktop-nav" aria-label="Điều hướng chính"><a href="/">Trang chủ</a><a href="/ufo/">U.F.O</a><a href="/meta/">META</a><a href="/ai/">A.I</a><a href="/soul/">SOUL</a><a href="/ling/" aria-current="page">L.I.N.G</a><span class="nav-future" title="Sẽ có trong Phase 3">Khám phá</span><a class="nav-search" href="/search/">Tìm kiếm</a></nav><details class="nav-menu"><summary>Danh mục</summary><nav aria-label="Điều hướng chính"><a href="/">Trang chủ</a><a href="/ufo/">U.F.O</a><a href="/meta/">META</a><a href="/ai/">A.I</a><a href="/soul/">SOUL</a><a href="/ling/" aria-current="page">L.I.N.G</a><span class="nav-future" title="Sẽ có trong Phase 3">Khám phá</span><a class="nav-search" href="/search/">Tìm kiếm</a></nav></details></div></header><main id="main-content"><div class="page-shell article-page"><nav class="breadcrumbs" aria-label="Breadcrumb" data-pagefind-ignore><ol><li><a href="/">Trang chủ</a></li><li><a href="/ling/">L.I.N.G — Life, Insights, Notes &amp; Growth</a></li><li><span aria-current="page">Từ số 0 đến bài test Selenium + Cucumber đầu tiên</span></li></ol></nav><header class="article-header" style="--accent: #747b80"><p class="eyebrow">L.I.N.G — Life, Insights, Notes &amp; Growth · Bài đọc</p><h1 data-pagefind-meta="title">Từ số 0 đến bài test Selenium + Cucumber đầu tiên</h1><p class="source-path">Nguồn Markdown: <code>5.ling/done/setup-selenium-cucumber-tu-dau.md</code></p><ul class="tag-list" aria-label="Tag: Từ số 0 đến bài test Selenium + Cucumber đầu tiên"><li><a class="tag-chip" href="/ling/?tag=java">Java</a></li><li><a class="tag-chip" href="/ling/?tag=selenium">Selenium</a></li><li><a class="tag-chip" href="/ling/?tag=cucumber">Cucumber</a></li><li><a class="tag-chip" href="/ling/?tag=junit">JUnit</a></li><li><a class="tag-chip" href="/ling/?tag=maven">Maven</a></li><li><a class="tag-chip" href="/ling/?tag=automation-testing">Kiểm thử tự động</a></li><li><a class="tag-chip" href="/ling/?tag=page-object-model">Page Object Model</a></li></ul></header><div class="reading-grid"><aside class="toc" data-pagefind-ignore><details open><summary>Mục lục bài viết</summary><nav aria-label="Mục lục bài viết"><ol><li class="toc-depth-2"><a href="#mô-hình-tổng-thể">🧭 Mô hình tổng thể</a></li><li class="toc-depth-2"><a href="#ví-dụ-tham-khảo-cucumberjava">🔎 Ví dụ tham khảo: CucumberJava</a></li><li class="toc-depth-2"><a href="#1-chuẩn-bị-từ-đầu">🧰 1) Chuẩn bị từ đầu</a></li><li class="toc-depth-3"><a href="#jdk-17">JDK 17+</a></li><li class="toc-depth-3"><a href="#maven-39">Maven 3.9+</a></li><li class="toc-depth-3"><a href="#chrome">Chrome</a></li><li class="toc-depth-2"><a href="#️-2-maven-layout-của-project">🗂️ 2) Maven layout của project</a></li><li class="toc-depth-2"><a href="#3-đọc-pomxml-dependency-nào-làm-việc-gì">🧩 3) Đọc pom.xml: dependency nào làm việc gì?</a></li><li class="toc-depth-2"><a href="#4-cấu-hình-url-và-tài-khoản">🔐 4) Cấu hình URL và tài khoản</a></li><li class="toc-depth-2"><a href="#5-pom-page-object-model-là-gì">🧱 5) POM: Page Object Model là gì?</a></li><li class="toc-depth-2"><a href="#6-driverfactory-và-selenium-manager">🚗 6) DriverFactory và Selenium Manager</a></li><li class="toc-depth-2"><a href="#7-hooks-tạo-driver-chụp-ảnh-đóng-driver">🪝 7) Hooks: tạo driver, chụp ảnh, đóng driver</a></li><li class="toc-depth-2"><a href="#8-feature-cucumber-viết-hành-vi-trước">🥒 8) Feature Cucumber: viết hành vi trước</a></li><li class="toc-depth-2"><a href="#9-steps-nối-gherkin-với-java">🔗 9) Steps: nối Gherkin với Java</a></li><li class="toc-depth-2"><a href="#️-10-junit-runner-điểm-bắt-đầu-của-maven">▶️ 10) JUnit runner: điểm bắt đầu của Maven</a></li><li class="toc-depth-2"><a href="#11-chạy-project-và-đọc-output">🏃 11) Chạy project và đọc output</a></li><li class="toc-depth-2"><a href="#12-lỗi-thực-tế-nosuchelementexception-tại-user-name">🐞 12) Lỗi thực tế: NoSuchElementException tại #user-name</a></li><li class="toc-depth-3"><a href="#cách-đọc-lỗi">Cách đọc lỗi</a></li><li class="toc-depth-3"><a href="#vì-sao-không-nên-chỉ-tăng-implicit-wait">Vì sao không nên chỉ tăng implicit wait?</a></li><li class="toc-depth-2"><a href="#️-13-sửa-đúng-chỗ-bằng-webdriverwait">🛠️ 13) Sửa đúng chỗ bằng WebDriverWait</a></li><li class="toc-depth-3"><a href="#trước-tìm-ngay-lập-tức">Trước: tìm ngay lập tức</a></li><li class="toc-depth-3"><a href="#sau-chờ-đúng-trạng-thái-cần-thao-tác">Sau: chờ đúng trạng thái cần thao tác</a></li><li class="toc-depth-3"><a href="#cải-thiện-tiếp-theo-cho-assertion">Cải thiện tiếp theo cho assertion</a></li><li class="toc-depth-2"><a href="#️-14-cảnh-báo-cdp-với-chrome-153">⚠️ 14) Cảnh báo CDP với Chrome 153</a></li><li class="toc-depth-2"><a href="#15-checklist-xử-lý-lỗi">📋 15) Checklist xử lý lỗi</a></li><li class="toc-depth-2"><a href="#16-tổng-kết-ai-làm-gì">🧠 16) Tổng kết: ai làm gì?</a></li><li class="toc-depth-2"><a href="#kết-luận">🎯 Kết luận</a></li><li class="toc-depth-2"><a href="#tóm-tắt-bỏ-túi-take-away">🧳 Tóm tắt bỏ túi (Take away)</a></li></ol></nav></details></aside><article class="prose" data-pagefind-body data-pagefind-meta="domain:ling,kind:article"><blockquote>
+<p>Mục tiêu của bài này không phải là chép vài dòng code để thấy Chrome bật lên. Mục tiêu là hiểu <strong>mỗi lớp đang chịu trách nhiệm gì</strong>, đọc được log khi test hỏng, và biết sửa đúng chỗ.</p>
+</blockquote>
+<p>Dự án mẫu kiểm thử luồng đăng nhập của <strong>SauceDemo</strong>. Công nghệ và tên lớp trong bài bám đúng project hiện tại:</p>
+<ul>
+<li>Java 17+</li>
+<li>Maven 3.9+</li>
+<li>Selenium 4.27.0</li>
+<li>Cucumber 7.20.1</li>
+<li>JUnit Jupiter 5.11.4</li>
+<li>JUnit Platform 1.11.4</li>
+<li>Maven Surefire 3.5.2</li>
+<li>Package gốc: <code>com.example.saucedemo</code></li>
+</ul>
+<hr>
+<h2 id="mô-hình-tổng-thể">🧭 Mô hình tổng thể<a class="heading-anchor" href="#mô-hình-tổng-thể" aria-label="Liên kết tới đề mục"></a></h2>
+<pre><code class="language-text">Maven
+  |
+  +-- src/test/resources/config.properties
+  |       base.url, username, password
+  |
+  +-- src/test/resources/features/login.feature
+  |       Given / When / Then
+  |
+  +-- RunCucumberTest (JUnit Platform)
+          |
+          v
+      Cucumber tìm step trong package com.example.saucedemo
+          |
+          +-- Hooks: tạo và đóng WebDriver
+          |       |
+          |       +-- DriverFactory: ChromeDriver / FirefoxDriver
+          |              |
+          |              +-- Selenium Manager tìm driver phù hợp
+          |
+          +-- LoginSteps: nối câu Gherkin với Java
+                  |
+                  +-- LoginPage: locator + thao tác UI + explicit wait
+                          |
+                          +-- Chrome -&gt; https://www.saucedemo.com/
+</code></pre>
+<blockquote>
+<p>Luồng dễ nhớ: <strong>Feature mô tả hành vi -&gt; Steps điều phối -&gt; Page Object thao tác -&gt; Driver điều khiển trình duyệt</strong>.</p>
+</blockquote>
+<h2 id="ví-dụ-tham-khảo-cucumberjava">🔎 Ví dụ tham khảo: CucumberJava<a class="heading-anchor" href="#ví-dụ-tham-khảo-cucumberjava" aria-label="Liên kết tới đề mục"></a></h2>
+<pre><code class="language-text">[CucumberJava]
+    │
+    ├─ Java + Selenium + Maven + Cucumber + JUnit
+    ├─ Chrome → Google → nhập từ khóa
+    ├─ Report: console + HTML + JSON + XML
+    ├─ Tham khảo:
+    │  https://github.com/pkduong/CucumberJava
+    └─ Khi áp dụng: kiểm tra dependency, secret,
+       locator và headless CI
+</code></pre>
+<p>Repo dùng để tham khảo luồng chạy và cách đóng gói; không mặc định mọi lựa chọn đều phù hợp production.</p>
+<hr>
+<h2 id="1-chuẩn-bị-từ-đầu">🧰 1) Chuẩn bị từ đầu<a class="heading-anchor" href="#1-chuẩn-bị-từ-đầu" aria-label="Liên kết tới đề mục"></a></h2>
+<h3 id="jdk-17">JDK 17+<a class="heading-anchor" href="#jdk-17" aria-label="Liên kết tới đề mục"></a></h3>
+<p>Mở PowerShell và kiểm tra:</p>
+<pre><code class="language-text">java -version
+</code></pre>
+<p>Project đặt:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="xml"><code><span class="line"><span style="color:#E1E4E8">&lt;</span><span style="color:#85E89D">maven.compiler.release</span><span style="color:#E1E4E8">&gt;17&lt;/</span><span style="color:#85E89D">maven.compiler.release</span><span style="color:#E1E4E8">&gt;</span></span></code></pre>
+<p>Vì vậy JDK 17 là mốc tối thiểu của project. JDK mới hơn có thể chạy nếu dependency và môi trường tương thích.</p>
+<h3 id="maven-39">Maven 3.9+<a class="heading-anchor" href="#maven-39" aria-label="Liên kết tới đề mục"></a></h3>
+<p>Kiểm tra:</p>
+<pre><code class="language-text">mvn --version
+</code></pre>
+<p>Maven đọc <code>pom.xml</code>, tải dependency vào local repository, biên dịch test và gọi Surefire để chạy JUnit/Cucumber.</p>
+<h3 id="chrome">Chrome<a class="heading-anchor" href="#chrome" aria-label="Liên kết tới đề mục"></a></h3>
+<p>Cài Chrome trên máy. <code>DriverFactory</code> tạo <code>ChromeDriver</code>, còn Selenium Manager của Selenium 4.27.0 tự xử lý việc tìm hoặc quản lý driver phù hợp. Vì vậy project <strong>không cần</strong> tải ChromeDriver thủ công và <strong>không cần</strong> đặt <code>webdriver.chrome.driver</code>.</p>
+<p><strong>Vì sao?</strong></p>
+<p>Nếu thiếu JDK hoặc Maven, test chưa thể chạy. Nếu thiếu Chrome, nhánh mặc định <code>chrome</code> trong <code>DriverFactory</code> không thể tạo trình duyệt. Ba điều kiện này phải được kiểm tra trước khi đọc lỗi Cucumber.</p>
+<hr>
+<h2 id="️-2-maven-layout-của-project">🗂️ 2) Maven layout của project<a class="heading-anchor" href="#️-2-maven-layout-của-project" aria-label="Liên kết tới đề mục"></a></h2>
+<pre><code class="language-text">CucumberJava/
+|-- pom.xml
+|-- README.md
+|-- src/
+|   `-- test/
+|       |-- java/com/example/saucedemo/
+|       |   |-- config/Config.java
+|       |   |-- driver/DriverFactory.java
+|       |   |-- hooks/Hooks.java
+|       |   |-- pages/LoginPage.java
+|       |   |-- runner/RunCucumberTest.java
+|       |   `-- steps/LoginSteps.java
+|       `-- resources/
+|           |-- config.properties
+|           `-- features/login.feature
+`-- target/                 (Maven sinh ra, khong sua tay)
+</code></pre>
+<ul>
+<li><code>src/test/java</code>: Java code phục vụ test.</li>
+<li><code>src/test/resources</code>: feature và cấu hình được đưa lên test classpath.</li>
+<li><code>target</code>: class đã biên dịch, report và file tạm; có thể bị xóa rồi sinh lại.</li>
+<li><code>pom.xml</code>: danh sách dependency, Java release và plugin chạy test.</li>
+</ul>
+<p><strong>Vì sao?</strong></p>
+<p>Tách <code>resources</code> khỏi Java giúp feature và cấu hình dễ đọc, dễ thay đổi. Cucumber có thể tìm <code>features</code> trên classpath, còn <code>Config</code> có thể đọc <code>config.properties</code> bằng ClassLoader.</p>
+<hr>
+<h2 id="3-đọc-pomxml-dependency-nào-làm-việc-gì">🧩 3) Đọc <code>pom.xml</code>: dependency nào làm việc gì?<a class="heading-anchor" href="#3-đọc-pomxml-dependency-nào-làm-việc-gì" aria-label="Liên kết tới đề mục"></a></h2>
+<p>Các phiên bản đang dùng trong <code>pom.xml</code>:</p>
+<table>
+<thead>
+<tr>
+<th>Thành phần</th>
+<th>Dependency / cấu hình</th>
+<th>Vai trò</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Java</td>
+<td><code>maven.compiler.release=17</code></td>
+<td>Biên dịch theo Java 17</td>
+</tr>
+<tr>
+<td>Selenium</td>
+<td><code>org.seleniumhq.selenium:selenium-java:4.27.0</code></td>
+<td>WebDriver, locator, wait, Chrome/Firefox driver</td>
+</tr>
+<tr>
+<td>Cucumber Java</td>
+<td><code>io.cucumber:cucumber-java:7.20.1</code></td>
+<td>Annotation <code>@Given</code>, <code>@When</code>, <code>@Then</code></td>
+</tr>
+<tr>
+<td>Cucumber JUnit</td>
+<td><code>io.cucumber:cucumber-junit-platform-engine:7.20.1</code></td>
+<td>Chạy Cucumber qua JUnit Platform</td>
+</tr>
+<tr>
+<td>JUnit Suite</td>
+<td><code>org.junit.platform:junit-platform-suite:1.11.4</code></td>
+<td><code>@Suite</code>, <code>@IncludeEngines</code>, chọn resource</td>
+</tr>
+<tr>
+<td>JUnit API</td>
+<td><code>org.junit.jupiter:junit-jupiter-api:5.11.4</code></td>
+<td>Assertion <code>assertTrue</code> trong step</td>
+</tr>
+<tr>
+<td>Surefire</td>
+<td><code>maven-surefire-plugin:3.5.2</code></td>
+<td>Maven tìm và chạy test; sinh report</td>
+</tr>
+</tbody>
+</table>
+<p>Cấu hình report hiện tại trong Surefire:</p>
+<pre><code class="language-text">cucumber.plugin=pretty,html:target/cucumber-reports/cucumber.html,json:target/cucumber-reports/cucumber.json
+cucumber.publish.quiet=true
+</code></pre>
+<p><strong>Vì sao?</strong></p>
+<p>Cucumber không tự chạy chỉ vì có file <code>.feature</code>. Cucumber cần engine, JUnit Platform cần suite, còn Maven cần Surefire để gọi toàn bộ chuỗi đó bằng <code>mvn test</code>.</p>
+<hr>
+<h2 id="4-cấu-hình-url-và-tài-khoản">🔐 4) Cấu hình URL và tài khoản<a class="heading-anchor" href="#4-cấu-hình-url-và-tài-khoản" aria-label="Liên kết tới đề mục"></a></h2>
+<pre><code class="language-text">[config.properties]
+  ├─ base.url
+  ├─ username
+  └─ password
+        │ ClassLoader
+        ▼
+[Config.get(key)] → [LoginPage / LoginSteps]
+</code></pre>
+<p>File hiện tại là <code>src/test/resources/config.properties</code>:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="properties"><code><span class="line"><span style="color:#F97583">base.url</span><span style="color:#E1E4E8">=https://www.saucedemo.com/</span></span>
+<span class="line"><span style="color:#F97583">username</span><span style="color:#E1E4E8">=standard_user</span></span>
+<span class="line"><span style="color:#F97583">password</span><span style="color:#E1E4E8">=secret_sauce</span></span></code></pre>
+<p><code>Config.java</code> tải file từ test classpath:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">try</span><span style="color:#E1E4E8"> (InputStream input </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> Config.class.</span><span style="color:#B392F0">getClassLoader</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">        .</span><span style="color:#B392F0">getResourceAsStream</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"config.properties"</span><span style="color:#E1E4E8">)) {</span></span>
+<span class="line"><span style="color:#F97583">    if</span><span style="color:#E1E4E8"> (input </span><span style="color:#F97583">==</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        throw</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> IllegalStateException</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#9ECBFF">                "config.properties was not found on the test classpath"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">    properties.</span><span style="color:#B392F0">load</span><span style="color:#E1E4E8">(input);</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>Mọi nơi dùng cấu hình qua:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#E1E4E8">Config.</span><span style="color:#B392F0">get</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"base.url"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">Config.</span><span style="color:#B392F0">get</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"username"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">Config.</span><span style="color:#B392F0">get</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"password"</span><span style="color:#E1E4E8">);</span></span></code></pre>
+<p>Nếu key không tồn tại hoặc rỗng, <code>Config.get</code> ném <code>IllegalArgumentException</code>.</p>
+<blockquote>
+<p>Với project thật, mật khẩu không nên commit công khai. Bài này giữ credentials mẫu của SauceDemo để reproducing đúng bài test.</p>
+</blockquote>
+<p><strong>Vì sao?</strong></p>
+<p>URL và credential là dữ liệu thay đổi, không phải trách nhiệm của Page Object. Đưa chúng vào properties giúp <code>LoginPage</code> chỉ lo thao tác giao diện, còn <code>LoginSteps</code> lấy dữ liệu từ cấu hình.</p>
+<hr>
+<h2 id="5-pom-page-object-model-là-gì">🧱 5) POM: Page Object Model là gì?<a class="heading-anchor" href="#5-pom-page-object-model-là-gì" aria-label="Liên kết tới đề mục"></a></h2>
+<p><code>LoginPage</code> đại diện cho màn hình đăng nhập. Nó giữ:</p>
+<ul>
+<li><code>WebDriver</code> để gửi lệnh tới browser.</li>
+<li>Locator <code>usernameInput</code>, <code>passwordInput</code>, <code>loginButton</code>, <code>productsTitle</code>.</li>
+<li><code>WebDriverWait</code> dùng lại cho các thao tác cần chờ.</li>
+<li>Các method mang ý nghĩa nghiệp vụ: <code>open</code>, <code>logIn</code>, <code>isProductsPageDisplayed</code>.</li>
+</ul>
+<pre><code class="language-text">LoginSteps
+    |
+    | goi logIn(username, password)
+    v
+LoginPage
+    |
+    | dung locator va wait
+    v
+WebDriver -&gt; Chrome -&gt; SauceDemo
+</code></pre>
+<p><strong>Vì sao?</strong></p>
+<p>Nếu locator nằm rải rác trong step, thay đổi HTML sẽ buộc sửa nhiều nơi. POM gom locator và thao tác UI vào một lớp, nên step đọc gần với ngôn ngữ người dùng hơn.</p>
+<hr>
+<h2 id="6-driverfactory-và-selenium-manager">🚗 6) DriverFactory và Selenium Manager<a class="heading-anchor" href="#6-driverfactory-và-selenium-manager" aria-label="Liên kết tới đề mục"></a></h2>
+<p><code>DriverFactory.createDriver()</code> đọc hai system property:</p>
+<pre><code class="language-text">browser  = chrome (mac dinh)
+headless = false (mac dinh)
+</code></pre>
+<p>Các lựa chọn hiện có:</p>
+<ul>
+<li><code>chrome</code>: tạo <code>ChromeDriver</code> và đặt kích thước cửa sổ <code>1920x1080</code>.</li>
+<li><code>firefox</code>: tạo <code>FirefoxDriver</code>.</li>
+<li><code>headless=true</code>: chạy không mở cửa sổ thật.</li>
+<li>browser khác: ném <code>IllegalArgumentException</code>.</li>
+</ul>
+<p>Ví dụ phần tạo Chrome:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">private</span><span style="color:#F97583"> static</span><span style="color:#E1E4E8"> ChromeOptions </span><span style="color:#B392F0">chromeOptions</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">boolean</span><span style="color:#E1E4E8"> headless) {</span></span>
+<span class="line"><span style="color:#E1E4E8">    ChromeOptions options </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> ChromeOptions</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">    if</span><span style="color:#E1E4E8"> (headless) {</span></span>
+<span class="line"><span style="color:#E1E4E8">        options.</span><span style="color:#B392F0">addArguments</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"--headless=new"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">    options.</span><span style="color:#B392F0">addArguments</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"--window-size=1920,1080"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#E1E4E8"> options;</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p><strong>Vì sao?</strong></p>
+<p>Factory tạo driver ở một chỗ duy nhất. Selenium Manager được Selenium 4.27.0 gọi phía dưới để tìm driver; test không cần biết đường dẫn executable.</p>
+<hr>
+<h2 id="7-hooks-tạo-driver-chụp-ảnh-đóng-driver">🪝 7) Hooks: tạo driver, chụp ảnh, đóng driver<a class="heading-anchor" href="#7-hooks-tạo-driver-chụp-ảnh-đóng-driver" aria-label="Liên kết tới đề mục"></a></h2>
+<p><code>Hooks</code> chạy quanh mỗi scenario:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#E1E4E8">@</span><span style="color:#F97583">Before</span></span>
+<span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> setUp</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#E1E4E8">    DRIVER.</span><span style="color:#B392F0">set</span><span style="color:#E1E4E8">(DriverFactory.</span><span style="color:#B392F0">createDriver</span><span style="color:#E1E4E8">());</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">@</span><span style="color:#F97583">After</span></span>
+<span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> tearDown</span><span style="color:#E1E4E8">(Scenario scenario) {</span></span>
+<span class="line"><span style="color:#E1E4E8">    WebDriver driver </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> DRIVER.</span><span style="color:#B392F0">get</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">    if</span><span style="color:#E1E4E8"> (scenario.</span><span style="color:#B392F0">isFailed</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">&amp;&amp;</span><span style="color:#E1E4E8"> driver </span><span style="color:#F97583">instanceof</span><span style="color:#E1E4E8"> TakesScreenshot screenshotDriver) {</span></span>
+<span class="line"><span style="color:#E1E4E8">        scenario.</span><span style="color:#B392F0">attach</span><span style="color:#E1E4E8">(screenshotDriver.</span><span style="color:#B392F0">getScreenshotAs</span><span style="color:#E1E4E8">(OutputType.BYTES),</span></span>
+<span class="line"><span style="color:#9ECBFF">                "image/png"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"failure"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#F97583">    if</span><span style="color:#E1E4E8"> (driver </span><span style="color:#F97583">!=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">        driver.</span><span style="color:#B392F0">quit</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">        DRIVER.</span><span style="color:#B392F0">remove</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p><code>ThreadLocal&lt;WebDriver&gt;</code> tách driver theo thread. <code>Hooks.driver()</code> trả driver cho step; nếu gọi quá sớm, nó báo <code>WebDriver has not been initialized</code>.</p>
+<p><strong>Vì sao?</strong></p>
+<p>Mỗi scenario cần trạng thái browser sạch. <code>quit()</code> giải phóng browser sau test; screenshot khi fail giúp nhìn thấy màn hình thực tế tại thời điểm lỗi.</p>
+<hr>
+<h2 id="8-feature-cucumber-viết-hành-vi-trước">🥒 8) Feature Cucumber: viết hành vi trước<a class="heading-anchor" href="#8-feature-cucumber-viết-hành-vi-trước" aria-label="Liên kết tới đề mục"></a></h2>
+<p>File <code>src/test/resources/features/login.feature</code>:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="gherkin"><code><span class="line"><span style="color:#F97583">Feature</span><span style="color:#E1E4E8">:</span><span style="color:#9ECBFF"> SauceDemo login</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">  As a SauceDemo user</span></span>
+<span class="line"><span style="color:#E1E4E8">  I want to log in with valid credentials</span></span>
+<span class="line"><span style="color:#E1E4E8">  So that I can access the products page</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  Scenario</span><span style="color:#E1E4E8">:</span><span style="color:#9ECBFF"> Login succeeds with valid credentials</span></span>
+<span class="line"><span style="color:#F97583">    Given </span><span style="color:#E1E4E8">I am on the SauceDemo login page</span></span>
+<span class="line"><span style="color:#F97583">    When </span><span style="color:#E1E4E8">I log in with valid credentials</span></span>
+<span class="line"><span style="color:#F97583">    Then </span><span style="color:#E1E4E8">I should see the products page</span></span></code></pre>
+<p><code>Given</code>, <code>When</code>, <code>Then</code> mô tả hành vi, không mô tả chi tiết CSS hay WebDriver. Đây là lý do feature có thể được đọc bởi người không viết Java.</p>
+<p><strong>Vì sao?</strong></p>
+<p>Feature là hợp đồng hành vi. Chi tiết “tìm phần tử bằng id nào” thuộc Page Object, không nên làm feature khó đọc.</p>
+<hr>
+<h2 id="9-steps-nối-gherkin-với-java">🔗 9) Steps: nối Gherkin với Java<a class="heading-anchor" href="#9-steps-nối-gherkin-với-java" aria-label="Liên kết tới đề mục"></a></h2>
+<p><code>LoginSteps</code> ánh xạ từng câu trong feature:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#E1E4E8">@</span><span style="color:#F97583">Given</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"I am on the SauceDemo login page"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> openLoginPage</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#E1E4E8">    loginPage </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> LoginPage</span><span style="color:#E1E4E8">(Hooks.</span><span style="color:#B392F0">driver</span><span style="color:#E1E4E8">());</span></span>
+<span class="line"><span style="color:#E1E4E8">    loginPage.</span><span style="color:#B392F0">open</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">@</span><span style="color:#F97583">When</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"I log in with valid credentials"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> logInWithValidCredentials</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#E1E4E8">    loginPage.</span><span style="color:#B392F0">logIn</span><span style="color:#E1E4E8">(Config.</span><span style="color:#B392F0">get</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"username"</span><span style="color:#E1E4E8">), Config.</span><span style="color:#B392F0">get</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"password"</span><span style="color:#E1E4E8">));</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">@</span><span style="color:#F97583">Then</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"I should see the products page"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> verifyProductsPage</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#B392F0">    assertTrue</span><span style="color:#E1E4E8">(loginPage.</span><span style="color:#B392F0">isProductsPageDisplayed</span><span style="color:#E1E4E8">(),</span></span>
+<span class="line"><span style="color:#9ECBFF">            "The products page should be displayed after login"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p><strong>Vì sao?</strong></p>
+<p>Step chỉ điều phối: lấy driver, lấy dữ liệu cấu hình, gọi Page Object và assert kết quả. Nó không nên chứa nhiều locator hoặc logic chờ riêng lẻ.</p>
+<hr>
+<h2 id="️-10-junit-runner-điểm-bắt-đầu-của-maven">▶️ 10) JUnit runner: điểm bắt đầu của Maven<a class="heading-anchor" href="#️-10-junit-runner-điểm-bắt-đầu-của-maven" aria-label="Liên kết tới đề mục"></a></h2>
+<p><code>RunCucumberTest</code> là JUnit Platform suite:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#E1E4E8">@</span><span style="color:#F97583">Suite</span></span>
+<span class="line"><span style="color:#E1E4E8">@</span><span style="color:#F97583">IncludeEngines</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"cucumber"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">@</span><span style="color:#F97583">SelectClasspathResource</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"features"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">@</span><span style="color:#F97583">ConfigurationParameter</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">key</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> GLUE_PROPERTY_NAME,</span></span>
+<span class="line"><span style="color:#79B8FF">        value</span><span style="color:#F97583"> =</span><span style="color:#9ECBFF"> "com.example.saucedemo"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> RunCucumberTest</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<ul>
+<li><code>@Suite</code>: đây là một suite JUnit.</li>
+<li><code>@IncludeEngines("cucumber")</code>: dùng Cucumber engine.</li>
+<li><code>@SelectClasspathResource("features")</code>: tìm feature trong <code>src/test/resources/features</code>.</li>
+<li><code>GLUE_PROPERTY_NAME</code>: tìm step, hook và các class Cucumber trong <code>com.example.saucedemo</code>.</li>
+</ul>
+<p><strong>Vì sao?</strong></p>
+<p>Không có runner đúng, Maven có thể biên dịch Java nhưng không tìm thấy scenario để chạy. Runner là điểm nối giữa JUnit Platform và Cucumber.</p>
+<hr>
+<h2 id="11-chạy-project-và-đọc-output">🏃 11) Chạy project và đọc output<a class="heading-anchor" href="#11-chạy-project-và-đọc-output" aria-label="Liên kết tới đề mục"></a></h2>
+<pre><code class="language-text">[clean test-compile] → [mvn test]
+                              │
+                 ┌────────────┴────────────┐
+                 ▼                         ▼
+          [Chrome / Firefox]       [HTML + JSON report]
+</code></pre>
+<p>Biên dịch cả main/test code:</p>
+<pre><code class="language-text">mvn clean test-compile
+</code></pre>
+<p>Chạy test bình thường, mở Chrome:</p>
+<pre><code class="language-text">mvn test
+</code></pre>
+<p>Chạy headless:</p>
+<pre><code class="language-text">mvn test -Dheadless=true
+</code></pre>
+<p>Chọn Firefox, vì <code>DriverFactory</code> có hỗ trợ:</p>
+<pre><code class="language-text">mvn test -Dbrowser=firefox
+</code></pre>
+<p>Các report được ghi vào:</p>
+<pre><code class="language-text">target/cucumber-reports/cucumber.html
+target/cucumber-reports/cucumber.json
+</code></pre>
+<p>Output thành công thường có ba bước màu xanh:</p>
+<pre><code class="language-text">Given I am on the SauceDemo login page
+When I log in with valid credentials
+Then I should see the products page
+
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0
+BUILD SUCCESS
+</code></pre>
+<p>Lưu ý: Maven có thể chạy xong nhưng log vẫn chứa <code>WARNING</code>. Hãy phân biệt <code>WARNING</code> với <code>ERROR</code>, <code>Failures</code> và <code>BUILD FAILURE</code>.</p>
+<hr>
+<h2 id="12-lỗi-thực-tế-nosuchelementexception-tại-user-name">🐞 12) Lỗi thực tế: <code>NoSuchElementException</code> tại <code>#user-name</code><a class="heading-anchor" href="#12-lỗi-thực-tế-nosuchelementexception-tại-user-name" aria-label="Liên kết tới đề mục"></a></h2>
+<p>Lỗi người dùng gặp có dạng bản chất như sau:</p>
+<pre><code class="language-text">org.openqa.selenium.NoSuchElementException:
+Unable to locate element: {"method":"css selector","selector":"#user-name"}
+</code></pre>
+<p>Trong log còn thể hiện implicit wait bằng <code>0</code>. Điều đó có nghĩa là lệnh tìm phần tử chỉ kiểm tra <strong>một lần tại thời điểm đó</strong>. Nếu trang chưa tải xong hoặc form chưa xuất hiện, Selenium ném lỗi ngay.</p>
+<pre><code class="language-text">driver.findElement(By.id("user-name"))
+             |
+             +-- kiem tra ngay lap tuc
+             +-- implicit wait = 0
+             +-- chua co element -&gt; NoSuchElementException
+</code></pre>
+<h3 id="cách-đọc-lỗi">Cách đọc lỗi<a class="heading-anchor" href="#cách-đọc-lỗi" aria-label="Liên kết tới đề mục"></a></h3>
+<ol>
+<li>Đọc loại exception: <code>NoSuchElementException</code> nói rằng Selenium không tìm thấy element tại thời điểm tìm.</li>
+<li>Đọc locator: <code>#user-name</code> tương đương <code>By.id("user-name")</code>; locator của SauceDemo là hợp lệ.</li>
+<li>Đọc wait: implicit wait <code>0</code> cho thấy không có thời gian chờ ngầm.</li>
+<li>Đọc step đang fail: lỗi xảy ra trong thao tác login, trước assertion products page.</li>
+<li>Kiểm tra URL và screenshot: có thể trang chưa mở đúng URL, mạng chậm, hoặc browser đang ở trang khác.</li>
+</ol>
+<h3 id="vì-sao-không-nên-chỉ-tăng-implicit-wait">Vì sao không nên chỉ tăng implicit wait?<a class="heading-anchor" href="#vì-sao-không-nên-chỉ-tăng-implicit-wait" aria-label="Liên kết tới đề mục"></a></h3>
+<p>Implicit wait là cấu hình toàn cục cho mọi <code>findElement</code>. Nó có thể làm test chậm và khó đoán khi trộn với explicit wait. Với trạng thái cụ thể như “username đã hiển thị”, explicit wait diễn đạt đúng ý định hơn.</p>
+<hr>
+<h2 id="️-13-sửa-đúng-chỗ-bằng-webdriverwait">🛠️ 13) Sửa đúng chỗ bằng <code>WebDriverWait</code><a class="heading-anchor" href="#️-13-sửa-đúng-chỗ-bằng-webdriverwait" aria-label="Liên kết tới đề mục"></a></h2>
+<pre><code class="language-text">[findElement ngay]
+        │ element chưa sẵn sàng
+        ▼
+[NoSuchElementException]
+        │ sửa bằng
+        ▼
+[WebDriverWait + điều kiện đúng]
+</code></pre>
+<h3 id="trước-tìm-ngay-lập-tức">Trước: tìm ngay lập tức<a class="heading-anchor" href="#trước-tìm-ngay-lập-tức" aria-label="Liên kết tới đề mục"></a></h3>
+<p>Đây là kiểu code gây lỗi khi implicit wait bằng <code>0</code>:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> logIn</span><span style="color:#E1E4E8">(String username, String password) {</span></span>
+<span class="line"><span style="color:#E1E4E8">    driver.</span><span style="color:#B392F0">findElement</span><span style="color:#E1E4E8">(usernameInput).</span><span style="color:#B392F0">sendKeys</span><span style="color:#E1E4E8">(username);</span></span>
+<span class="line"><span style="color:#E1E4E8">    driver.</span><span style="color:#B392F0">findElement</span><span style="color:#E1E4E8">(passwordInput).</span><span style="color:#B392F0">sendKeys</span><span style="color:#E1E4E8">(password);</span></span>
+<span class="line"><span style="color:#E1E4E8">    driver.</span><span style="color:#B392F0">findElement</span><span style="color:#E1E4E8">(loginButton).</span><span style="color:#B392F0">click</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>Nếu thao tác <code>open()</code> cũng chỉ gọi <code>driver.get(...)</code> mà không chờ form, rủi ro còn rõ hơn:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> open</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#E1E4E8">    driver.</span><span style="color:#B392F0">get</span><span style="color:#E1E4E8">(Config.</span><span style="color:#B392F0">get</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"base.url"</span><span style="color:#E1E4E8">));</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p><strong>Vì sao?</strong></p>
+<p><code>driver.get</code> chờ một phần quá trình tải trang, nhưng không nên giả định rằng mọi element động đã sẵn sàng đúng vào thời điểm lệnh tiếp theo chạy. Mạng, máy và browser có tốc độ khác nhau.</p>
+<h3 id="sau-chờ-đúng-trạng-thái-cần-thao-tác">Sau: chờ đúng trạng thái cần thao tác<a class="heading-anchor" href="#sau-chờ-đúng-trạng-thái-cần-thao-tác" aria-label="Liên kết tới đề mục"></a></h3>
+<p><code>LoginPage</code> hiện tại đã dùng hướng này:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">public</span><span style="color:#B392F0"> LoginPage</span><span style="color:#E1E4E8">(WebDriver driver) {</span></span>
+<span class="line"><span style="color:#79B8FF">    this</span><span style="color:#E1E4E8">.driver </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> driver;</span></span>
+<span class="line"><span style="color:#79B8FF">    this</span><span style="color:#E1E4E8">.wait </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> WebDriverWait</span><span style="color:#E1E4E8">(driver, Duration.</span><span style="color:#B392F0">ofSeconds</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">10</span><span style="color:#E1E4E8">));</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> open</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#E1E4E8">    driver.</span><span style="color:#B392F0">get</span><span style="color:#E1E4E8">(Config.</span><span style="color:#B392F0">get</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"base.url"</span><span style="color:#E1E4E8">));</span></span>
+<span class="line"><span style="color:#E1E4E8">    wait.</span><span style="color:#B392F0">until</span><span style="color:#E1E4E8">(ExpectedConditions.</span><span style="color:#B392F0">visibilityOfElementLocated</span><span style="color:#E1E4E8">(usernameInput));</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> logIn</span><span style="color:#E1E4E8">(String username, String password) {</span></span>
+<span class="line"><span style="color:#E1E4E8">    wait.</span><span style="color:#B392F0">until</span><span style="color:#E1E4E8">(ExpectedConditions.</span><span style="color:#B392F0">visibilityOfElementLocated</span><span style="color:#E1E4E8">(usernameInput))</span></span>
+<span class="line"><span style="color:#E1E4E8">            .</span><span style="color:#B392F0">sendKeys</span><span style="color:#E1E4E8">(username);</span></span>
+<span class="line"><span style="color:#E1E4E8">    wait.</span><span style="color:#B392F0">until</span><span style="color:#E1E4E8">(ExpectedConditions.</span><span style="color:#B392F0">visibilityOfElementLocated</span><span style="color:#E1E4E8">(passwordInput))</span></span>
+<span class="line"><span style="color:#E1E4E8">            .</span><span style="color:#B392F0">sendKeys</span><span style="color:#E1E4E8">(password);</span></span>
+<span class="line"><span style="color:#E1E4E8">    wait.</span><span style="color:#B392F0">until</span><span style="color:#E1E4E8">(ExpectedConditions.</span><span style="color:#B392F0">elementToBeClickable</span><span style="color:#E1E4E8">(loginButton)).</span><span style="color:#B392F0">click</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>Cách đọc từng dòng:</p>
+<ul>
+<li><code>Duration.ofSeconds(10)</code>: tối đa chờ 10 giây cho mỗi điều kiện.</li>
+<li><code>visibilityOfElementLocated(usernameInput)</code>: element phải tồn tại và nhìn thấy được.</li>
+<li><code>elementToBeClickable(loginButton)</code>: nút phải sẵn sàng để click.</li>
+<li>Nếu hết 10 giây, lỗi sẽ là timeout có ngữ cảnh hơn, thay vì thất bại tức thời.</li>
+</ul>
+<blockquote>
+<p>Explicit wait không chữa được URL sai, selector sai hoặc server không phản hồi. Nó chỉ xử lý đúng bài toán đồng bộ hóa khi element xuất hiện muộn.</p>
+</blockquote>
+<h3 id="cải-thiện-tiếp-theo-cho-assertion">Cải thiện tiếp theo cho assertion<a class="heading-anchor" href="#cải-thiện-tiếp-theo-cho-assertion" aria-label="Liên kết tới đề mục"></a></h3>
+<p><code>isProductsPageDisplayed()</code> hiện kiểm tra URL rồi gọi ngay:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">return</span><span style="color:#E1E4E8"> driver.</span><span style="color:#B392F0">getCurrentUrl</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">contains</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"/inventory.html"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">        &amp;&amp;</span><span style="color:#E1E4E8"> driver.</span><span style="color:#B392F0">findElement</span><span style="color:#E1E4E8">(productsTitle).</span><span style="color:#B392F0">getText</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">equals</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"Products"</span><span style="color:#E1E4E8">);</span></span></code></pre>
+<p>Đây là điểm có thể làm explicit-wait robust hơn ở bước tiếp theo, chẳng hạn chờ <code>productsTitle</code> visible trước khi đọc text. <strong>Bài này không sửa code đó</strong>; chỉ ghi nhận để tránh nhầm rằng mọi điểm trong flow đã có wait.</p>
+<hr>
+<h2 id="️-14-cảnh-báo-cdp-với-chrome-153">⚠️ 14) Cảnh báo CDP với Chrome 153<a class="heading-anchor" href="#️-14-cảnh-báo-cdp-với-chrome-153" aria-label="Liên kết tới đề mục"></a></h2>
+<p>Log thực tế còn có:</p>
+<pre><code class="language-text">WARNING: Unable to find CDP implementation matching 153
+WARNING: Unable to find version of CDP to use for 153.0.8010.53
+</code></pre>
+<p>Giải thích:</p>
+<ul>
+<li>Chrome đang là nhánh major <code>153</code>.</li>
+<li>Selenium 4.27.0 có các module CDP cụ thể cho một số phiên bản Chromium, nhưng không có implementation khớp <code>153</code> trong bộ dependency hiện tại.</li>
+<li>Đây là <strong>WARNING</strong>, không phải nguyên nhân trực tiếp của <code>NoSuchElementException</code>.</li>
+<li>Test login có thể vẫn chạy thành công nếu chỉ dùng WebDriver API thông thường. Log chạy thành công gần nhất của project có <code>Failures: 0</code>, nhưng vẫn in cảnh báo này.</li>
+</ul>
+<p>CDP đặc biệt quan trọng khi test dùng DevTools API như network interception, performance log hoặc browser emulation. Với flow hiện tại chỉ dùng <code>ChromeDriver</code>, locator, click và wait, cần theo dõi warning nhưng không nên chữa nhầm nó thành lỗi locator.</p>
+<p><strong>Vì sao?</strong></p>
+<p>Hai vấn đề khác nhau:</p>
+<pre><code class="language-text">NoSuchElementException + implicit wait 0
+    -&gt; vấn đề đồng bộ element
+
+Unable to find CDP implementation matching 153
+    -&gt; lệch phiên bản Chrome/CDP integration
+</code></pre>
+<p>Ưu tiên sửa explicit wait cho lỗi element. Nếu sau này cần CDP API, cân nhắc cập nhật Selenium tương thích với Chrome hoặc thêm module CDP đúng theo hướng dẫn của chính Selenium; không tự đoán artifact version.</p>
+<hr>
+<h2 id="15-checklist-xử-lý-lỗi">📋 15) Checklist xử lý lỗi<a class="heading-anchor" href="#15-checklist-xử-lý-lỗi" aria-label="Liên kết tới đề mục"></a></h2>
+<pre><code class="language-text">[ ] java -version &gt;= 17
+[ ] mvn --version &gt;= 3.9
+[ ] Chrome đã cài và mở được
+[ ] base.url có dấu / đúng và truy cập được
+[ ] config.properties nằm trong src/test/resources
+[ ] username/password không rỗng
+[ ] feature nằm trong src/test/resources/features
+[ ] runner chọn đúng resource "features"
+[ ] glue trỏ tới com.example.saucedemo
+[ ] locator #user-name đúng với trang đang mở
+[ ] URL thực tế là https://www.saucedemo.com/
+[ ] dùng explicit wait cho element xuất hiện/click được
+[ ] screenshot failure được xem trong report
+[ ] phân biệt WARNING với BUILD FAILURE
+[ ] kiểm tra target/cucumber-reports/cucumber.html
+</code></pre>
+<p>Nếu vẫn lỗi <code>#user-name</code>, kiểm tra theo thứ tự:</p>
+<ol>
+<li>In hoặc quan sát URL hiện tại; có thể browser bị redirect hoặc không tải được mạng.</li>
+<li>Mở <code>base.url</code> bằng tay trên Chrome.</li>
+<li>Xem screenshot do <code>Hooks</code> attach khi scenario fail.</li>
+<li>Xác nhận <code>LoginPage</code> dùng <code>By.id("user-name")</code>, không gõ nhầm <code>username</code>.</li>
+<li>Giữ explicit wait và kiểm tra timeout có đủ 10 giây trong môi trường chậm.</li>
+<li>Nếu lỗi là <code>TimeoutException</code>, đó là dấu hiệu element không xuất hiện trong thời gian chờ; quay lại kiểm tra URL, mạng và DOM.</li>
+</ol>
+<hr>
+<h2 id="16-tổng-kết-ai-làm-gì">🧠 16) Tổng kết: ai làm gì?<a class="heading-anchor" href="#16-tổng-kết-ai-làm-gì" aria-label="Liên kết tới đề mục"></a></h2>
+<table>
+<thead>
+<tr>
+<th>Thành phần</th>
+<th>Trách nhiệm chính</th>
+<th>Không nên làm</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>pom.xml</code></td>
+<td>Dependency, Java release, Surefire, report</td>
+<td>Chứa locator UI</td>
+</tr>
+<tr>
+<td><code>Config</code></td>
+<td>Đọc properties và báo thiếu key</td>
+<td>Điều khiển browser</td>
+</tr>
+<tr>
+<td><code>DriverFactory</code></td>
+<td>Tạo Chrome/Firefox và options</td>
+<td>Chứa step nghiệp vụ</td>
+</tr>
+<tr>
+<td><code>Hooks</code></td>
+<td>Setup, teardown, screenshot</td>
+<td>Chứa locator login</td>
+</tr>
+<tr>
+<td><code>LoginPage</code></td>
+<td>Locator, thao tác UI, explicit wait</td>
+<td>Đọc trực tiếp feature</td>
+</tr>
+<tr>
+<td><code>LoginSteps</code></td>
+<td>Nối Gherkin với Page Object, assertion</td>
+<td>Rải locator khắp step</td>
+</tr>
+<tr>
+<td><code>login.feature</code></td>
+<td>Mô tả hành vi người dùng</td>
+<td>Chứa Java code</td>
+</tr>
+<tr>
+<td><code>RunCucumberTest</code></td>
+<td>Chọn Cucumber engine, feature, glue</td>
+<td>Thực hiện thao tác UI</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Công thức cuối: <strong>Feature nói cần gì, Step điều phối, Page Object biết làm thế nào, Hook quản lý vòng đời, DriverFactory biết tạo browser, Maven biết cách chạy tất cả.</strong></p>
+</blockquote>
+<p>Khi test fail, đừng sửa theo dòng log cuối cùng một cách máy móc. Hãy hỏi: <strong>đây là locator sai, trang sai, browser chưa sẵn sàng, hay chỉ là warning tương thích?</strong> Với lỗi hiện tại, câu trả lời là đồng bộ hóa element: dùng <code>WebDriverWait</code> và <code>ExpectedConditions</code> trong <code>LoginPage</code>.</p>
+<h2 id="kết-luận">🎯 Kết luận<a class="heading-anchor" href="#kết-luận" aria-label="Liên kết tới đề mục"></a></h2>
+<p>Một project Selenium + Cucumber dễ bảo trì khi mỗi lớp có trách nhiệm rõ: feature mô tả hành vi, step điều phối, Page Object thao tác UI, hook quản lý vòng đời và Maven chạy test. Khi lỗi xảy ra, cần phân biệt lỗi locator, lỗi đồng bộ, lỗi môi trường và cảnh báo tương thích trước khi sửa.</p>
+<h2 id="tóm-tắt-bỏ-túi-take-away">🧳 Tóm tắt bỏ túi (Take away)<a class="heading-anchor" href="#tóm-tắt-bỏ-túi-take-away" aria-label="Liên kết tới đề mục"></a></h2>
+<table>
+<thead>
+<tr>
+<th>Điểm chính</th>
+<th>Hành động</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Môi trường</td>
+<td>Kiểm tra JDK, Maven, browser và cấu hình trước khi debug.</td>
+</tr>
+<tr>
+<td>Page Object</td>
+<td>Giữ locator và explicit wait trong <code>LoginPage</code>, không rải logic UI vào step.</td>
+</tr>
+<tr>
+<td>Debug</td>
+<td>Đọc exception, URL, screenshot và report cùng nhau.</td>
+</tr>
+<tr>
+<td>Tham khảo</td>
+<td>Có thể xem project CucumberJava, nhưng phải tự xác minh dependency và yêu cầu CI.</td>
+</tr>
+</tbody>
+</table>
+</article></div></div></main><footer class="site-footer" data-pagefind-ignore><div class="footer-inner"><p class="footer-version"><strong>PKD · Project Knowledge Disclosure</strong> — v0.4 —<a href="/changelog/">Changelog</a><span aria-hidden="true"> | </span><a href="/phan-loai-kien-thuc/">Phân loại kiến thức</a></p><p><a href="/search/">Tìm trong toàn bộ kho tri thức</a></p></div></footer></body></html>
