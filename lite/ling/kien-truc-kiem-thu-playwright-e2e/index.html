@@ -1,0 +1,132 @@
+<!DOCTYPE html><html lang="vi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Triển khai Playwright E2E cho website này · PKD Lite</title><meta name="description" content="Chi tiết cấu trúc kiểm thử tự động Playwright, ma trận đa thiết bị, quy trình tích hợp CI và báo cáo chất lượng công khai cho website tĩnh PKD."><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="stylesheet" href="/_astro/LiteLayout.DFVAyc4m.css"></head><body data-pagefind-ignore="all"><div class="lite-container"><header class="lite-nav"><div><a class="lite-brand" href="/lite/">PKD / LITE</a></div><nav class="lite-nav-links" aria-label="Điều hướng Lite"><a href="/lite/">Mục lục</a><span aria-hidden="true">·</span><a href="/ling/articles/kien-truc-kiem-thu-playwright-e2e/" title="Chuyển sang giao diện đầy đủ ban đầu">Sang bản đầy đủ ↗</a></nav></header><main id="main-content"><article><header class="lite-article-header"><h1>Triển khai Playwright E2E cho website này</h1><p class="lite-article-meta"><span>Lĩnh vực: <strong>LING</strong></span><span aria-hidden="true">·</span><span>Cập nhật: 2026-09-27</span><span aria-hidden="true">·</span><span>Thời gian đọc: ~5 phút</span><span aria-hidden="true">·</span><a href="/ling/articles/kien-truc-kiem-thu-playwright-e2e/" title="Xem bài viết này ở giao diện chuẩn">Xem bản chuẩn ↗</a></p></header><div class="lite-prose"><blockquote>
+<p><em>Kiểm thử tự động chỉ thực sự đáng tin khi nó mô phỏng đúng hành vi của người dùng thật trên trình duyệt thật.</em></p>
+</blockquote>
+<h2 id="mô-hình-tổng-thể">🧭 Mô hình tổng thể<a class="heading-anchor" href="#mô-hình-tổng-thể" aria-label="Liên kết tới đề mục"></a></h2>
+<pre><code class="language-text">Source Commit -&gt; Build Preview Site -&gt; Playwright Runner
+                         |                    |
+                         |                    +-&gt; Desktop Chrome (1280x720)
+                         |                    +-&gt; Mobile Pixel 5 (375x812)
+                         v
+                Quality Gate (Pass 100%) -&gt; Public HTML Test Report
+</code></pre>
+<p>Quy trình kiểm thử đầu cuối (End-to-End Testing) sử dụng Playwright để tự động khởi tạo môi trường xem trước (preview server), sau đó chạy song song các kịch bản người dùng trên cả hai cấu hình màn hình máy tính và thiết bị di động. Kết quả được lưu trữ thành báo cáo trực quan có lịch sử chạy phục vụ nghiệm thu chất lượng phần mềm.</p>
+<h2 id="thiết-bị-và-môi-trường-thực-thi">📱 Thiết bị và môi trường thực thi<a class="heading-anchor" href="#thiết-bị-và-môi-trường-thực-thi" aria-label="Liên kết tới đề mục"></a></h2>
+<p>Hệ thống thiết lập hai hồ sơ thiết bị (device profiles) độc lập nhằm bảo đảm trải nghiệm đồng nhất trên mọi kích thước màn hình:</p>
+<ul>
+<li><strong>Chromium Desktop:</strong> Mô phỏng trình duyệt Chrome máy tính với khung nhìn 1280×720 pixel, kiểm tra khả năng tương tác chuột, bàn phím và bố cục đa cột.</li>
+<li><strong>Chromium Mobile:</strong> Mô phỏng điện thoại Google Pixel 5 với khung nhìn 375×812 pixel, kiểm tra tương tác cảm ứng, thanh tiến độ cuộn trang và bảo đảm giao diện không bị tràn ngang (<code>scrollWidth &lt;= window.innerWidth</code>).</li>
+</ul>
+<p>Mỗi kịch bản kiểm thử được chạy độc lập trên cả hai môi trường, giúp phát hiện sớm các lỗi vỡ giao diện hoặc mất cân đối tính năng giữa desktop và mobile.</p>
+<h2 id="phạm-vi-kiểm-thử-các-tính-năng-cốt-lõi">🎯 Phạm vi kiểm thử các tính năng cốt lõi<a class="heading-anchor" href="#phạm-vi-kiểm-thử-các-tính-năng-cốt-lõi" aria-label="Liên kết tới đề mục"></a></h2>
+<pre><code class="language-text">Tính năng chính
+|
++-- Header Navigation
+|   `-- 5 domain -&gt; đúng URL + H1
++-- Reading Time
+|   `-- cuộn 0% -&gt; 100% -&gt; "Đã đọc xong"
++-- Pagefind Search
+|   `-- từ khóa Việt + ?q= -&gt; kết quả / fallback
++-- Tag Filter
+|   `-- trạng thái lọc còn trên URL
++-- No-JS Fallback
+|   `-- bài, directory, changelog vẫn đọc được
++-- Accessibility (AxeBuilder)
+|   `-- không có lỗi nghiêm trọng
+`-- Route không có
+    `-- 404 -&gt; về trang chủ / tìm kiếm
+</code></pre>
+<p>Các kịch bản chạy trên cả Desktop Chrome và Mobile Pixel 5. <code>Fallback</code> là đường dẫn thay thế khi chỉ mục tìm kiếm không dùng được; AxeBuilder quét DOM để phát hiện lỗi tiếp cận nghiêm trọng.</p>
+<h2 id="️-tích-hợp-cicd-github-action">⚙️ Tích hợp CI/CD - Github Action<a class="heading-anchor" href="#️-tích-hợp-cicd-github-action" aria-label="Liên kết tới đề mục"></a></h2>
+<pre><code class="language-text">PR Created -&gt; Quality Gate (Smoke Tests) -&gt; Merge Main -&gt; Deploy Pages
+                    |                                          |
+                    +-- Chặn merge nếu có lỗi                  +-- Xuất HTML Report
+</code></pre>
+<ol>
+<li>
+<p><strong>Trên Pull Request:</strong> Mỗi khi có thay đổi mã nguồn, GitHub Actions tự động kích hoạt bộ smoke test để kiểm tra tính toàn vẹn trước khi cho phép hợp nhất vào nhánh chính.</p>
+</li>
+<li>
+<p><strong>Trên nhánh Main:</strong> Khi deploy lên production, toàn bộ bài test được thực thi, xuất bản tệp HTML report chi tiết và cập nhật lịch sử kiểm thử vào snapshot phục vụ công khai trên website.</p>
+</li>
+</ol>
+<h2 id="các-báo-cáo-kiểm-thử-công-khai">🔗 Các báo cáo kiểm thử công khai<a class="heading-anchor" href="#các-báo-cáo-kiểm-thử-công-khai" aria-label="Liên kết tới đề mục"></a></h2>
+<p>Kết quả kiểm thử Playwright được tổ chức thành hai tầng báo cáo độc lập:</p>
+<ul>
+<li>
+<p><strong>Trang tổng quan và Lịch sử đo lường:</strong> <a href="https://pkduong.github.io/playwright-test/" target="_blank" rel="noopener noreferrer"><code>https://pkduong.github.io/playwright-test/</code></a> — Thể hiện tổng số bài test, tỷ lệ vượt qua (Pass Rate 100%), thời gian chạy và bảng lịch sử kiểm thử qua từng commit. Liên kết này được tích hợp ngay tại footer của toàn bộ website (<code>Playwright report | Hiệu năng lab: LCP 757 ms | Báo cáo tải K6</code>).</p>
+</li>
+<li>
+<p><strong>Báo cáo HTML nguyên bản chi tiết:</strong> <a href="https://pkduong.github.io/playwright-test/report/index.html" target="_blank" rel="noopener noreferrer"><code>https://pkduong.github.io/playwright-test/report/index.html</code></a> — Báo cáo tương tác chính thức của Playwright với đầy đủ các bước thực thi, ảnh chụp màn hình và phân loại chi tiết theo từng trình duyệt.</p>
+</li>
+</ul>
+<h2 id="kết-luận">📚 Kết luận<a class="heading-anchor" href="#kết-luận" aria-label="Liên kết tới đề mục"></a></h2>
+<p>Kiểm thử tự động với Playwright tạo thành lớp bảo vệ chất lượng thứ ba bên cạnh Vitest (Unit Test) và Lighthouse/K6 (Performance Test). Việc kết hợp kiểm thử đa thiết bị với chế độ no-JS giúp website duy trì độ bền vững cao, không bị hồi quy tính năng sau mỗi lần phát hành mã nguồn mới.</p>
+<h2 id="tóm-tắt-bỏ-túi-take-away">🧾 Tóm tắt bỏ túi (Take away)<a class="heading-anchor" href="#tóm-tắt-bỏ-túi-take-away" aria-label="Liên kết tới đề mục"></a></h2>
+<table>
+<thead>
+<tr>
+<th>Điểm chính</th>
+<th>Hành động</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kiểm thử song song đa thiết bị</td>
+<td>Chạy đồng thời trên Desktop Chrome và Mobile Pixel 5.</td>
+</tr>
+<tr>
+<td>Bảo đảm trải nghiệm No-JS</td>
+<td>Luôn kiểm tra khả năng đọc nội dung khi trình duyệt tắt JavaScript.</td>
+</tr>
+<tr>
+<td>Quét tự động chuẩn tiếp cận</td>
+<td>Sử dụng AxeBuilder để ngăn ngừa lỗi rào cản truy cập.</td>
+</tr>
+<tr>
+<td>Hai tầng báo cáo trực quan</td>
+<td>Dùng trang tổng quan và HTML report làm bằng chứng nghiệm thu OKR.</td>
+</tr>
+<tr>
+<td>Quy tắc cập nhật liên tục</td>
+<td>Bổ sung test case tương ứng mỗi khi phát triển tính năng mới.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="nhật-ký-thay-đổi-bộ-kiểm-thử-test-changelog">📝 Nhật ký thay đổi bộ kiểm thử (Test Changelog)<a class="heading-anchor" href="#nhật-ký-thay-đổi-bộ-kiểm-thử-test-changelog" aria-label="Liên kết tới đề mục"></a></h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: center">Phiên bản</th>
+<th style="text-align: center">Ngày cập nhật</th>
+<th style="text-align: center">Số lượng bài test</th>
+<th style="text-align: left">Nội dung kiểm thử mới được bổ sung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center"><strong>v1.0</strong></td>
+<td style="text-align: center">2026-09-20</td>
+<td style="text-align: center">24 tests</td>
+<td style="text-align: left">Khởi tạo bộ kiểm thử E2E: Điều hướng cơ bản, no-JS, reading progress, Pagefind search tiếng Việt, Accessibility axe-core.</td>
+</tr>
+<tr>
+<td style="text-align: center"><strong>v1.1</strong></td>
+<td style="text-align: center">2026-09-24</td>
+<td style="text-align: center">8 tests</td>
+<td style="text-align: left">Bổ sung kiểm thử thẻ tag bí mật (black tags), phím Tab/Focus và tương tác hover card.</td>
+</tr>
+<tr>
+<td style="text-align: center"><strong>v1.3</strong></td>
+<td style="text-align: center">2026-09-27</td>
+<td style="text-align: center">4 tests</td>
+<td style="text-align: left">Bổ sung kiểm thử tuần tự 5 Header Domain links (<code>TC-E2E-001</code>), xử lý trang 404 (<code>TC-E2E-002</code>), xuất bản 2 tầng báo cáo Playwright công khai.</td>
+</tr>
+<tr>
+<td style="text-align: center"><strong>v1.5</strong></td>
+<td style="text-align: center">2026-09-27</td>
+<td style="text-align: center">8 tests</td>
+<td style="text-align: left">Bổ sung kiểm thử card “Mới cập nhật” trên homepage (<code>AC-HC-001</code> đến <code>AC-HC-008</code>): hiển thị 10 bài mới, no-JS, phím Tab/Enter, mobile 375px không tràn ngang, Accessibility axe-core.</td>
+</tr>
+</tbody>
+</table>
+</div></article></main><footer class="lite-footer"><div><span>Project Knowledge Disclosure · Chế độ đọc tối giản</span></div><div><a href="#main-content">Lên đầu trang ↑</a></div></footer></div></body></html>

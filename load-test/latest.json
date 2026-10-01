@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-09-27T07:26:05.982Z",
+  "sourceCommitSha": "65edf75386534b24b687f942652194297445631c",
+  "targetOrigin": "https://pkduong.github.io",
+  "profile": "load-100-vus-5m",
+  "workload": {
+    "peakVUs": 100,
+    "steadyStateSeconds": 300,
+    "totalDurationSeconds": 420
+  },
+  "results": {
+    "requestCount": 10327,
+    "throughputRps": 24.458481258406305,
+    "errorRate": 0,
+    "p95ResponseMs": 3.8534725999999986,
+    "checksRate": 1,
+    "droppedIterations": 0
+  },
+  "referenceRanges": {
+    "errorRateMax": 0.01,
+    "p95ResponseMsMax": 1500,
+    "checksRateMin": 0.99
+  },
+  "compatibility": {
+    "routes": [
+      "/",
+      "/search/",
+      "/ai/articles/thoat-bay-vibe-coding-voi-sdd/"
+    ],
+    "k6Major": 2,
+    "runner": "github-hosted"
+  },
+  "comparison": {
+    "baseline": {
+      "sourceCommitSha": "e333d55ffbf1b15018c7e186a01bd36e274d36f3",
+      "generatedAt": "2026-09-27T06:47:02.959Z",
+      "compatible": true
+    },
+    "delta": {
+      "p95ResponseMs": {
+        "absolute": -13.0606308,
+        "percent": -77.21739953416628
+      },
+      "errorRatePoints": 0,
+      "throughputRps": {
+        "absolute": 0.17913799789651463,
+        "percent": 0.7378206073138788
+      },
+      "requestCount": {
+        "absolute": 63,
+        "percent": 0.6137957911145752
+      },
+      "checksRatePoints": 0,
+      "droppedIterations": 0
+    },
+    "assessment": "improved"
+  }
+}

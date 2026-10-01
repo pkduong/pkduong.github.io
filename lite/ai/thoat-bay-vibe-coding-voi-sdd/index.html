@@ -1,0 +1,100 @@
+<!DOCTYPE html><html lang="vi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Bí Mật Vibe Coding: Bắt AI Làm Thợ, Giữ Lấy Cái Đầu Bằng SDD · PKD Lite</title><meta name="description" content="Đừng để AI dắt mũi dự án của bạn. Tìm hiểu cách dùng Spec Driven Development (SDD) để bắt AI làm thợ gõ code, còn bạn giữ lại tư duy nghiệp vụ."><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="stylesheet" href="/_astro/LiteLayout.DFVAyc4m.css"></head><body data-pagefind-ignore="all"><div class="lite-container"><header class="lite-nav"><div><a class="lite-brand" href="/lite/">PKD / LITE</a></div><nav class="lite-nav-links" aria-label="Điều hướng Lite"><a href="/lite/">Mục lục</a><span aria-hidden="true">·</span><a href="/ai/articles/thoat-bay-vibe-coding-voi-sdd/" title="Chuyển sang giao diện đầy đủ ban đầu">Sang bản đầy đủ ↗</a></nav></header><main id="main-content"><article><header class="lite-article-header"><h1>Bí Mật Vibe Coding: Bắt AI Làm Thợ, Giữ Lấy Cái Đầu Bằng SDD</h1><p class="lite-article-meta"><span>Lĩnh vực: <strong>AI</strong></span><span aria-hidden="true">·</span><span>Cập nhật: 2026-09-20</span><span aria-hidden="true">·</span><span>Thời gian đọc: ~3 phút</span><span aria-hidden="true">·</span><a href="/ai/articles/thoat-bay-vibe-coding-voi-sdd/" title="Xem bài viết này ở giao diện chuẩn">Xem bản chuẩn ↗</a></p></header><div class="lite-prose"><blockquote>
+<p><em>“AI là một người thợ xây cực nhanh, nhưng nó không phải là kiến trúc sư. Hãy giữ quyền quyết định nghiệp vụ, đừng giao phó ‘cái đầu’ của bạn cho máy móc.”</em></p>
+</blockquote>
+<h2 id="1-vibe-coding-cái-bẫy-của-cảm-giác-sung-sướng">🪤 1. “Vibe Coding”: Cái Bẫy Của Cảm Giác Sung Sướng<a class="heading-anchor" href="#1-vibe-coding-cái-bẫy-của-cảm-giác-sung-sướng" aria-label="Liên kết tới đề mục"></a></h2>
+<p>Vibe Coding là một cú lừa vay nặng lãi:</p>
+<pre><code class="language-plaintext">┌────────────────────┐
+│      TUẦN 1        │ ──► Code lên production nhanh thần tốc.
+│ (Vibe Coding)      │ ──► Team sung sướng.
+└─────────┬──────────┘
+          ▼
+┌────────────────────┐
+│      THÁNG 3       │ ──► Bug xuất hiện.
+│ (Nợ kỹ thuật)      │ ──► Không ai nhớ vì sao code viết thế này?
+└─────────┬──────────┘     Ngoại lệ (exception) xử lý ở đâu?
+          ▼
+┌────────────────────┐
+│     HẬU QUẢ        │ ──► Sửa bug cực chậm.
+│ (Mất kiểm soát)    │ ──► Không ai dám đụng vào code cũ (Refactor).
+└────────────────────┘
+
+</code></pre>
+<p><strong>Nguyên nhân:</strong> Tốc độ tạo code của AI đã bỏ xa khả năng ghi nhận ngữ cảnh (Context) của con người.</p>
+<h2 id="2-sdd-bắt-ai-làm-thợ-giữ-lấy-cái-đầu">🧠 2. SDD: Bắt AI Làm Thợ, Giữ Lấy “Cái Đầu”<a class="heading-anchor" href="#2-sdd-bắt-ai-làm-thợ-giữ-lấy-cái-đầu" aria-label="Liên kết tới đề mục"></a></h2>
+<p>Để trị căn bệnh này, các team lão luyện dùng <strong>SDD (Spec Driven Development - Phát triển hướng Đặc tả)</strong>.</p>
+<p>Quy tắc rất đơn giản: Chèn một bản Đặc tả (Spec) làm “hợp đồng” giữa cái đầu của bạn và đôi tay của AI.</p>
+<pre><code class="language-plaintext">┌────────────────────────────────────────────────────────┐
+│  [ NÃO BỘ ] ──► (Con người chốt Ý tưởng, Logic, Luật)  │
+└──────────────────────────┬─────────────────────────────┘
+                           ▼
+┌────────────────────────────────────────────────────────┐
+│  [ SPEC ] ──► (Văn bản chốt hạ Rule, Ngữ cảnh rõ ràng) │
+└──────────────────────────┬─────────────────────────────┘
+                           ▼
+┌────────────────────────────────────────────────────────┐
+│  [ THỢ XÂY ] ──► (AI Agent code/test dựa ĐÚNG vào Spec)│
+└────────────────────────────────────────────────────────┘
+</code></pre>
+<p>Nguyên lý sinh tử: Nếu có bug, phải tìm và sửa trên file Spec trước, sau đó mới kêu AI sửa code.</p>
+<h2 id="3-4-câu-hỏi-gom-gọn-trong-file-spec">📝 3. 4 Câu Hỏi Gom Gọn Trong File Spec<a class="heading-anchor" href="#3-4-câu-hỏi-gom-gọn-trong-file-spec" aria-label="Liên kết tới đề mục"></a></h2>
+<p>Để AI không đoán bừa, bạn làm chủ “cái đầu” bằng cách trả lời đúng 4 câu hỏi này vào Spec trước khi gõ dòng code nào:</p>
+<pre><code class="language-plaintext">┌─────────────────────────────────────────────────────────┐
+│ 1. TẠI SAO LÀM? (Business Requirement - BR)             │
+│    Vd: Tăng tỷ lệ thanh toán thành công.                │
+├─────────────────────────────────────────────────────────┤
+│ 2. AI LÀM GÌ? (Use Case - UC)                           │
+│    Vd: User quét mã QR để trả tiền.                     │
+├─────────────────────────────────────────────────────────┤
+│ 3. KHÁI NIỆM NÀO? (Entity)                              │
+│    Vd: Hóa đơn (Order), Cổng thanh toán (Gateway).      │
+├─────────────────────────────────────────────────────────┤
+│ 4. THẾ NÀO LÀ ĐÚNG? (Acceptance Criteria - AC)          │
+│    Vd: Mã QR hết hạn sau 15p thì tự động hủy đơn.       │
+└─────────────────────────────────────────────────────────┘
+</code></pre>
+<h2 id="️-4-chậm-lại-1-tuần-cứu-lấy-cả-năm">⚖️ 4. Chậm Lại 1 Tuần, Cứu Lấy Cả Năm<a class="heading-anchor" href="#️-4-chậm-lại-1-tuần-cứu-lấy-cả-năm" aria-label="Liên kết tới đề mục"></a></h2>
+<pre><code class="language-plaintext">                    BÀN CÂN THỰC CHIẾN
+┌─────────────────────────┬─────────────────────────────┐
+│       VIBE CODING       │    SPEC-DRIVEN (SDD)        │
+├─────────────────────────┼─────────────────────────────┤
+│ 1. Nhanh ở tuần đầu     │ 1. Tuần đầu chậm hơn (viết Spec)│
+│ 2. Mù mờ vào tháng thứ 3│ 2. Ổn định dài hạn (nhờ Spec)│
+│ 3. Sửa bug bằng niềm tin│ 3. Sửa bug đọc AC, đọc Test │
+│ 4. Prompt quyết định Code│ 4. Spec quyết định Code    │
+└─────────────────────────┴─────────────────────────────┘
+</code></pre>
+<h2 id="5-tóm-tắt-bỏ-túi-take-away">🎯 5. Tóm tắt bỏ túi (Take away)<a class="heading-anchor" href="#5-tóm-tắt-bỏ-túi-take-away" aria-label="Liên kết tới đề mục"></a></h2>
+<p>Nếu bạn quên hết những gì vừa đọc, chỉ cần nhớ cái bảng này là đủ:</p>
+<table>
+<thead>
+<tr>
+<th>Tiêu chí</th>
+<th>Điểm mấu chốt</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Bản chất Vibe Coding</strong></td>
+<td>Giao cả não lẫn tay cho AI: Viết code siêu tốc nhưng tạo ra “nợ kỹ thuật” khổng lồ vì mất ngữ cảnh.</td>
+</tr>
+<tr>
+<td><strong>Giải pháp (SDD)</strong></td>
+<td>Bắt AI làm “thợ gõ code”, con người giữ lại “bộ não” nghiệp vụ (Business Rule).</td>
+</tr>
+<tr>
+<td><strong>Quy trình chuẩn</strong></td>
+<td>Mình viết Spec trước ──► AI đọc Spec &amp; phản biện ──► AI viết code.</td>
+</tr>
+<tr>
+<td><strong>Cách sửa lỗi</strong></td>
+<td>Bug ở đâu ──► Cập nhật lại Spec ở đó ──► Yêu cầu AI viết lại code (Không sửa code trực tiếp).</td>
+</tr>
+<tr>
+<td><strong>4 Tầng Đặc Tả</strong></td>
+<td>Trả lời: Tại sao làm? - Ai làm gì? - Khái niệm? - Tiêu chí đúng là gì?</td>
+</tr>
+</tbody>
+</table>
+<h2 id="tài-liệu-đọc-thêm">📘 Tài liệu đọc thêm<a class="heading-anchor" href="#tài-liệu-đọc-thêm" aria-label="Liên kết tới đề mục"></a></h2>
+<p>Muốn đi sâu hơn vào quy trình Spec Driven Development, bạn có thể đọc thêm <a href="/assets/docs/ai/SDD-Ebook.pdf">SDD-Ebook.pdf</a>.</p>
+</div></article></main><footer class="lite-footer"><div><span>Project Knowledge Disclosure · Chế độ đọc tối giản</span></div><div><a href="#main-content">Lên đầu trang ↑</a></div></footer></div></body></html>

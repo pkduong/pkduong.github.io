@@ -1,0 +1,177 @@
+<!DOCTYPE html><html lang="vi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Không gian giải mã và lưu trữ dữ liệu về hiện tượng lạ, ranh giới khoa học và bản chất thực tại."><meta name="generator" content="Astro v7.3.3"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="theme-color" content="#f4f0e8" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#17191d" media="(prefers-color-scheme: dark)"><link rel="canonical" href="https://pkduong.github.io/ling/articles/thiet-ke-perf-test-lighthouse-k6/"><meta name="keywords" content="PKD, tri thức, UFO, tâm thức"><meta property="og:title" content="Thiết kế kiểm thử hiệu năng website với Lighthouse và k6 · Project Knowledge Disclosure"><meta property="og:description" content="Không gian giải mã và lưu trữ dữ liệu về hiện tượng lạ, ranh giới khoa học và bản chất thực tại."><meta property="og:image" content="https://pkduong.github.io/images/pkd-og-image-v1.png"><meta property="og:url" content="https://pkduong.github.io/ling/articles/thiet-ke-perf-test-lighthouse-k6/"><meta property="og:type" content="article"><meta property="og:locale" content="vi_VN"><meta property="og:site_name" content="Project Knowledge Disclosure"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Thiết kế kiểm thử hiệu năng website với Lighthouse và k6 · Project Knowledge Disclosure"><meta name="twitter:description" content="Không gian giải mã và lưu trữ dữ liệu về hiện tượng lạ, ranh giới khoa học và bản chất thực tại."><meta name="twitter:image" content="https://pkduong.github.io/images/pkd-og-image-v1.png"><title>Thiết kế kiểm thử hiệu năng website với Lighthouse và k6 · Project Knowledge Disclosure</title><link rel="stylesheet" href="/_astro/global.Qb3MuEWg.css"></head><body><a class="skip-link" href="#main-content">Bỏ qua điều hướng</a><header class="site-header" data-pagefind-ignore><div class="header-inner"><a class="brand" href="/" aria-label="Project Knowledge Disclosure — Trang chủ"><span class="brand-mark" aria-hidden="true">PKD</span><span class="brand-name">Project Knowledge Disclosure</span></a><nav class="desktop-nav" aria-label="Điều hướng chính"><a href="/">Trang chủ</a><a href="/ufo/">UFO</a><a href="/meta/">META</a><a href="/ai/">A.I</a><a href="/soul/">SOUL</a><a href="/ling/" aria-current="page">LING</a><a class="nav-search" href="/search/">Khám phá</a><a class="nav-lite" href="/lite/" title="Chuyển sang giao diện danh mục tối giản">Bản tối giản ↗</a></nav><details class="nav-menu"><summary>Danh mục</summary><nav aria-label="Điều hướng chính"><a href="/">Trang chủ</a><a href="/ufo/">UFO</a><a href="/meta/">META</a><a href="/ai/">A.I</a><a href="/soul/">SOUL</a><a href="/ling/" aria-current="page">LING</a><a class="nav-search" href="/search/">Khám phá</a><a class="nav-lite" href="/lite/" title="Chuyển sang giao diện danh mục tối giản">Bản tối giản ↗</a></nav></details></div></header><main id="main-content"><div class="page-shell article-page"><nav class="breadcrumbs" aria-label="Breadcrumb" data-pagefind-ignore><ol><li><a href="/">Trang chủ</a></li><li><a href="/ling/">LING - Life Insights, Notes for Growth</a></li><li><span aria-current="page">Thiết kế kiểm thử hiệu năng website với Lighthouse và k6</span></li></ol></nav><header class="article-header" style="--accent: #747b80"><p class="eyebrow">LING - Life Insights, Notes for Growth · Bài đọc</p><h1 data-pagefind-meta="title">Thiết kế kiểm thử hiệu năng website với Lighthouse và k6</h1><p class="source-path">Nguồn Markdown: <code>5.ling/done/thiet-ke-perf-test-lighthouse-k6.md</code> ·<a href="/lite/ling/thiet-ke-perf-test-lighthouse-k6/" title="Chuyển sang giao diện đọc bài tối giản">Bản đọc tối giản ↗</a></p><ul class="tag-list" aria-label="Phân loại bài viết: Thiết kế kiểm thử hiệu năng website với Lighthouse và k6"><li><a class="tag-chip tag-chip--black" href="/ling/?tag=web-performance">Hiệu năng web</a></li><li><a class="tag-chip" href="/ling/?tag=lighthouse">Google Lighthouse</a></li><li><a class="tag-chip" href="/ling/?tag=k6">Grafana k6</a></li><li><a class="tag-chip" href="/ling/?tag=github-actions">GitHub Actions</a></li><li><a class="tag-chip" href="/ling/?tag=astro">Astro</a></li></ul><span data-pagefind-filter="domain:ling" data-pagefind-ignore hidden></span><span data-pagefind-meta="kind:article" data-pagefind-ignore hidden></span><span data-pagefind-meta="reading_time:7" data-pagefind-ignore hidden></span></header><button type="button" id="btn-expand-sidebar" class="sidebar-restore-btn" aria-label="Mở rộng mục lục bài viết" title="Mở rộng mục lục (Phím tắt: [)" data-sidebar-restore hidden><span aria-hidden="true">&rarr;</span><span class="sr-only">Mở rộng mục lục</span></button><div class="reading-grid"><div class="reading-sidebar"><section class="article-reading-status" data-article-progress data-reading-time-minutes="7" aria-label="Trạng thái đọc"><p class="article-reading-status__reading-time reading-time">Thời gian đọc: 7 phút</p><div class="article-progress" data-article-progress-details hidden><p class="article-progress__status"><span data-reading-progress-label>Tiến độ đọc: 0%</span><span data-reading-time-remaining>Thời gian còn lại (ước tính): 7 phút</span></p><div class="article-progress__track" role="progressbar" aria-label="Tiến độ đọc" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-valuetext="Tiến độ đọc 0%"><span class="article-progress__fill" data-reading-progress-fill></span></div></div></section><aside class="toc" data-pagefind-ignore><details open><summary>Mục lục bài viết</summary><nav aria-label="Mục lục bài viết"><ol><li class="toc-depth-2"><a href="#mô-hình-tổng-thể">🧭 Mô hình tổng thể</a></li><li class="toc-depth-2"><a href="#hai-phép-đo-hai-câu-hỏi">🔍 Hai phép đo, hai câu hỏi</a></li><li class="toc-depth-2"><a href="#lighthouse-trước-khi-deploy">⚡ Lighthouse trước khi deploy</a></li><li class="toc-depth-2"><a href="#k6-theo-yêu-cầu-thủ-công-manual-dispatch">👥 k6 theo yêu cầu thủ công (Manual Dispatch)</a></li><li class="toc-depth-3"><a href="#1-cách-chuyển-từ-auto-sang-manual">1. Cách chuyển từ Auto sang Manual</a></li><li class="toc-depth-3"><a href="#2-tip-thực-chiến">2. Tip thực chiến</a></li><li class="toc-depth-2"><a href="#so-sánh-sự-khác-biệt-delta">📈 So sánh sự khác biệt Delta:</a></li><li class="toc-depth-2"><a href="#các-báo-cáo-chính-thức-và-bằng-chứng-kiểm-thử">🔗 Các báo cáo chính thức và bằng chứng kiểm thử</a></li><li class="toc-depth-2"><a href="#kết-luận">📚 Kết luận</a></li><li class="toc-depth-2"><a href="#tóm-tắt-bỏ-túi-take-away">🧾 Tóm tắt bỏ túi (Take away)</a></li><li class="toc-depth-2"><a href="#tài-liệu-tham-khảo">🔎 Tài liệu tham khảo</a></li></ol></nav></details><div class="toc-collapse-footer"><button type="button" id="btn-collapse-sidebar" class="toc-collapse-btn" aria-label="Thu gọn thanh bên" title="Thu gọn thanh bên (Phím tắt: [)" data-sidebar-toggle hidden><span class="toc-collapse-icon" aria-hidden="true">&larr;</span><span class="toc-collapse-text">Thu gọn thanh bên</span></button></div></aside></div><article class="prose" data-article-reading-body data-pagefind-body><blockquote>
+<p><em>Một con số hiệu năng chỉ có ý nghĩa khi biết nó được đo ở đâu, bằng kịch bản nào và so với mốc nào.</em></p>
+</blockquote>
+<h2 id="mô-hình-tổng-thể">🧭 Mô hình tổng thể<a class="heading-anchor" href="#mô-hình-tổng-thể" aria-label="Liên kết tới đề mục"></a></h2>
+<pre><code class="language-text">Source commit -&gt; Astro static build
+       |                    |
+       v                    +-&gt; Lighthouse -&gt; lab report
+Deploy Pages
+       |
+(Manual trigger) -&gt; k6 load test -&gt; HTTP report
+</code></pre>
+<p>Mỗi source deploy tạo một artifact tĩnh. Lighthouse kiểm tra artifact tự động trước khi publish; sau khi deploy thành công, maintainer kích hoạt k6 thủ công qua <code>workflow_dispatch</code> để gọi các URL production theo profile đã định. Kết quả được chuẩn hóa thành dữ liệu nhỏ để hai trang report render sẵn, kể cả khi trình duyệt tắt JavaScript.</p>
+<h2 id="hai-phép-đo-hai-câu-hỏi">🔍 Hai phép đo, hai câu hỏi<a class="heading-anchor" href="#hai-phép-đo-hai-câu-hỏi" aria-label="Liên kết tới đề mục"></a></h2>
+<pre><code class="language-text">Lighthouse: browser lab / từng route
+  -&gt; LCP, FCP, TBT, CLS, score
+  -&gt; ghi route, thời điểm, máy, mạng, phiên bản
+  != trải nghiệm mọi người dùng; không đo INP
+
+k6: VU -&gt; GET route công khai -&gt; nghỉ
+  -&gt; p95, lỗi, throughput, request, dropped iteration
+</code></pre>
+<ul>
+<li><strong>LCP:</strong> thời điểm nội dung lớn nhất hiển thị.</li>
+<li><strong>FCP:</strong> thời điểm nội dung đầu tiên hiển thị.</li>
+<li><strong>TBT:</strong> tổng thời gian luồng chính bị chặn.</li>
+<li><strong>CLS:</strong> mức dịch chuyển bố cục bất ngờ.</li>
+<li><strong>INP:</strong> độ trễ phản hồi tương tác của trang.</li>
+<li><strong>VU:</strong> người dùng ảo chạy kịch bản k6.</li>
+<li><strong>HTTP:</strong> giao thức dùng để gửi request web.</li>
+</ul>
+<h2 id="lighthouse-trước-khi-deploy">⚡ Lighthouse trước khi deploy<a class="heading-anchor" href="#lighthouse-trước-khi-deploy" aria-label="Liên kết tới đề mục"></a></h2>
+<pre><code class="language-text">Build preview -&gt; Lighthouse: 3 route, mobile profile
+       |       -&gt; metric + score + build/index/size
+       v
+So baseline cùng profile và route -&gt; report delta
+Content tăng -&gt; theo dõi build, index, trang bị ảnh hưởng
+</code></pre>
+<ul>
+<li><strong>Route:</strong> địa chỉ/trang được kiểm thử.</li>
+<li><strong>Mobile profile:</strong> cấu hình mô phỏng thiết bị và mạng di động.</li>
+<li><strong>Baseline:</strong> snapshot trước dùng làm mốc so sánh.</li>
+<li><strong>Delta:</strong> chênh lệch giữa kết quả hiện tại và baseline.</li>
+<li><strong>Metric / score:</strong> số đo riêng lẻ / điểm tổng hợp.</li>
+<li><strong>Build / index:</strong> thời gian dựng site / dữ liệu tìm kiếm Pagefind.</li>
+<li><strong><code>dist</code>:</strong> thư mục chứa site tĩnh sau khi build.</li>
+</ul>
+<p>Chỉ so sánh khi route và profile tương thích; delta là tín hiệu theo dõi, không thay quality threshold CI. Site tĩnh dựng HTML lúc build; content tăng có thể ảnh hưởng thời gian build, index hoặc kích thước trang liên quan. <a href="https://docs.astro.build/en/guides/on-demand-rendering/" target="_blank" rel="noopener noreferrer">Astro: on-demand rendering và prerendering</a></p>
+<h2 id="k6-theo-yêu-cầu-thủ-công-manual-dispatch">👥 k6 theo yêu cầu thủ công (Manual Dispatch)<a class="heading-anchor" href="#k6-theo-yêu-cầu-thủ-công-manual-dispatch" aria-label="Liên kết tới đề mục"></a></h2>
+<pre><code class="language-text">Deploy tự động (.github/workflows/deploy.yml)
+  -&gt; Push main -&gt; Build -&gt; Publish Pages (Dừng, không chạy k6)
+
+Load test thủ công (.github/workflows/load-test.yml)
+  -&gt; Actions UI / gh CLI -&gt; Run workflow -&gt; k6 run -&gt; Bot push snapshot
+</code></pre>
+<h3 id="1-cách-chuyển-từ-auto-sang-manual">1. Cách chuyển từ Auto sang Manual<a class="heading-anchor" href="#1-cách-chuyển-từ-auto-sang-manual" aria-label="Liên kết tới đề mục"></a></h3>
+<p><strong>Bước 1:</strong> Xóa job <code>load-test</code> tự động khỏi pipeline deploy <code>.github/workflows/deploy.yml</code>:</p>
+<pre class="astro-code astro-code-themes github-light github-dark" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="yaml"><code><span class="line"><span style="color:#6A737D;--shiki-dark:#6A737D"># Trong deploy.yml: Chỉ giữ lại job build-and-deploy</span></span>
+<span class="line"><span style="color:#22863A;--shiki-dark:#85E89D">jobs</span><span style="color:#24292E;--shiki-dark:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#22863A;--shiki-dark:#85E89D">  build-and-deploy</span><span style="color:#24292E;--shiki-dark:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#22863A;--shiki-dark:#85E89D">    runs-on</span><span style="color:#24292E;--shiki-dark:#E1E4E8">: </span><span style="color:#032F62;--shiki-dark:#9ECBFF">ubuntu-latest</span></span>
+<span class="line"><span style="color:#22863A;--shiki-dark:#85E89D">    steps</span><span style="color:#24292E;--shiki-dark:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">      - </span><span style="color:#22863A;--shiki-dark:#85E89D">run</span><span style="color:#24292E;--shiki-dark:#E1E4E8">: </span><span style="color:#032F62;--shiki-dark:#9ECBFF">npm run build:with-lighthouse</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">      - </span><span style="color:#22863A;--shiki-dark:#85E89D">uses</span><span style="color:#24292E;--shiki-dark:#E1E4E8">: </span><span style="color:#032F62;--shiki-dark:#9ECBFF">peaceiris/actions-gh-pages@v4</span></span></code></pre>
+<p><strong>Bước 2:</strong> Tạo workflow độc lập <code>.github/workflows/load-test.yml</code> với trigger <code>workflow_dispatch</code></p>
+<pre class="astro-code astro-code-themes github-light github-dark" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="yaml"><code><span class="line"><span style="color:#22863A;--shiki-dark:#85E89D">name</span><span style="color:#24292E;--shiki-dark:#E1E4E8">: </span><span style="color:#032F62;--shiki-dark:#9ECBFF">Manual K6 Performance Load Test</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#79B8FF">on</span><span style="color:#24292E;--shiki-dark:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#22863A;--shiki-dark:#85E89D">  workflow_dispatch</span><span style="color:#24292E;--shiki-dark:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#22863A;--shiki-dark:#85E89D">    inputs</span><span style="color:#24292E;--shiki-dark:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#22863A;--shiki-dark:#85E89D">      target_url</span><span style="color:#24292E;--shiki-dark:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#22863A;--shiki-dark:#85E89D">        description</span><span style="color:#24292E;--shiki-dark:#E1E4E8">: </span><span style="color:#032F62;--shiki-dark:#9ECBFF">'Target site URL'</span></span>
+<span class="line"><span style="color:#22863A;--shiki-dark:#85E89D">        required</span><span style="color:#24292E;--shiki-dark:#E1E4E8">: </span><span style="color:#005CC5;--shiki-dark:#79B8FF">false</span></span>
+<span class="line"><span style="color:#22863A;--shiki-dark:#85E89D">        default</span><span style="color:#24292E;--shiki-dark:#E1E4E8">: </span><span style="color:#032F62;--shiki-dark:#9ECBFF">'https://pkduong.github.io'</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#22863A;--shiki-dark:#85E89D">jobs</span><span style="color:#24292E;--shiki-dark:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#22863A;--shiki-dark:#85E89D">  load-test</span><span style="color:#24292E;--shiki-dark:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#22863A;--shiki-dark:#85E89D">    runs-on</span><span style="color:#24292E;--shiki-dark:#E1E4E8">: </span><span style="color:#032F62;--shiki-dark:#9ECBFF">ubuntu-latest</span></span>
+<span class="line"><span style="color:#22863A;--shiki-dark:#85E89D">    environment</span><span style="color:#24292E;--shiki-dark:#E1E4E8">: </span><span style="color:#032F62;--shiki-dark:#9ECBFF">load-test</span></span>
+<span class="line"><span style="color:#22863A;--shiki-dark:#85E89D">    steps</span><span style="color:#24292E;--shiki-dark:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">      - </span><span style="color:#22863A;--shiki-dark:#85E89D">uses</span><span style="color:#24292E;--shiki-dark:#E1E4E8">: </span><span style="color:#032F62;--shiki-dark:#9ECBFF">actions/checkout@v4</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">      - </span><span style="color:#22863A;--shiki-dark:#85E89D">uses</span><span style="color:#24292E;--shiki-dark:#E1E4E8">: </span><span style="color:#032F62;--shiki-dark:#9ECBFF">grafana/setup-k6-action@v1</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">      - </span><span style="color:#22863A;--shiki-dark:#85E89D">name</span><span style="color:#24292E;--shiki-dark:#E1E4E8">: </span><span style="color:#032F62;--shiki-dark:#9ECBFF">Run production K6</span></span>
+<span class="line"><span style="color:#22863A;--shiki-dark:#85E89D">        env</span><span style="color:#24292E;--shiki-dark:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#22863A;--shiki-dark:#85E89D">          TARGET_URL</span><span style="color:#24292E;--shiki-dark:#E1E4E8">: </span><span style="color:#032F62;--shiki-dark:#9ECBFF">${{ inputs.target_url || 'https://pkduong.github.io' }}</span></span>
+<span class="line"><span style="color:#22863A;--shiki-dark:#85E89D">          K6_WEB_DASHBOARD</span><span style="color:#24292E;--shiki-dark:#E1E4E8">: </span><span style="color:#032F62;--shiki-dark:#9ECBFF">'true'</span></span>
+<span class="line"><span style="color:#22863A;--shiki-dark:#85E89D">          K6_WEB_DASHBOARD_EXPORT</span><span style="color:#24292E;--shiki-dark:#E1E4E8">: </span><span style="color:#032F62;--shiki-dark:#9ECBFF">'.tmp/load-test/report.html'</span></span>
+<span class="line"><span style="color:#22863A;--shiki-dark:#85E89D">        run</span><span style="color:#24292E;--shiki-dark:#E1E4E8">: </span><span style="color:#D73A49;--shiki-dark:#F97583">|</span></span>
+<span class="line"><span style="color:#032F62;--shiki-dark:#9ECBFF">          mkdir -p .tmp/load-test</span></span>
+<span class="line"><span style="color:#032F62;--shiki-dark:#9ECBFF">          k6 run --out web-dashboard=export=.tmp/load-test/report.html tests/load/pages-read-only.k6.js</span></span></code></pre>
+<h3 id="2-tip-thực-chiến">2. Tip thực chiến<a class="heading-anchor" href="#2-tip-thực-chiến" aria-label="Liên kết tới đề mục"></a></h3>
+<ul>
+<li><strong>Triệt tiêu commit rác (<code>chore(perf)</code>):</strong> Nếu chạy k6 tự động sau mỗi deploy, bot k6 sẽ tạo commit snapshot rác liên tục trên <code>main</code>, làm nhiễu Git log.</li>
+<li><strong>Tiết kiệm tài nguyên CI:</strong> Kịch bản k6 <code>ramping-vus</code> ngốn 7–10 phút runner. Tách sang manual giúp chỉ đo khi thật sự cần nghiệm thu release lớn.</li>
+<li><strong>Tip chạy kiểm thử cục bộ (Local Command):</strong>
+<pre class="astro-code astro-code-themes github-light github-dark" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">TARGET_URL</span><span style="color:#D73A49;--shiki-dark:#F97583">=</span><span style="color:#032F62;--shiki-dark:#9ECBFF">"https://pkduong.github.io"</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> K6_WEB_DASHBOARD</span><span style="color:#D73A49;--shiki-dark:#F97583">=</span><span style="color:#032F62;--shiki-dark:#9ECBFF">true</span><span style="color:#6F42C1;--shiki-dark:#B392F0"> k6</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> run</span><span style="color:#005CC5;--shiki-dark:#79B8FF"> --out</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> web-dashboard=export=.tmp/load-test/report.html</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> tests/load/pages-read-only.k6.js</span></span></code></pre>
+</li>
+<li><strong>Tip kích hoạt qua GitHub CLI (<code>gh</code>):</strong>
+<pre class="astro-code astro-code-themes github-light github-dark" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6F42C1;--shiki-dark:#B392F0">gh</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> workflow</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> run</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> load-test.yml</span><span style="color:#005CC5;--shiki-dark:#79B8FF"> -f</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> target_url="https://pkduong.github.io"</span></span></code></pre>
+</li>
+</ul>
+<h2 id="so-sánh-sự-khác-biệt-delta">📈 So sánh sự khác biệt Delta:<a class="heading-anchor" href="#so-sánh-sự-khác-biệt-delta" aria-label="Liên kết tới đề mục"></a></h2>
+<pre><code class="language-text">Snapshot mới
+  -&gt; đối chiếu điều kiện đo với baseline
+     -&gt; không khớp: đánh dấu không tương thích
+     -&gt; khớp: tính delta và hiển thị thông tin
+  -&gt; lọc kết quả k6 thành JSON snapshot
+  -&gt; App chỉ stage đường dẫn được phép
+  -&gt; bot commit -&gt; build report; bỏ k6 ở lượt publish này
+</code></pre>
+<p>Lighthouse cần cùng phiên bản công cụ, mobile profile và tập route; k6 cần cùng target, profile, route mix, phiên bản major và runner. <strong>Snapshot</strong> là kết quả đã lưu của một lần đo; <strong>route mix</strong> là tỷ trọng các route trong kịch bản; <strong>runner</strong> là môi trường chạy test.</p>
+<p>Với k6, delta của <strong>error rate</strong> (tỷ lệ request lỗi) và <strong>check rate</strong> (tỷ lệ điều kiện kiểm tra đạt) dùng điểm phần trăm. <strong>p95</strong> là ngưỡng mà 95% request không chậm hơn; <strong>throughput</strong> là lượng request xử lý theo thời gian. Hai chỉ số này hiển thị cả chênh lệch tuyệt đối lẫn tương đối.</p>
+<p>Một lần đo chậm hơn chỉ là tín hiệu vì CDN, mạng hoặc runner cũng có thể ảnh hưởng; hai report không chặn deploy hay rollback. <strong>Stage</strong> là chọn file vào commit: GitHub App chỉ cài trên source repository và workflow chỉ stage JSON snapshot ở đường dẫn cho phép. Commit của bot vẫn build report tĩnh, nhưng lượt publish đó được nhận diện để không chạy k6 lặp lại.</p>
+<h2 id="các-báo-cáo-chính-thức-và-bằng-chứng-kiểm-thử">🔗 Các báo cáo chính thức và bằng chứng kiểm thử<a class="heading-anchor" href="#các-báo-cáo-chính-thức-và-bằng-chứng-kiểm-thử" aria-label="Liên kết tới đề mục"></a></h2>
+<p>Hệ thống đã triển khai độc lập hai tầng báo cáo: trang snapshot tổng hợp có delta/lịch sử chạy, cùng liên kết trực tiếp tới file HTML báo cáo chi tiết nguyên bản của từng công cụ phục vụ bằng chứng nghiệm thu:</p>
+<ul>
+<li><strong>Báo cáo kiểm thử tải (K6):</strong>
+<ul>
+<li>Trang tổng quan &amp; so sánh baseline: <a href="https://pkduong.github.io/load-test/" target="_blank" rel="noopener noreferrer"><code>https://pkduong.github.io/load-test/</code></a></li>
+<li>Báo cáo K6 Web Dashboard chi tiết (HTML có biểu đồ): <a href="https://pkduong.github.io/load-test/k6/index.html" target="_blank" rel="noopener noreferrer"><code>https://pkduong.github.io/load-test/k6/index.html</code></a></li>
+</ul>
+</li>
+<li><strong>Báo cáo phòng lab (Lighthouse):</strong>
+<ul>
+<li>Trang tổng quan &amp; Core Web Vitals: <a href="https://pkduong.github.io/lighthouse/" target="_blank" rel="noopener noreferrer"><code>https://pkduong.github.io/lighthouse/</code></a></li>
+<li>Báo cáo Lighthouse Audit chi tiết (HTML gốc): <a href="https://pkduong.github.io/lighthouse/perf-test/index.html" target="_blank" rel="noopener noreferrer"><code>https://pkduong.github.io/lighthouse/perf-test/index.html</code></a></li>
+</ul>
+</li>
+</ul>
+<p>Tất cả các báo cáo trên được sinh tự động trong pipeline CI/CD GitHub Actions và deploy trực tiếp lên GitHub Pages tĩnh.</p>
+<h2 id="kết-luận">📚 Kết luận<a class="heading-anchor" href="#kết-luận" aria-label="Liên kết tới đề mục"></a></h2>
+<pre><code class="language-text"> ┌─────────── HỆ THỐNG ĐO HIỆU NĂNG ──────────┐
+ │ 1. LAB (CI Tự động)   -&gt; Lighthouse       │
+ │    • Đo: LCP, TBT, CLS (route đơn lẻ)     │
+ │                                           │
+ │ 2. LOAD (Manual Trigger) -&gt; k6 Engine     │
+ │    • Đo: p95, throughput (tải CDN)        │
+ └─────────────────────┬─────────────────────┘
+                       ▼
+          [ Đối chiếu Delta chuẩn mốc ]
+           Cùng route + Cùng profile
+</code></pre>
+<p>Một hệ thống đo hiệu năng hiệu quả không nằm ở việc chạy dồn dập công cụ sau mỗi lần deploy, mà ở việc <strong>tách biệt đúng tầng trách nhiệm</strong>:</p>
+<ol>
+<li><strong>Chặn sớm ở cửa ngõ (Lighthouse):</strong> Tự động kiểm tra trải nghiệm tải trang trên từng route tĩnh ngay lúc build để phát hiện sớm suy thoái về CSS/JS hay kích thước trang.</li>
+<li><strong>Kiểm tra sức bền khi cần (k6 manual dispatch):</strong> Giữ pipeline deploy gọn nhẹ, chỉ kích hoạt tải đồng thời lên CDN khi cần nghiệm thu thực tế, loại bỏ hoàn toàn commit snapshot rác.</li>
+<li><strong>Giá trị nằm ở Delta:</strong> Mọi con số chỉ có ý nghĩa khi so sánh chênh lệch (delta) trên cùng một hệ quy chiếu và điều kiện đo tương thích.</li>
+</ol>
+<h2 id="tóm-tắt-bỏ-túi-take-away">🧾 Tóm tắt bỏ túi (Take away)<a class="heading-anchor" href="#tóm-tắt-bỏ-túi-take-away" aria-label="Liên kết tới đề mục"></a></h2>
+<table>
+<thead>
+<tr>
+<th>Điểm chính</th>
+<th>Hành động</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Lighthouse đo browser lab</td>
+<td>So LCP/TBT/CLS giữa các build có cùng profile và route.</td>
+</tr>
+<tr>
+<td>k6 kích hoạt thủ công (Manual)</td>
+<td>Chạy <code>workflow_dispatch</code> khi cần; đọc p95, lỗi và throughput.</td>
+</tr>
+<tr>
+<td>Delta cần baseline tương thích</td>
+<td>Kiểm tra commit, thời điểm, route và điều kiện đo.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="tài-liệu-tham-khảo">🔎 Tài liệu tham khảo<a class="heading-anchor" href="#tài-liệu-tham-khảo" aria-label="Liên kết tới đề mục"></a></h2>
+<ul>
+<li><a href="https://developer.chrome.com/docs/lighthouse/performance/performance-scoring" target="_blank" rel="noopener noreferrer">Lighthouse Performance scoring — Chrome for Developers</a></li>
+<li><a href="https://web.dev/articles/vitals-measurement-getting-started" target="_blank" rel="noopener noreferrer">Getting started with measuring Web Vitals — web.dev</a></li>
+<li><a href="https://grafana.com/docs/k6/latest/using-k6/scenarios/executors/ramping-vus/" target="_blank" rel="noopener noreferrer">Ramping VUs — Grafana k6 documentation</a></li>
+<li><a href="https://docs.github.com/en/actions/how-tos/write-workflows/choose-when-workflows-run/trigger-a-workflow" target="_blank" rel="noopener noreferrer">GitHub Actions workflow triggers</a></li>
+</ul>
+</article></div></div></main><footer class="site-footer" data-pagefind-ignore><div class="footer-inner"><p class="footer-version"><strong>PKD · Project Knowledge Disclosure</strong> — v1.0 —<a href="/changelog/">Changelog</a><span aria-hidden="true"> | </span><a href="/phan-loai-kien-thuc/">Phân loại kiến thức</a></p><p class="footer-performance"><a href="/playwright-test/">Playwright report</a><span aria-hidden="true"> | </span><a href="/lighthouse/" aria-label="Báo cáo Lighthouse lab, trang chủ LCP 759 ms, đo 2026-10-01T23:17:24.513Z">Hiệu năng lab: LCP 759 ms</a><span aria-hidden="true"> | </span><a href="/load-test/">Báo cáo tải K6</a></p></div></footer><script type="module">var e=e=>Math.floor((crypto.getRandomValues(new Uint32Array(1))[0]??0)/2**32*e);document.querySelectorAll(`ul.tag-list`).forEach(t=>{if(t.closest(`[data-search-form]`)||t.classList.contains(`search-suggestions`))return;let n=[...t.querySelectorAll(`.tag-chip`)].filter(e=>!e.classList.contains(`tag-chip--series`));if(!n.length)return;let r=Math.min(n.length,Math.max(1,n.filter(e=>e.classList.contains(`tag-chip--black`)).length));n.forEach(e=>e.classList.remove(`tag-chip--black`));for(let t=0;t<r;t+=1){let r=t+e(n.length-t);[n[t],n[r]]=[n[r],n[t]],n[t]?.classList.add(`tag-chip--black`)}});</script></body></html><script type="module" src="/_astro/_slug_.astro_astro_type_script_index_0_lang.C5M74Ugj.js"></script>

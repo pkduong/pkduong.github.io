@@ -1,0 +1,118 @@
+<!DOCTYPE html><html lang="vi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Hướng dẫn tối ưu token theo quy trình SDD · PKD Lite</title><meta name="description" content="Chiến lược tối ưu token theo quy trình SDD: neo ngữ cảnh bằng schema, phân tầng model theo năng lực và chặn token thừa với diff-only."><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="stylesheet" href="/_astro/LiteLayout.DFVAyc4m.css"></head><body data-pagefind-ignore="all"><div class="lite-container"><header class="lite-nav"><div><a class="lite-brand" href="/lite/">PKD / LITE</a></div><nav class="lite-nav-links" aria-label="Điều hướng Lite"><a href="/lite/">Mục lục</a><span aria-hidden="true">·</span><a href="/ai/articles/huong-dan-toi-uu-token-theo-quy-trinh-sdd/" title="Chuyển sang giao diện đầy đủ ban đầu">Sang bản đầy đủ ↗</a></nav></header><main id="main-content"><article><header class="lite-article-header"><h1>Hướng dẫn tối ưu token theo quy trình SDD</h1><p class="lite-article-meta"><span>Lĩnh vực: <strong>AI</strong></span><span aria-hidden="true">·</span><span>Cập nhật: 2026-09-29</span><span aria-hidden="true">·</span><span>Thời gian đọc: ~5 phút</span><span aria-hidden="true">·</span><a href="/ai/articles/huong-dan-toi-uu-token-theo-quy-trinh-sdd/" title="Xem bài viết này ở giao diện chuẩn">Xem bản chuẩn ↗</a></p></header><div class="lite-prose"><blockquote>
+<p>Tối ưu token là đưa đúng yêu cầu và ngữ cảnh liên quan để AI tập trung vào phần việc cần làm.</p>
+</blockquote>
+<ul>
+<li>SDD (Spec-Driven Development) bắt đầu từ yêu cầu và tiêu chí chấp nhận;</li>
+<li>schema/contract là một phần giúp làm rõ ranh giới dữ liệu.</li>
+<li>Đưa đúng phần spec, contract và mã liên quan vào ngữ cảnh có thể giảm nội dung thừa;</li>
+<li>mức tiết kiệm token phụ thuộc task và cách làm việc.</li>
+</ul>
+<h2 id="mô-hình-tổng-thể">🧭 Mô hình tổng thể<a class="heading-anchor" href="#mô-hình-tổng-thể" aria-label="Liên kết tới đề mục"></a></h2>
+<pre><code class="language-text">[Input: Spec, contract, mã liên quan]
+           │
+           ▼
+[Phân tầng Model &amp; Reasoning Effort]
+ ├─ Năng lực cao: Phân tích kiến trúc, logic khó
+ ├─ Năng lực vừa: Viết logic theo boundary
+ └─ Nhanh/nhẹ: Boilerplate, type, stub
+           │
+           ▼
+[Output: Diff-Only / Patch] (Chặn tái tạo toàn file)
+</code></pre>
+<p>Mô hình vận hành theo 3 trụ cột: chỉ đưa contract liên quan vào đầu vào, chọn model và mức suy luận theo độ khó, rồi giới hạn đầu ra vào diff/patch khi chỉ sửa một phần.</p>
+<h2 id="️-1-chọn-năng-lực-model-theo-tác-vụ">🗺️ 1. Chọn năng lực model theo tác vụ<a class="heading-anchor" href="#️-1-chọn-năng-lực-model-theo-tác-vụ" aria-label="Liên kết tới đề mục"></a></h2>
+<p>Không dùng model flagship đắt đỏ cho công việc lặp lại. Phân chia tác vụ theo 3 tầng năng lực:</p>
+<pre><code class="language-text">Năng lực cao     ──&gt; Kiến trúc, logic khó
+        │
+Năng lực vừa     ──&gt; Logic theo contract
+        │
+Nhanh/nhẹ         ──&gt; Stub, mock, tác vụ lặp lại
+</code></pre>
+<ul>
+<li><strong>Năng lực suy luận cao:</strong> Dùng khi cần phân tích kiến trúc, phản biện yêu cầu hoặc truy nguyên lỗi khó.</li>
+<li><strong>Năng lực cân bằng:</strong> Dùng để triển khai logic nghiệp vụ và mapping trong contract đã rõ.</li>
+<li><strong>Nhanh/chi phí thấp:</strong> Dùng cho tác vụ hẹp, lặp lại như boilerplate, type stub và mock data.</li>
+</ul>
+<p>Tên model, mức suy luận và giá thay đổi theo nhà cung cấp. Hãy chọn theo khả năng hiện có, chính sách dữ liệu và chất lượng trên tác vụ thực tế; các nhãn trên là cách phân nhóm công việc, không phải xếp hạng cố định.</p>
+<h2 id="️-2-quy-trình-sdd-tối-ưu-token-theo-từng-giai-đoạn">⚙️ 2. Quy trình SDD tối ưu token theo từng giai đoạn<a class="heading-anchor" href="#️-2-quy-trình-sdd-tối-ưu-token-theo-từng-giai-đoạn" aria-label="Liên kết tới đề mục"></a></h2>
+<p>Quy tắc cốt lõi: <strong>Chọn model theo độ khó của task; giữ spec và tiêu chí chấp nhận làm căn cứ, dùng schema/contract để ràng buộc phần triển khai.</strong></p>
+<pre><code class="language-text">1. Design Contract ──&gt; Năng lực cao
+        │
+2. Gen Type &amp; Stub ──&gt; Nhanh/nhẹ
+        │
+3. Implement Logic ──&gt; Năng lực cân bằng
+        │
+4. Unit Test Mocks ──&gt; Nhanh/nhẹ
+        │
+5. Deep Debugging  ──&gt; Năng lực cao
+</code></pre>
+<ol>
+<li><strong>Giai đoạn 1: Design Schema &amp; Contract:</strong> Thiết kế OpenAPI, JSON Schema, Prisma hoặc database architecture. Chọn model có khả năng phân tích phù hợp để rà mâu thuẫn ranh giới dữ liệu trước khi viết code.</li>
+<li><strong>Giai đoạn 2: Stubbing &amp; DTOs:</strong> Sinh type definitions, interfaces và data models từ schema đã thống nhất. Vì đây thường là ánh xạ trực tiếp, có thể chọn model nhanh/nhẹ sau khi kiểm tra đầu ra.</li>
+<li><strong>Giai đoạn 3: Business Logic Implementation:</strong> Hiện thực hóa logic nghiệp vụ bên trong các hàm có ranh giới input/output rõ ràng. Chỉ nạp mã nguồn cần thiết để hiểu module và các phụ thuộc liên quan.</li>
+<li><strong>Giai đoạn 4: Unit Test &amp; Mocks:</strong> Sinh mock data và đề xuất ca kiểm thử biên dựa trên input/output contract. Người viết vẫn cần kiểm tra test có xác nhận đúng behavior hay không.</li>
+<li><strong>Giai đoạn 5: Deep Root-Cause Debugging:</strong> Với lỗi khó như race condition hoặc deadlock, cung cấp log và phạm vi liên quan rồi cân nhắc model có năng lực suy luận cao hơn. Không nạp dữ liệu nhạy cảm nếu chưa được phép.</li>
+</ol>
+<h2 id="3-bốn-nguyên-tắc-vàng-tiết-kiệm-token">💡 3. Bốn nguyên tắc vàng tiết kiệm token<a class="heading-anchor" href="#3-bốn-nguyên-tắc-vàng-tiết-kiệm-token" aria-label="Liên kết tới đề mục"></a></h2>
+<pre><code class="language-text"> [Input]                [Processing]             [Output]
+Cô đọng               Chọn effort phù hợp      Giới hạn phạm vi
+   │                         │                      │
+   ▼                         ▼                      ▼
+Nạp đúng spec,        Dùng model phù hợp      Yêu cầu diff/patch
+contract và mã        với độ khó của task     cho sửa đổi cục bộ
+</code></pre>
+<h3 id="31-nguyên-tắc-schema-làm-mỏ-neo-contract-first">3.1. Nguyên tắc “Schema làm mỏ neo” (Contract-First)<a class="heading-anchor" href="#31-nguyên-tắc-schema-làm-mỏ-neo-contract-first" aria-label="Liên kết tới đề mục"></a></h3>
+<p>Thay vì nạp toàn bộ repository, bắt đầu với yêu cầu, tiêu chí chấp nhận, interface và contract liên quan (<code>schema.prisma</code>, <code>swagger.yaml</code>, <code>types.ts</code>), rồi bổ sung đúng tệp phụ thuộc khi cần. Cách này giảm phần đầu vào không liên quan; mức giảm cụ thể tùy repository và task.</p>
+<h3 id="32-kiểm-soát-thinking-và-reasoning-tokens">3.2. Kiểm soát Thinking và Reasoning Tokens<a class="heading-anchor" href="#32-kiểm-soát-thinking-và-reasoning-tokens" aria-label="Liên kết tới đề mục"></a></h3>
+<p>Một số model cho phép cấu hình mức suy luận. Với tác vụ hẹp, có tiêu chí và cấu trúc rõ, hãy thử mức thấp hơn hoặc model nhanh hơn rồi kiểm tra kết quả; tác vụ mơ hồ hay rủi ro cao có thể cần phân tích sâu hơn.</p>
+<h3 id="33-cơ-chế-diff-only-output">3.3. Cơ chế Diff-Only Output<a class="heading-anchor" href="#33-cơ-chế-diff-only-output" aria-label="Liên kết tới đề mục"></a></h3>
+<p>Cấm model sinh lại boilerplate HTML/CSS hoặc toàn bộ file khi chỉ sửa đổi một câu lệnh logic.</p>
+<ul>
+<li><strong>Prompt mẫu:</strong></li>
+</ul>
+<blockquote>
+<p>Chỉ xuất unified diff hoặc đúng function cần sửa, không xuất lại toàn bộ file.</p>
+</blockquote>
+<h3 id="34-kỷ-luật-context-window">3.4. Kỷ luật Context Window<a class="heading-anchor" href="#34-kỷ-luật-context-window" aria-label="Liên kết tới đề mục"></a></h3>
+<p>Không có một ngưỡng token cố định áp dụng cho mọi model và tác vụ. Nghiên cứu về long context ghi nhận một số model truy xuất kém hơn khi thông tin cần thiết nằm giữa ngữ cảnh dài; điều đó không thiết lập ngưỡng chung 100K cho mọi model. Khi lịch sử không còn liên quan hoặc khó điều hướng, hãy tạo phiên mới với mục tiêu, quyết định và contract cần thiết. <a href="https://aclanthology.org/2024.tacl-1.9/" target="_blank" rel="noopener noreferrer">Nguồn nghiên cứu</a>.</p>
+<h2 id="kết-luận">🎯 Kết luận<a class="heading-anchor" href="#kết-luận" aria-label="Liên kết tới đề mục"></a></h2>
+<pre><code class="language-text">Yêu cầu + contract liên quan
+       ↓
+Model và suy luận theo độ khó
+       ↓
+Diff nhỏ + test phù hợp
+       ↓
+Ít ngữ cảnh thừa; thay đổi vẫn kiểm chứng được
+</code></pre>
+<h2 id="tóm-tắt-bỏ-túi-take-away">🧳 Tóm tắt bỏ túi (Take away)<a class="heading-anchor" href="#tóm-tắt-bỏ-túi-take-away" aria-label="Liên kết tới đề mục"></a></h2>
+<table>
+<thead>
+<tr>
+<th>Điểm chính</th>
+<th>Hành động</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Spec và contract liên quan</td>
+<td>Nạp yêu cầu, tiêu chí và phần mã cần thiết; bổ sung phụ thuộc khi cần</td>
+</tr>
+<tr>
+<td>Chọn năng lực model</td>
+<td>Khớp năng lực với độ khó; kiểm tra chất lượng đầu ra</td>
+</tr>
+<tr>
+<td>Mức suy luận</td>
+<td>Thử mức thấp hơn cho task rõ và hẹp; tăng khi độ khó đòi hỏi</td>
+</tr>
+<tr>
+<td>Xuất diff có chọn lọc</td>
+<td>Yêu cầu unified diff hoặc snippet khi sửa đổi cục bộ</td>
+</tr>
+<tr>
+<td>Context dài</td>
+<td>Mở phiên mới khi lịch sử không còn liên quan hoặc khó điều hướng</td>
+</tr>
+</tbody>
+</table>
+</div></article></main><footer class="lite-footer"><div><span>Project Knowledge Disclosure · Chế độ đọc tối giản</span></div><div><a href="#main-content">Lên đầu trang ↑</a></div></footer></div></body></html>

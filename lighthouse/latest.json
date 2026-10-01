@@ -1,0 +1,175 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-01T23:17:24.513Z",
+  "commitSha": "8a7e3b58891f92885a572a2dd9ccc1e678712588",
+  "source": "ci-preview",
+  "freshnessDays": 14,
+  "config": {
+    "lighthouseVersion": "12.6.1",
+    "formFactor": "mobile",
+    "viewport": {
+      "width": 412,
+      "height": 823,
+      "deviceScaleFactor": 1.75
+    },
+    "throttlingMethod": "simulate",
+    "cpuSlowdownMultiplier": 4,
+    "thresholds": {
+      "performance": 0.85,
+      "accessibility": 0.95,
+      "best-practices": 0.9,
+      "seo": 0.9
+    }
+  },
+  "routes": [
+    {
+      "id": "home",
+      "path": "/",
+      "categories": {
+        "performance": 0.97,
+        "accessibility": 1,
+        "best-practices": 1,
+        "seo": 1
+      },
+      "metrics": {
+        "fcpMs": 758.7844,
+        "lcpMs": 758.7844,
+        "speedIndexMs": 758.7844,
+        "tbtMs": 194.5,
+        "cls": 0,
+        "transferBytes": 16640,
+        "requestCount": null
+      },
+      "passed": true
+    },
+    {
+      "id": "article",
+      "path": "/ai/articles/thoat-bay-vibe-coding-voi-sdd/",
+      "categories": {
+        "performance": 1,
+        "accessibility": 1,
+        "best-practices": 1,
+        "seo": 1
+      },
+      "metrics": {
+        "fcpMs": 982.5450000000001,
+        "lcpMs": 1209.054,
+        "speedIndexMs": 982.5450000000001,
+        "tbtMs": 0,
+        "cls": 0,
+        "transferBytes": 16322,
+        "requestCount": null
+      },
+      "passed": true
+    },
+    {
+      "id": "search",
+      "path": "/search/",
+      "categories": {
+        "performance": 1,
+        "accessibility": 1,
+        "best-practices": 1,
+        "seo": 1
+      },
+      "metrics": {
+        "fcpMs": 908.7425000000001,
+        "lcpMs": 1058.7425,
+        "speedIndexMs": 908.7425000000001,
+        "tbtMs": 9,
+        "cls": 0,
+        "transferBytes": 24218,
+        "requestCount": null
+      },
+      "passed": true
+    }
+  ],
+  "comparison": {
+    "baseline": {
+      "commitSha": "7cda501674e50d89747a77a32bbd1085c071d3ba",
+      "generatedAt": "2026-09-29T14:01:50.253Z",
+      "compatible": true
+    },
+    "routes": [
+      {
+        "id": "home",
+        "delta": {
+          "lcpMs": {
+            "absolute": -150.8369,
+            "percent": -16.582384339504806
+          },
+          "tbtMs": {
+            "absolute": 162.31065,
+            "percent": 504.23711569199145
+          },
+          "cls": {
+            "absolute": 0,
+            "percent": null
+          },
+          "transferBytes": {
+            "absolute": 87,
+            "percent": 0.5255844861958557
+          },
+          "performance": {
+            "absolute": -0.030000000000000027,
+            "percent": -3.0000000000000027
+          }
+        }
+      },
+      {
+        "id": "article",
+        "delta": {
+          "lcpMs": {
+            "absolute": -50.662599999999884,
+            "percent": -4.021745843469864
+          },
+          "tbtMs": {
+            "absolute": 0,
+            "percent": null
+          },
+          "cls": {
+            "absolute": 0,
+            "percent": null
+          },
+          "transferBytes": {
+            "absolute": 0,
+            "percent": 0
+          },
+          "performance": {
+            "absolute": 0,
+            "percent": 0
+          }
+        }
+      },
+      {
+        "id": "search",
+        "delta": {
+          "lcpMs": {
+            "absolute": -2.5517999999999574,
+            "percent": -0.24044225998386665
+          },
+          "tbtMs": {
+            "absolute": 9,
+            "percent": null
+          },
+          "cls": {
+            "absolute": 0,
+            "percent": null
+          },
+          "transferBytes": {
+            "absolute": 229,
+            "percent": 0.9546041935887283
+          },
+          "performance": {
+            "absolute": 0,
+            "percent": 0
+          }
+        }
+      }
+    ],
+    "build": {
+      "durationMs": 46173,
+      "distBytes": 8511619,
+      "pagefindBytes": 1046040
+    }
+  }
+}

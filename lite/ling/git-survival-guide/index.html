@@ -1,0 +1,162 @@
+<!DOCTYPE html><html lang="vi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Git Survival Guide: Cẩm nang sinh tồn cho Developer · PKD Lite</title><meta name="description" content="Hướng dẫn quy trình Git an toàn khi bắt đầu task, xử lý xung đột và khôi phục commit bị thất lạc; kèm các giới hạn cần biết để tránh mất dữ liệu."><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="stylesheet" href="/_astro/LiteLayout.DFVAyc4m.css"></head><body data-pagefind-ignore="all"><div class="lite-container"><header class="lite-nav"><div><a class="lite-brand" href="/lite/">PKD / LITE</a></div><nav class="lite-nav-links" aria-label="Điều hướng Lite"><a href="/lite/">Mục lục</a><span aria-hidden="true">·</span><a href="/ling/articles/git-survival-guide/" title="Chuyển sang giao diện đầy đủ ban đầu">Sang bản đầy đủ ↗</a></nav></header><main id="main-content"><article><header class="lite-article-header"><h1>Git Survival Guide: Cẩm nang sinh tồn cho Developer</h1><p class="lite-article-meta"><span>Lĩnh vực: <strong>LING</strong></span><span aria-hidden="true">·</span><span>Cập nhật: 2026-09-26</span><span aria-hidden="true">·</span><span>Thời gian đọc: ~5 phút</span><span aria-hidden="true">·</span><a href="/ling/articles/git-survival-guide/" title="Xem bài viết này ở giao diện chuẩn">Xem bản chuẩn ↗</a></p></header><div class="lite-prose"><blockquote>
+<p>Git lưu lịch sử thay đổi, nhưng khả năng khôi phục phụ thuộc vào việc nội dung đã được commit hay vẫn chỉ nằm trong working tree.</p>
+</blockquote>
+<p><em>Các lệnh ví dụ giả định remote tên <code>origin</code> và nhánh chính tên <code>main</code>. Hãy thay bằng tên trong repository của bạn nếu khác.</em></p>
+<h2 id="mô-hình-tổng-thể">🧭 Mô hình tổng thể<a class="heading-anchor" href="#mô-hình-tổng-thể" aria-label="Liên kết tới đề mục"></a></h2>
+<pre><code class="language-text">Working tree -&gt; Stage -&gt; Commit -&gt; Push
+                    |
+                    +-&gt; reference đổi -&gt; Reflog ghi lại
+</code></pre>
+<ul>
+<li>Working tree chứa thay đổi đang làm.</li>
+<li>Stage chọn nội dung đưa vào commit.</li>
+<li>Commit lưu một mốc trong lịch sử local.</li>
+<li>Push gửi commit lên remote.</li>
+</ul>
+<p>Reflog ghi lại một số lần cập nhật reference trong repository local. Nó không sao lưu nội dung chưa commit.</p>
+<h2 id="️-thói-quen-giúp-giảm-rủi-ro">🛡️ Thói quen giúp giảm rủi ro<a class="heading-anchor" href="#️-thói-quen-giúp-giảm-rủi-ro" aria-label="Liên kết tới đề mục"></a></h2>
+<pre><code class="language-text">Kiểm tra nhánh + working tree
+          |
+          v
+Làm trên branch riêng -&gt; Stage phần cần thiết -&gt; Commit rõ nghĩa
+          |                                      |
+          v                                      v
+Theo quy trình review                Push lên remote phù hợp
+          |
+          v
+Không force-push nhánh dùng chung
+</code></pre>
+<ul>
+<li>Dùng <code>git pull</code> khi cần tích hợp đúng upstream vào nhánh hiện tại.</li>
+<li>Tránh force-push lên nhánh dùng chung.</li>
+<li>Nếu cần cập nhật lịch sử nhánh cá nhân, hiểu tác động và phối hợp với nhóm. <code>--force-with-lease</code> vẫn có thể thay lịch sử.</li>
+</ul>
+<h2 id="bắt-đầu-một-task">🌱 Bắt đầu một task<a class="heading-anchor" href="#bắt-đầu-một-task" aria-label="Liên kết tới đề mục"></a></h2>
+<p>Nếu <code>main</code> là nhánh chính và bạn chưa có thay đổi local cần giữ:</p>
+<pre class="astro-code astro-code-themes github-light github-dark" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6F42C1;--shiki-dark:#B392F0">git</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> switch</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> main</span></span>
+<span class="line"><span style="color:#6F42C1;--shiki-dark:#B392F0">git</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> pull</span><span style="color:#005CC5;--shiki-dark:#79B8FF"> --ff-only</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> origin</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> main</span></span>
+<span class="line"><span style="color:#6F42C1;--shiki-dark:#B392F0">git</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> switch</span><span style="color:#005CC5;--shiki-dark:#79B8FF"> -c</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> task-123</span></span></code></pre>
+<ul>
+<li><code>--ff-only</code> khiến lệnh dừng nếu lịch sử local và remote đã phân kỳ. Khi đó, chọn cách tích hợp phù hợp.</li>
+<li>Nếu nhánh chính có tên khác, thay <code>main</code> bằng tên đó.</li>
+<li>Nếu có thay đổi chưa commit, hãy kiểm tra rồi commit hoặc cất chúng an toàn trước khi chuyển nhánh.</li>
+</ul>
+<p>Khi hoàn tất, kiểm tra diff, tạo commit và push nhánh task:</p>
+<pre class="astro-code astro-code-themes github-light github-dark" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6F42C1;--shiki-dark:#B392F0">git</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> status</span></span>
+<span class="line"><span style="color:#6F42C1;--shiki-dark:#B392F0">git</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> diff</span></span>
+<span class="line"><span style="color:#6F42C1;--shiki-dark:#B392F0">git</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> add</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> path/to/changed-file</span></span>
+<span class="line"><span style="color:#6F42C1;--shiki-dark:#B392F0">git</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> commit</span><span style="color:#005CC5;--shiki-dark:#79B8FF"> -m</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> "feat: describe the change"</span></span>
+<span class="line"><span style="color:#6F42C1;--shiki-dark:#B392F0">git</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> push</span><span style="color:#005CC5;--shiki-dark:#79B8FF"> -u</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> origin</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> task-123</span></span></code></pre>
+<ul>
+<li>Chỉ định file cần stage thay vì <code>git add .</code> để tránh đưa nhầm file vào commit.</li>
+<li>Nếu push bị từ chối vì remote có commit mới, fetch rồi tích hợp đúng upstream theo quy trình nhóm.</li>
+<li>Không cần chạy <code>git pull</code> trước mọi lần push.</li>
+</ul>
+<h2 id="️-branch-tag-và-release-khác-nhau-thế-nào">🏷️ Branch, tag và release khác nhau thế nào?<a class="heading-anchor" href="#️-branch-tag-và-release-khác-nhau-thế-nào" aria-label="Liên kết tới đề mục"></a></h2>
+<pre><code class="language-text">Branch:   commit -&gt; commit -&gt; commit   (tiếp tục tiến khi làm việc)
+                       |
+                       v
+Tag:              v1.0.0              (đánh dấu một commit)
+                       |
+                       v
+Release:       notes + tệp tải       (trên GitHub/GitLab...)
+</code></pre>
+<ul>
+<li>Branch dùng cho một dòng phát triển; nó tiến tới commit mới khi tiếp tục làm việc.</li>
+<li>Tag đánh dấu một commit cụ thể và thường được giữ nguyên.</li>
+<li>Release là trang phát hành trên nền tảng lưu trữ, gắn với tag và có thể có ghi chú cùng tệp tải xuống.</li>
+</ul>
+<p>Tạo branch để tiếp tục phát triển, hoặc annotated tag để đánh dấu commit phát hành:</p>
+<pre class="astro-code astro-code-themes github-light github-dark" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6F42C1;--shiki-dark:#B392F0">git</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> switch</span><span style="color:#005CC5;--shiki-dark:#79B8FF"> -c</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> feature/login</span></span>
+<span class="line"><span style="color:#6F42C1;--shiki-dark:#B392F0">git</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> tag</span><span style="color:#005CC5;--shiki-dark:#79B8FF"> -a</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> v1.0.0</span><span style="color:#005CC5;--shiki-dark:#79B8FF"> -m</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> "Release v1.0.0"</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> HEAD</span></span>
+<span class="line"><span style="color:#6F42C1;--shiki-dark:#B392F0">git</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> push</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> origin</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> v1.0.0</span></span></code></pre>
+<ul>
+<li>Lệnh trên gắn tag vào commit hiện tại (<code>HEAD</code>).</li>
+<li>Đẩy tag riêng bằng <code>git push origin v1.0.0</code>; push branch không tự đẩy tag.</li>
+<li>Annotated tag lưu người tạo, thời điểm và thông điệp. Lightweight tag là nhãn đơn giản hơn.</li>
+</ul>
+<p>Định nghĩa chi tiết về <a href="https://git-scm.com/docs/gitdatamodel" target="_blank" rel="noopener noreferrer">reference, branch và tag trong Git</a>; xem thêm <a href="https://git-scm.com/book/en/v2/Git-Basics-Tagging" target="_blank" rel="noopener noreferrer">cách tạo tag</a>.</p>
+<h2 id="xử-lý-conflict">🧩 Xử lý conflict<a class="heading-anchor" href="#xử-lý-conflict" aria-label="Liên kết tới đề mục"></a></h2>
+<p>Conflict xuất hiện khi Git không thể tự kết hợp thay đổi. Trong lúc merge, file thường có các dấu phân cách sau:</p>
+<pre><code class="language-text">&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+Nội dung từ nhánh hiện tại
+=======
+Nội dung từ nhánh được tích hợp
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; ten-nhanh
+</code></pre>
+<ol>
+<li>Mở từng file, chọn hoặc kết hợp nội dung đúng rồi xóa dấu phân cách.</li>
+<li>Chạy <code>git add &lt;file&gt;</code> cho từng file đã giải quyết.</li>
+<li>Kiểm tra <code>git status</code> và diff.</li>
+<li>Với merge, chạy <code>git commit</code> nếu Git yêu cầu. Với rebase, chạy <code>git rebase --continue</code>.</li>
+</ol>
+<p>Để hủy thao tác đang chạy, dùng <code>git merge --abort</code> hoặc <code>git rebase --abort</code> tương ứng.</p>
+<h2 id="tìm-lại-commit-bị-thất-lạc">🧯 Tìm lại commit bị thất lạc<a class="heading-anchor" href="#tìm-lại-commit-bị-thất-lạc" aria-label="Liên kết tới đề mục"></a></h2>
+<ul>
+<li><code>git reflog</code> liệt kê các lần cập nhật reference local.</li>
+<li>Lệnh này hữu ích khi commit đã tạo nhưng không còn được nhánh hiện tại trỏ tới.</li>
+<li>Reflog không ghi lại mọi lần sửa file và không khôi phục nội dung chưa được Git lưu thành object.</li>
+</ul>
+<pre class="astro-code astro-code-themes github-light github-dark" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6A737D;--shiki-dark:#6A737D"># Xem các lần HEAD được cập nhật gần đây</span></span>
+<span class="line"><span style="color:#6F42C1;--shiki-dark:#B392F0">git</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> reflog</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D;--shiki-dark:#6A737D"># Kiểm tra commit nghi ngờ trước khi khôi phục</span></span>
+<span class="line"><span style="color:#6F42C1;--shiki-dark:#B392F0">git</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> show</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> a1b2c3d</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D;--shiki-dark:#6A737D"># Tạo nhánh cứu hộ trỏ tới commit cần giữ</span></span>
+<span class="line"><span style="color:#6F42C1;--shiki-dark:#B392F0">git</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> branch</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> rescue</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> a1b2c3d</span></span></code></pre>
+<ul>
+<li>Nhánh cứu hộ giữ commit để kiểm tra mà không viết lại nhánh hiện tại.</li>
+<li>Reflog chỉ có ở local; các mục cũ có thể bị dọn theo cấu hình và thời gian.</li>
+<li>Nếu commit đã push, kiểm tra cả remote.</li>
+<li>Thay đổi chưa commit bị xóa bởi <code>git reset --hard</code> có thể không khôi phục được bằng reflog.</li>
+</ul>
+<h2 id="kết-luận">✅ Kết luận<a class="heading-anchor" href="#kết-luận" aria-label="Liên kết tới đề mục"></a></h2>
+<ul>
+<li>Kiểm tra nhánh và nội dung sẽ stage trước khi commit.</li>
+<li>Commit tạo mốc có thể truy vết; push lưu commit trên remote.</li>
+<li>Reflog có thể giúp tìm commit local bị mất dấu, nhưng không thay thế backup cho thay đổi chưa commit.</li>
+</ul>
+<h2 id="tóm-tắt-bỏ-túi-take-away">🎒 Tóm tắt bỏ túi (Take away)<a class="heading-anchor" href="#tóm-tắt-bỏ-túi-take-away" aria-label="Liên kết tới đề mục"></a></h2>
+<table>
+<thead>
+<tr>
+<th>Điểm chính</th>
+<th>Hành động</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Bắt đầu task</td>
+<td>Cập nhật nhánh chính có chủ đích rồi tạo nhánh riêng.</td>
+</tr>
+<tr>
+<td>Stage và commit</td>
+<td>Kiểm tra <code>git status</code>/<code>git diff</code>, chỉ stage file liên quan, viết message rõ.</td>
+</tr>
+<tr>
+<td>Push</td>
+<td>Đẩy nhánh phù hợp lên remote; tránh force push nhánh dùng chung.</td>
+</tr>
+<tr>
+<td>Conflict</td>
+<td>Sửa từng file, stage phần đã giải quyết và hoàn tất merge hoặc rebase đúng quy trình.</td>
+</tr>
+<tr>
+<td>Mất dấu commit</td>
+<td>Dùng <code>git reflog</code>, kiểm tra bằng <code>git show</code>, rồi tạo nhánh cứu hộ.</td>
+</tr>
+<tr>
+<td>Bảo vệ dữ liệu</td>
+<td>Commit và push lên remote; reflog local không phải backup cho file chưa commit.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="tài-liệu-tham-khảo">🔗 Tài liệu tham khảo<a class="heading-anchor" href="#tài-liệu-tham-khảo" aria-label="Liên kết tới đề mục"></a></h2>
+<ul>
+<li><a href="https://git-scm.com/docs/git-pull" target="_blank" rel="noopener noreferrer">Git: git-pull</a></li>
+<li><a href="https://git-scm.com/docs/git-reflog" target="_blank" rel="noopener noreferrer">Git: git-reflog</a></li>
+<li><a href="https://git-scm.com/docs/git-merge" target="_blank" rel="noopener noreferrer">Git: git-merge</a></li>
+</ul>
+<p>Nội dung về branch và tag dựa trên <a href="https://git-scm.com/docs/gitdatamodel" target="_blank" rel="noopener noreferrer">tài liệu mô hình dữ liệu Git</a> và <a href="https://git-scm.com/book/en/v2/Git-Basics-Tagging" target="_blank" rel="noopener noreferrer">hướng dẫn tagging</a>.</p>
+</div></article></main><footer class="lite-footer"><div><span>Project Knowledge Disclosure · Chế độ đọc tối giản</span></div><div><a href="#main-content">Lên đầu trang ↑</a></div></footer></div></body></html>

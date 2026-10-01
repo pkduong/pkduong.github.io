@@ -1,0 +1,161 @@
+<!DOCTYPE html><html lang="vi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Claude Code CLI: Từ phiên tương tác đến quy trình kiểm thử · PKD Lite</title><meta name="description" content="Hướng dẫn dùng Claude Code CLI để đọc dự án, thực hiện task và kiểm tra thay đổi; kèm lệnh cơ bản, cấu hình CLAUDE.md và giới hạn an toàn."><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="stylesheet" href="/_astro/LiteLayout.DFVAyc4m.css"></head><body data-pagefind-ignore="all"><div class="lite-container"><header class="lite-nav"><div><a class="lite-brand" href="/lite/">PKD / LITE</a></div><nav class="lite-nav-links" aria-label="Điều hướng Lite"><a href="/lite/">Mục lục</a><span aria-hidden="true">·</span><a href="/ai/articles/claude-code-cli-playbook/" title="Chuyển sang giao diện đầy đủ ban đầu">Sang bản đầy đủ ↗</a></nav></header><main id="main-content"><article><header class="lite-article-header"><h1>Claude Code CLI: Từ phiên tương tác đến quy trình kiểm thử</h1><p class="lite-article-meta"><span>Lĩnh vực: <strong>AI</strong></span><span aria-hidden="true">·</span><span>Cập nhật: 2026-09-29</span><span aria-hidden="true">·</span><span>Thời gian đọc: ~8 phút</span><span aria-hidden="true">·</span><a href="/ai/articles/claude-code-cli-playbook/" title="Xem bài viết này ở giao diện chuẩn">Xem bản chuẩn ↗</a></p></header><div class="lite-prose"><blockquote>
+<p>Claude Code CLI giúp đưa một yêu cầu lập trình vào terminal và kiểm tra kết quả ngay trong dự án.</p>
+</blockquote>
+<pre><code>  ____ _        _   _ ____  _____   ____ ___  ____  _____
+ / ___| |      / \ | |  _ \| ____| / ___/ _ \|  _ \| ____|
+| |   | |     / _ \| | | | |  _|  | | | | | | | | |  _|
+| |___| |___ / ___ \ |_| | | |___ | |__| |_| | |_| | |___
+ \____|_____/_/   \_\____/|_____| \____\___/|____/|_____|
+             CLI PLAYBOOK FOR AUTOMATION TESTING &amp; DEV
+</code></pre>
+<h2 id="mô-hình-tổng-thể">🧭 Mô hình tổng thể<a class="heading-anchor" href="#mô-hình-tổng-thể" aria-label="Liên kết tới đề mục"></a></h2>
+<pre><code class="language-text">Yêu cầu → Đọc repo → Thực hiện thay đổi
+                       ↓
+             Chạy kiểm tra → Xem diff
+                       ↓
+                  Người dùng duyệt
+</code></pre>
+<p>Claude Code có thể đọc và sửa tệp, chạy lệnh theo quyền được cấp, rồi trả kết quả trong phiên terminal. Người dùng vẫn cần kiểm tra diff và kết quả lệnh trước khi chấp nhận thay đổi.</p>
+<h2 id="️-cài-đặt-và-xác-thực">🖥️ Cài đặt và xác thực<a class="heading-anchor" href="#️-cài-đặt-và-xác-thực" aria-label="Liên kết tới đề mục"></a></h2>
+<p>Tài liệu Anthropic hiện nêu Node.js 18+ và hỗ trợ macOS, Linux cùng Windows qua WSL hoặc Git for Windows. Cách cài đặt npm tiêu chuẩn:</p>
+<pre class="astro-code astro-code-themes github-light github-dark" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6F42C1;--shiki-dark:#B392F0">npm</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> install</span><span style="color:#005CC5;--shiki-dark:#79B8FF"> -g</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> @anthropic-ai/claude-code</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-dark:#79B8FF">cd</span><span style="color:#032F62;--shiki-dark:#9ECBFF"> ten-du-an</span></span>
+<span class="line"><span style="color:#6F42C1;--shiki-dark:#B392F0">claude</span></span></code></pre>
+<p>Khi khởi động lần đầu, chọn phương thức đăng nhập được tài khoản của mình hỗ trợ. Có thể dùng Claude.ai với gói phù hợp, Anthropic Console, hoặc cấu hình nền tảng doanh nghiệp. Cách cài đặt và lựa chọn đăng nhập có thể thay đổi; xem <a href="https://docs.anthropic.com/en/docs/claude-code/getting-started" target="_blank" rel="noopener noreferrer">hướng dẫn cài đặt chính thức</a> trước khi thiết lập.</p>
+<h2 id="cung-cấp-hướng-dẫn-bằng-claudemd">🧠 Cung cấp hướng dẫn bằng <code>CLAUDE.md</code><a class="heading-anchor" href="#cung-cấp-hướng-dẫn-bằng-claudemd" aria-label="Liên kết tới đề mục"></a></h2>
+<p><code>CLAUDE.md</code> lưu chỉ dẫn dự án như lệnh kiểm thử, quy ước code và ranh giới cần tuân thủ. Claude Code tự nạp các tệp memory phù hợp vào ngữ cảnh; có thể dùng <code>/memory</code> để xem những tệp nào đang được áp dụng. Nội dung trong tệp này là hướng dẫn, không thay thế việc kiểm tra thay đổi.</p>
+<p>Ví dụ nội dung cho dự án Playwright TypeScript:</p>
+<pre class="astro-code astro-code-themes github-light github-dark" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="markdown"><code><span class="line"><span style="color:#005CC5;--shiki-light-font-weight:bold;--shiki-dark:#79B8FF;--shiki-dark-font-weight:bold"># Quy ước dự án</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#005CC5;--shiki-light-font-weight:bold;--shiki-dark:#79B8FF;--shiki-dark-font-weight:bold">## Lệnh</span></span>
+<span class="line"><span style="color:#E36209;--shiki-dark:#FFAB70">-</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> Chạy toàn bộ test: </span><span style="color:#005CC5;--shiki-dark:#79B8FF">`npx playwright test`</span></span>
+<span class="line"><span style="color:#E36209;--shiki-dark:#FFAB70">-</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> Chạy một file: </span><span style="color:#005CC5;--shiki-dark:#79B8FF">`npx playwright test tests/&lt;file&gt;.spec.ts`</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#005CC5;--shiki-light-font-weight:bold;--shiki-dark:#79B8FF;--shiki-dark-font-weight:bold">## Quy ước</span></span>
+<span class="line"><span style="color:#E36209;--shiki-dark:#FFAB70">-</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> Ưu tiên locator theo vai trò người dùng như </span><span style="color:#005CC5;--shiki-dark:#79B8FF">`getByRole`</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> và </span><span style="color:#005CC5;--shiki-dark:#79B8FF">`getByLabel`</span><span style="color:#24292E;--shiki-dark:#E1E4E8">.</span></span>
+<span class="line"><span style="color:#E36209;--shiki-dark:#FFAB70">-</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> Dùng assertion chờ trạng thái thay vì </span><span style="color:#005CC5;--shiki-dark:#79B8FF">`page.waitForTimeout()`</span><span style="color:#24292E;--shiki-dark:#E1E4E8">.</span></span>
+<span class="line"><span style="color:#E36209;--shiki-dark:#FFAB70">-</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> Đọc hướng dẫn dự án trước khi sửa file.</span></span></code></pre>
+<p>Với dự án áp dụng <strong>Spec-Driven Development (SDD)</strong>, thêm chỉ dẫn về thứ tự đọc spec và traceability. Giữ <code>CLAUDE.md</code> ngắn; để nội dung chi tiết ở tài liệu chuẩn của repo thay vì sao chép checklist vào nhiều nơi:</p>
+<pre class="astro-code astro-code-themes github-light github-dark" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="markdown"><code><span class="line"><span style="color:#005CC5;--shiki-light-font-weight:bold;--shiki-dark:#79B8FF;--shiki-dark-font-weight:bold"># SDD workflow</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#005CC5;--shiki-light-font-weight:bold;--shiki-dark:#79B8FF;--shiki-dark-font-weight:bold">## Source of truth</span></span>
+<span class="line"><span style="color:#E36209;--shiki-dark:#FFAB70">-</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> Đọc </span><span style="color:#005CC5;--shiki-dark:#79B8FF">`AGENTS.md`</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> trước khi phân tích hoặc sửa repository.</span></span>
+<span class="line"><span style="color:#E36209;--shiki-dark:#FFAB70">-</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> Với thay đổi implementation, đọc </span><span style="color:#005CC5;--shiki-dark:#79B8FF">`specs/TECHNICAL-DESIGN.md`</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> và spec/ADR liên quan.</span></span>
+<span class="line"><span style="color:#E36209;--shiki-dark:#FFAB70">-</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> Khi tài liệu mâu thuẫn, theo thứ tự ưu tiên được quy định trong </span><span style="color:#005CC5;--shiki-dark:#79B8FF">`AGENTS.md`</span><span style="color:#24292E;--shiki-dark:#E1E4E8">.</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#005CC5;--shiki-light-font-weight:bold;--shiki-dark:#79B8FF;--shiki-dark-font-weight:bold">## Trước khi implement</span></span>
+<span class="line"><span style="color:#E36209;--shiki-dark:#FFAB70">-</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> Xác định Business Requirement, Use Case, Entity/Rule và Acceptance Criteria (AC).</span></span>
+<span class="line"><span style="color:#E36209;--shiki-dark:#FFAB70">-</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> Lập traceability: Requirement → Use Case → Entity/Rule → AC → Test → Code.</span></span>
+<span class="line"><span style="color:#E36209;--shiki-dark:#FFAB70">-</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> Làm theo thứ tự task trong technical design; không tự đổi business rule hoặc schema.</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#005CC5;--shiki-light-font-weight:bold;--shiki-dark:#79B8FF;--shiki-dark-font-weight:bold">## Kiểm tra và hoàn tất</span></span>
+<span class="line"><span style="color:#E36209;--shiki-dark:#FFAB70">-</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> Mỗi behavior test phải gắn với mã AC.</span></span>
+<span class="line"><span style="color:#E36209;--shiki-dark:#FFAB70">-</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> Chạy format, validation, test, build và E2E checks theo </span><span style="color:#005CC5;--shiki-dark:#79B8FF">`AGENTS.md`</span><span style="color:#24292E;--shiki-dark:#E1E4E8">.</span></span>
+<span class="line"><span style="color:#E36209;--shiki-dark:#FFAB70">-</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> Cập nhật spec, tài liệu vận hành và changelog liên quan trong cùng thay đổi.</span></span>
+<span class="line"><span style="color:#E36209;--shiki-dark:#FFAB70">-</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> Nếu thay đổi schema, public URL, privacy hoặc chi phí vận hành, cập nhật ADR</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">  và chờ owner xác nhận trước khi implement phần bị ảnh hưởng.</span></span></code></pre>
+<p>Các dòng trên là ví dụ; hãy thay tên và đường dẫn bằng tài liệu thực tế của dự án. Claude Code hiện có thể đọc <code>AGENTS.md</code>; có thể dùng <code>CLAUDE.md</code> để bổ sung lối vào và quy ước dành riêng cho Claude. Tránh tạo hai bản checklist khác nhau vì chỉ dẫn mâu thuẫn có thể làm agent áp dụng sai workflow.</p>
+<p>Xem <a href="https://docs.anthropic.com/en/docs/claude-code/memory" target="_blank" rel="noopener noreferrer">hướng dẫn quản lý memory</a> để biết cách tổ chức chỉ dẫn và nhập thêm tệp.</p>
+<h2 id="️-các-lệnh-cli-thường-dùng">⌨️ Các lệnh CLI thường dùng<a class="heading-anchor" href="#️-các-lệnh-cli-thường-dùng" aria-label="Liên kết tới đề mục"></a></h2>
+<table>
+<thead>
+<tr>
+<th>Lệnh</th>
+<th>Công dụng</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>claude</code></td>
+<td>Mở phiên tương tác trong thư mục hiện tại</td>
+</tr>
+<tr>
+<td><code>claude "giải thích dự án này"</code></td>
+<td>Mở phiên với yêu cầu khởi đầu</td>
+</tr>
+<tr>
+<td><code>claude -p "tóm tắt log này"</code></td>
+<td>Chạy ở chế độ không tương tác rồi thoát</td>
+</tr>
+<tr>
+<td><code>claude -c</code></td>
+<td>Tiếp tục phiên gần nhất trong thư mục hiện tại</td>
+</tr>
+<tr>
+<td><code>claude -r &lt;session-id&gt;</code></td>
+<td>Chọn hoặc khôi phục phiên theo mã phiên</td>
+</tr>
+<tr>
+<td><code>claude --help</code></td>
+<td>Xem trợ giúp của phiên bản đang cài</td>
+</tr>
+</tbody>
+</table>
+<p>Trong phiên tương tác, <code>/clear</code> bắt đầu ngữ cảnh mới và <code>/compact</code> rút gọn ngữ cảnh hiện tại. Tập lệnh slash có thể thay đổi theo phiên bản và cấu hình; kiểm tra danh sách trong CLI đang dùng. Tham khảo <a href="https://docs.anthropic.com/en/docs/claude-code/cli-usage" target="_blank" rel="noopener noreferrer">CLI reference</a>.</p>
+<h2 id="quy-trình-kiểm-thử-với-playwright">🧪 Quy trình kiểm thử với Playwright<a class="heading-anchor" href="#quy-trình-kiểm-thử-với-playwright" aria-label="Liên kết tới đề mục"></a></h2>
+<p>Với task kiểm thử, giao yêu cầu có phạm vi cụ thể: nêu file liên quan, hành vi cần kiểm tra, tiêu chí pass và giới hạn chỉnh sửa. Sau khi CLI hoàn tất, tự xem diff, chạy test và xác minh kết quả.</p>
+<p>Ví dụ một yêu cầu kiểm thử đăng nhập:</p>
+<pre><code class="language-text">Đọc cấu trúc dự án và hướng dẫn trong CLAUDE.md.
+Tạo Page Object cho trang đăng nhập hiện có, rồi viết test cho
+đăng nhập thành công và sai mật khẩu. Chỉ sửa các file cần thiết.
+Chạy test liên quan và báo file đã đổi cùng kết quả thực tế.
+</code></pre>
+<p>Quy trình gọn:</p>
+<pre><code class="language-text">Mở phiên → Giao task có tiêu chí → Xem diff → Chạy test → Duyệt
+</code></pre>
+<p>Không nên yêu cầu agent tự lặp vô hạn cho đến khi “mọi test đều pass”. Nếu test thất bại, cần xem log và xác định test, môi trường hay implementation là nguyên nhân trước khi sửa tiếp.</p>
+<h2 id="tạo-skill-cho-quy-trình-verification">🧩 Tạo Skill cho quy trình verification<a class="heading-anchor" href="#tạo-skill-cho-quy-trình-verification" aria-label="Liên kết tới đề mục"></a></h2>
+<p>Skill là bộ hướng dẫn có thể tái sử dụng, đặt trong <code>SKILL.md</code>. Skill phù hợp khi thường xuyên lặp lại cùng một checklist hoặc quy trình nhiều bước. Với Skill dùng chung trong repo, tạo thư mục <code>.claude/skills/&lt;tên-skill&gt;/</code>; gọi trực tiếp bằng <code>/&lt;tên-skill&gt;</code>. Phần <code>description</code> giúp Claude nhận biết khi nào nên tự dùng Skill. Xem <a href="https://code.claude.com/docs/en/skills" target="_blank" rel="noopener noreferrer">hướng dẫn Skills chính thức</a>.</p>
+<p>Ví dụ dưới đây tạo <code>/verification</code>, một Skill chỉ kiểm tra thay đổi và báo bằng chứng, không tự sửa file. Dùng tên riêng này để tránh nhầm với Skill <code>/verify</code> được Claude Code cung cấp sẵn ở một số phiên bản.</p>
+<p>Tạo file <code>.claude/skills/verification/SKILL.md</code>:</p>
+<pre class="astro-code astro-code-themes github-light github-dark" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="markdown"><code><span class="line"><span style="color:#005CC5;--shiki-light-font-weight:bold;--shiki-dark:#79B8FF;--shiki-dark-font-weight:bold">---</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">name: verification</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">description: Kiểm tra thay đổi sau khi sửa code hoặc tài liệu; dùng khi cần chạy kiểm tra phù hợp và báo kết quả có bằng chứng.</span></span>
+<span class="line"><span style="color:#005CC5;--shiki-light-font-weight:bold;--shiki-dark:#79B8FF;--shiki-dark-font-weight:bold">---</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#005CC5;--shiki-light-font-weight:bold;--shiki-dark:#79B8FF;--shiki-dark-font-weight:bold"># Verification</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E36209;--shiki-dark:#FFAB70">1.</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> Xem </span><span style="color:#005CC5;--shiki-dark:#79B8FF">`git status`</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> và diff để xác định file thuộc task; bỏ qua thay đổi không liên quan.</span></span>
+<span class="line"><span style="color:#E36209;--shiki-dark:#FFAB70">2.</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> Đọc hướng dẫn repo và tìm command kiểm tra đã có sẵn, chẳng hạn trong </span><span style="color:#005CC5;--shiki-dark:#79B8FF">`package.json`</span><span style="color:#24292E;--shiki-dark:#E1E4E8">.</span></span>
+<span class="line"><span style="color:#E36209;--shiki-dark:#FFAB70">3.</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> Chọn kiểm tra hẹp nhất phù hợp với loại thay đổi. Trước khi chạy command có tác động lớn, hãy nêu rõ tác động và xin xác nhận.</span></span>
+<span class="line"><span style="color:#E36209;--shiki-dark:#FFAB70">4.</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> Chỉ chạy kiểm tra; không sửa file, cài dependency, commit hoặc push.</span></span>
+<span class="line"><span style="color:#E36209;--shiki-dark:#FFAB70">5.</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> Báo command đã chạy, pass/fail, lỗi chính và kiểm tra nào chưa chạy cùng lý do.</span></span>
+<span class="line"><span style="color:#E36209;--shiki-dark:#FFAB70">6.</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> Không kết luận pass nếu không có output xác nhận; phân biệt lỗi môi trường với lỗi sản phẩm.</span></span></code></pre>
+<p>Mở hoặc tiếp tục phiên Claude Code trong repo rồi gọi <code>/verification</code>. Kiểm tra xem Skill đã đọc đúng diff, chọn command phù hợp và báo trung thực các kiểm tra bị bỏ qua chưa. Nếu vừa tạo thư mục <code>.claude/skills/</code> trong phiên hiện tại mà Skill chưa xuất hiện, dùng <code>/reload-skills</code> hoặc khởi động lại phiên. Quy trình áp dụng ở dự án thật phải theo hướng dẫn và chính sách quyền của repo đó.</p>
+<h2 id="quyền-chạy-lệnh-và-mức-tự-động">🔐 Quyền chạy lệnh và mức tự động<a class="heading-anchor" href="#quyền-chạy-lệnh-và-mức-tự-động" aria-label="Liên kết tới đề mục"></a></h2>
+<p>Claude Code áp dụng quyền cho thao tác đọc, sửa tệp và chạy lệnh; các thao tác nhạy cảm có thể cần người dùng chấp thuận. Hãy cấp quyền vừa đủ cho task và xem lại lệnh trước khi phê duyệt.</p>
+<p><code>--dangerously-skip-permissions</code> bỏ qua lời nhắc quyền. Không dùng cờ này như cách mặc định để chạy test hoặc CI; chỉ cân nhắc trong môi trường cách ly đã kiểm soát, sau khi hiểu rõ phạm vi lệnh có thể được thực hiện. Chi tiết nằm trong <a href="https://docs.anthropic.com/en/docs/claude-code/security" target="_blank" rel="noopener noreferrer">tài liệu bảo mật Anthropic</a>.</p>
+<h2 id="kết-luận">✅ Kết luận<a class="heading-anchor" href="#kết-luận" aria-label="Liên kết tới đề mục"></a></h2>
+<p>Claude Code CLI hữu ích khi task có phạm vi rõ, chỉ dẫn dự án cập nhật và cách kiểm tra kết quả cụ thể. Skill giúp chuẩn hóa checklist lặp lại như <code>/verification</code>; quyết định chấp nhận diff và kết quả kiểm thử vẫn cần dựa trên bằng chứng mà người dùng kiểm tra được.</p>
+<h2 id="tóm-tắt-bỏ-túi-take-away">🎒 Tóm tắt bỏ túi (Take away)<a class="heading-anchor" href="#tóm-tắt-bỏ-túi-take-away" aria-label="Liên kết tới đề mục"></a></h2>
+<table>
+<thead>
+<tr>
+<th>Điểm chính</th>
+<th>Hành động</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Hướng dẫn dự án</td>
+<td>Ghi lệnh và quy ước vào <code>CLAUDE.md</code>; kiểm tra <code>/memory</code>.</td>
+</tr>
+<tr>
+<td>Quy trình lặp lại</td>
+<td>Tạo project Skill trong <code>.claude/skills/&lt;tên&gt;/SKILL.md</code>; thử gọi trực tiếp rồi rà kết quả.</td>
+</tr>
+<tr>
+<td>Giao task</td>
+<td>Nêu phạm vi, tiêu chí hoàn thành và file được phép sửa.</td>
+</tr>
+<tr>
+<td>Kiểm tra kết quả</td>
+<td>Đọc diff, chạy test liên quan và đối chiếu log.</td>
+</tr>
+<tr>
+<td>Quyền CLI</td>
+<td>Chỉ cấp quyền cần thiết; tránh bỏ qua xác nhận theo mặc định.</td>
+</tr>
+</tbody>
+</table>
+</div></article></main><footer class="lite-footer"><div><span>Project Knowledge Disclosure · Chế độ đọc tối giản</span></div><div><a href="#main-content">Lên đầu trang ↑</a></div></footer></div></body></html>

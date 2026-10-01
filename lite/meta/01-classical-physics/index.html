@@ -1,0 +1,378 @@
+<!DOCTYPE html><html lang="vi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Vật lý cổ điển — toolkit đọc UAP · PKD Lite</title><meta name="description" content="Toolkit vật lý cổ điển để đọc dữ liệu UAP theo cảm biến, mô hình và giới hạn đo lường."><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="stylesheet" href="/_astro/LiteLayout.DFVAyc4m.css"></head><body data-pagefind-ignore="all"><div class="lite-container"><header class="lite-nav"><div><a class="lite-brand" href="/lite/">PKD / LITE</a></div><nav class="lite-nav-links" aria-label="Điều hướng Lite"><a href="/lite/">Mục lục</a><span aria-hidden="true">·</span><a href="/meta/articles/01-classical-physics/" title="Chuyển sang giao diện đầy đủ ban đầu">Sang bản đầy đủ ↗</a></nav></header><main id="main-content"><article><header class="lite-article-header"><h1>Vật lý cổ điển — toolkit đọc UAP</h1><p class="lite-article-meta"><span>Lĩnh vực: <strong>META</strong></span><span aria-hidden="true">·</span><span>Cập nhật: 2026-09-22</span><span aria-hidden="true">·</span><span>Thời gian đọc: ~18 phút</span><span aria-hidden="true">·</span><a href="/meta/articles/01-classical-physics/" title="Xem bài viết này ở giao diện chuẩn">Xem bản chuẩn ↗</a></p></header><div class="lite-prose"><p>Vật lý cổ điển là bộ mô hình cho chuyển động, lực, điện từ, nhiệt, chất lưu, sóng và quang học trong miền đời thường. Nó không trả lời UAP “là gì”; câu hỏi phải bắt đầu bằng <strong>cảm biến đã đo gì, trong điều kiện nào, với hiệu chuẩn và sai số nào</strong>. NASA lưu ý dữ liệu UAP thường thiếu hiệu chuẩn và metadata cần để suy ra chắc chắn kích thước, khoảng cách hoặc động học (<a href="https://smd-cms.nasa.gov/wp-content/uploads/2023/09/uap-independent-study-team-final-report.pdf" target="_blank" rel="noopener noreferrer">NASA UAP Independent Study, 2023, tr. 13</a>).</p>
+<p>Đây là bài <strong>toolkit</strong>, không phải hồ sơ kết luận sáu nhánh vật lý là sáu lời giải UAP. Mỗi nhánh dưới đây giữ riêng ba lớp:</p>
+<ol>
+<li><strong>Observable:</strong> tín hiệu thiết bị hoặc quan sát gốc.</li>
+<li><strong>Đại lượng suy ra:</strong> kết quả chỉ có sau hiệu chuẩn, hình học và mô hình.</li>
+<li><strong>Giả thuyết nguồn:</strong> máy bay, balloon, plasma, nhiễu, vật thể chưa xác định hoặc cơ chế khác.</li>
+</ol>
+<p>Không được đi thẳng từ lớp 1 sang lớp 3.</p>
+<h2 id="00-đo-lường-trước-diễn-giải">00. Đo lường trước diễn giải<a class="heading-anchor" href="#00-đo-lường-trước-diễn-giải" aria-label="Liên kết tới đề mục"></a></h2>
+<table>
+<thead>
+<tr>
+<th>Trường</th>
+<th>Nội dung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Định nghĩa vận hành</strong></td>
+<td>“Nhanh”, “đứng yên”, “không phát nhiệt”, “không có sonic boom” và “biến mất dưới nước” chưa phải đại lượng đo. Một phát biểu vận hành phải nêu cảm biến, timebase, hệ tọa độ, dải phổ, độ phân giải, trạng thái platform và uncertainty.</td>
+</tr>
+<tr>
+<td><strong>Dữ liệu tối thiểu</strong></td>
+<td>Thời gian đồng bộ; vị trí và attitude của platform; azimuth/elevation; slant range hoặc ràng buộc range; mode, zoom/FOV và band của cảm biến; weather; raw file và calibration history. Thiếu trường nào thì giữ trường ấy là unknown, không điền bằng lời kể.</td>
+</tr>
+<tr>
+<td><strong>Tương quan đa cảm biến</strong></td>
+<td>Hai kênh chỉ là corroboration khi có thể đồng bộ thời gian, vùng không gian và uncertainty để chứng minh chúng có khả năng nhìn cùng mục tiêu. “Radar có track” và “phi công thấy ánh sáng” trong cùng đêm chưa tự động là cùng object.</td>
+</tr>
+<tr>
+<td><strong>Đại lượng suy ra</strong></td>
+<td>Tốc độ tuyến tính cần khoảng cách cùng tốc độ góc hoặc nhiều vị trí theo thời gian; gia tốc cần trajectory đã bù chuyển động platform; nhiệt độ cần radiance, band và emissivity; kích thước cần range và angular extent.</td>
+</tr>
+<tr>
+<td><strong>Quy tắc bác bỏ</strong></td>
+<td>Một giả thuyết quy ước chỉ mạnh khi tạo được dấu quan sát định lượng và có điều kiện có thể bác bỏ. Từ “có thể là” không được viết thành “đã giải thích”; từ “chưa giải thích” không được nâng thành công nghệ mới.</td>
+</tr>
+<tr>
+<td><strong>Phân loại</strong></td>
+<td>Metrology, calibration và propagation đã kiểm là <strong>Phân loại 1</strong>; mô hình tái dựng dùng assumption thiếu dữ liệu thường là <strong>Phân loại 2</strong>. Nguồn gốc của một target không thừa hưởng Phân loại từ công cụ dùng để phân tích nó.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="01-cơ-học-và-hấp-dẫn-newton">01. Cơ học và hấp dẫn Newton<a class="heading-anchor" href="#01-cơ-học-và-hấp-dẫn-newton" aria-label="Liên kết tới đề mục"></a></h2>
+<table>
+<thead>
+<tr>
+<th>Trường</th>
+<th>Nội dung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>1. Định nghĩa vận hành và miền áp dụng</strong></td>
+<td>Cơ học mô tả vị trí, vận tốc, gia tốc, lực, động lượng và năng lượng của vật thể ở vận tốc thấp hơn nhiều so với ánh sáng và trong trường hấp dẫn yếu. Hấp dẫn Newton đủ cho quỹ đạo gần Trái Đất thông thường; nó không phải mô hình “tắt/bật trọng lực”.</td>
+</tr>
+<tr>
+<td><strong>2. Định luật / đại lượng</strong></td>
+<td>Ba định luật Newton; bảo toàn động lượng và năng lượng; chuyển động tròn; định luật hấp dẫn nghịch đảo bình phương. Đại lượng cần có: timebase, range, vận tốc góc, vận tốc tuyến tính, gia tốc, bán kính cong, khối lượng và lực.</td>
+</tr>
+<tr>
+<td><strong>3. Type-specimen</strong></td>
+<td>Xe đẩy hoặc con lắc cho quán tính; quỹ đạo đạn cho chuyển động dưới trọng lực; thí nghiệm Cavendish cho lực hấp dẫn yếu; máy ly tâm cho quan hệ giữa tốc độ, bán kính cong và gia tốc. <a href="https://openstax.org/books/physics/pages/1-introduction" target="_blank" rel="noopener noreferrer">OpenStax Physics</a> là nguồn nền cho miền cổ điển.</td>
+</tr>
+<tr>
+<td><strong>4. Áp vào UAP</strong></td>
+<td><code>GOFAST</code>: tốc độ góc trong video không đủ cho ground speed nếu chưa khóa range và bù chuyển động F/A-18; AARO tái dựng độ cao khoảng 13.000 ft và không thấy tốc độ dị thường. <code>GIMBAL</code>: rotation của ảnh/line-of-sight không tự động là rotation thân vật. <code>USS Nimitz Encounters</code>: lời kể gia tốc lớn phải tách khỏi trajectory có range/time đồng bộ.</td>
+</tr>
+<tr>
+<td><strong>5. Giả thuyết quy ước mạnh</strong></td>
+<td>Parallax do platform chuyển động; balloon trôi gió; chuyển động tròn; sai track association; target xa có tốc độ góc nhỏ; target gần tạo apparent motion lớn. Mỗi giả thuyết cần geometry riêng cho hồ sơ, không tái dùng con số của vụ khác.</td>
+</tr>
+<tr>
+<td><strong>6. Chỗ cổ điển hết</strong></td>
+<td>Nếu telemetry đã hiệu chuẩn thật sự yêu cầu vận tốc tương đối tính thì chuyển sang SR; hấp dẫn mạnh chuyển sang GR; lực mới cần mô hình trường và phép đo lab. Việc mô hình Newton không khớp sau tái dựng chưa đủ chứng minh “anti-gravity”.</td>
+</tr>
+<tr>
+<td><strong>7. Nhầm phạm trù</strong></td>
+<td>“Đứng yên không cánh” không đồng nghĩa tắt hấp dẫn: lực nâng, lực đẩy, lực căng, lực điện từ hoặc lực nổi đều có thể cân bằng trọng lượng. “Không thấy quá tải G” cũng không phải phép đo tải lên vật thể hay occupant từ video xa.</td>
+</tr>
+<tr>
+<td><strong>8. Phân loại</strong></td>
+<td>Định luật bảo toàn và động lực học đã kiểm trong miền là <strong>Phân loại 1</strong>; dùng Newton như xấp xỉ thay cho mô hình sâu hơn là <strong>Phân loại 2</strong>. “Vật thể chưa nhận dạng nên đã điều khiển hấp dẫn” là <strong>Phân loại 5</strong>.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="02-điện-từ-học-radar-và-nhiễu-điện-từ">02. Điện từ học, radar và nhiễu điện từ<a class="heading-anchor" href="#02-điện-từ-học-radar-và-nhiễu-điện-từ" aria-label="Liên kết tới đề mục"></a></h2>
+<table>
+<thead>
+<tr>
+<th>Trường</th>
+<th>Nội dung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>1. Định nghĩa vận hành và miền áp dụng</strong></td>
+<td>Điện từ học cổ điển mô tả điện trường, từ trường, sóng vô tuyến, phản xạ và cảm ứng ở thang vĩ mô. Radar phát sóng, nhận echo và suy range/bearing; Doppler chỉ cho thành phần vận tốc xuyên tâm, không tự cho vector vận tốc ba chiều.</td>
+</tr>
+<tr>
+<td><strong>2. Định luật / đại lượng</strong></td>
+<td>Phương trình Maxwell; cảm ứng Faraday; radar range equation; Doppler; radar cross section (RCS). Cần frequency, polarization, antenna pattern, pulse/PRF, signal-to-noise, range gate, radial velocity, clutter map và target aspect. RCS không phải diện tích hình học hay kích thước vật thể theo quan hệ một-một.</td>
+</tr>
+<tr>
+<td><strong>3. Type-specimen</strong></td>
+<td>Faraday induction; Hertz phát–thu sóng radio; echo range theo time-of-flight; Doppler weather radar; Faraday cage và thử tương thích điện từ (EMC). Radar có thể đo khoảng cách bằng thời gian echo (<a href="https://openstax.org/books/university-physics-volume-2/pages/16-5-the-electromagnetic-spectrum" target="_blank" rel="noopener noreferrer">OpenStax, Electromagnetic Spectrum</a>).</td>
+</tr>
+<tr>
+<td><strong>4. Áp vào UAP</strong></td>
+<td><code>Washington National — đêm 2</code>: anomalous propagation/inversion là giả thuyết vật lý còn đứng, nhưng không được ghi là đã giải trọn mọi radar–visual report. <code>Levelland</code>: claim động cơ/đèn xe tắt là lời khai CE-2, không phải trường EM đã được đo; cần log điện, thời tiết và cơ chế coupling. <code>Tehran Jet Intercept</code>: phải tách mất thiết bị được báo cáo, trạng thái avionics và phần lore hồi cứu.</td>
+</tr>
+<tr>
+<td><strong>5. Giả thuyết quy ước mạnh</strong></td>
+<td>Ducting/superrefraction có thể bẻ chùm radar xuống mặt đất và tạo echo anomalous propagation; ground/sea clutter, multipath, sidelobe, interference, transponder hoặc track association cũng có dấu riêng. NWS mô tả gradient nhiệt–ẩm mạnh và inversion là điều kiện gây ducting/AP (<a href="https://training.weather.gov/nwstc/NEXRAD/RADAR/Section1-2.html" target="_blank" rel="noopener noreferrer">NWS Radar Basics</a>).</td>
+</tr>
+<tr>
+<td><strong>6. Chỗ cổ điển hết</strong></td>
+<td>Tương tác vật liệu ở thang nguyên tử, detector bán dẫn và noise lượng tử cần condensed matter/QM; plasma nóng hoặc phi cân bằng cần mô hình plasma chuyên biệt. Claim “lực mới” cần phép đo lực/trường tái lập, không thể suy từ một radar return.</td>
+</tr>
+<tr>
+<td><strong>7. Nhầm phạm trù</strong></td>
+<td>Radar return không chứng minh vật thể rắn; mất radar không chứng minh “cloaking”; thiết bị tắt gần một ánh sáng lạ không tự chứng minh EMP. Cần phân biệt tương quan thời gian với đường truyền năng lượng và failure mode.</td>
+</tr>
+<tr>
+<td><strong>8. Phân loại</strong></td>
+<td>Maxwell và nguyên lý radar trong miền đã kiểm là <strong>Phân loại 1</strong>; mô hình propagation/clutter cho một khí quyển hoặc hệ thống cụ thể là <strong>Phân loại 2</strong>. “Nhiễu điện tử ⇒ công nghệ phi địa cầu” là <strong>Phân loại 5</strong> nếu không có bước chứng minh nguồn.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="03-nhiệt-động-lực-học-và-ảnh-hồng-ngoại">03. Nhiệt động lực học và ảnh hồng ngoại<a class="heading-anchor" href="#03-nhiệt-động-lực-học-và-ảnh-hồng-ngoại" aria-label="Liên kết tới đề mục"></a></h2>
+<table>
+<thead>
+<tr>
+<th>Trường</th>
+<th>Nội dung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>1. Định nghĩa vận hành và miền áp dụng</strong></td>
+<td>Nhiệt động lực học ràng buộc trao đổi năng lượng, entropy và hiệu suất. Cảm biến IR đo <strong>spectral radiance trong band của detector</strong>, không đo trực tiếp “nhiệt độ thật” và càng không đo tổng nhiệt thải chỉ từ màu sáng/tối trên màn hình.</td>
+</tr>
+<tr>
+<td><strong>2. Định luật / đại lượng</strong></td>
+<td>Định luật I–II nhiệt động lực học; Planck, Stefan–Boltzmann và Kirchhoff; truyền nhiệt dẫn–đối lưu–bức xạ. Cần bandpass, radiance, emissivity, atmospheric transmission, range, integration time, gain/palette và calibration target.</td>
+</tr>
+<tr>
+<td><strong>3. Type-specimen</strong></td>
+<td>Calorimetry; động cơ nhiệt; vật đen; camera nhiệt nhìn cùng vật có emissivity khác nhau; so radiance mẫu với blackbody chuẩn. NIST nhấn mạnh emissivity, reflectance và phép so chuẩn trong suy nhiệt độ từ IR (<a href="https://www.nist.gov/laboratories/tools-instruments/system-infrared-spectral-emittance-materials" target="_blank" rel="noopener noreferrer">NIST spectral emittance</a>).</td>
+</tr>
+<tr>
+<td><strong>4. Áp vào UAP</strong></td>
+<td><code>GOFAST</code>, <code>GIMBAL</code> và <code>FLIR1 / USS Nimitz Encounters</code>: polarity trắng/đen, contrast hoặc apparent blob không tự cho nhiệt độ, công suất hay cơ chế đẩy. Muốn nói “không exhaust” hoặc “không heat signature” phải biết band, range, sensitivity, atmospheric path, viewing angle và processing.</td>
+</tr>
+<tr>
+<td><strong>5. Giả thuyết quy ước mạnh</strong></td>
+<td>Target lạnh so với nền, phản xạ bầu trời, emissivity thấp, range lớn, hấp thụ khí quyển, auto-gain, saturation hoặc point-spread function đều có thể làm dấu IR khác trực giác. Chúng là phương án kiểm tra, không phải nhãn giải thích mặc định.</td>
+</tr>
+<tr>
+<td><strong>6. Chỗ cổ điển hết</strong></td>
+<td>Dòng khí hypersonic phi cân bằng, ion hóa, vật liệu ablation hoặc phổ phát xạ lạ cần aerothermodynamics/plasma/materials và dữ liệu lab. Nhưng “chưa có mô hình nhiệt” không cho phép bỏ qua bảo toàn năng lượng.</td>
+</tr>
+<tr>
+<td><strong>7. Nhầm phạm trù</strong></td>
+<td>“Không thấy nóng” không đồng nghĩa không có nhiệt; “cold spot” không đồng nghĩa vật lạnh tuyệt đối. “Năng lượng” vật lý có đơn vị joule và sổ cân bằng; prāṇa, khí hoặc “năng lượng rung động” là ngôn ngữ truyền thống/ẩn dụ, không thay thế đại lượng này.</td>
+</tr>
+<tr>
+<td><strong>8. Phân loại</strong></td>
+<td>Định luật nhiệt động lực học và radiometry đã kiểm là <strong>Phân loại 1</strong>; temperature retrieval hoặc energy budget dưới assumption chưa khóa là <strong>Phân loại 2</strong>. Động cơ hiệu suất 100% hoặc “free energy” vi phạm định luật II là <strong>Phân loại 5</strong> khi được nêu như thiết bị thật mà không có đo kiểm.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="04-sóng-âm-học-và-dòng-nén-được">04. Sóng, âm học và dòng nén được<a class="heading-anchor" href="#04-sóng-âm-học-và-dòng-nén-được" aria-label="Liên kết tới đề mục"></a></h2>
+<table>
+<thead>
+<tr>
+<th>Trường</th>
+<th>Nội dung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>1. Định nghĩa vận hành và miền áp dụng</strong></td>
+<td>Sóng mang năng lượng và thông tin qua trường hoặc môi trường; âm cần môi trường vật chất. Khi vật thể nhanh gần hoặc trên tốc độ âm, compressibility và shock wave trở thành phần bắt buộc của mô hình khí động.</td>
+</tr>
+<tr>
+<td><strong>2. Định luật / đại lượng</strong></td>
+<td>Phương trình sóng; superposition, diffraction và Doppler; Mach number; conservation qua shock. Cần local speed of sound, altitude, temperature profile, source geometry, trajectory, microphone bandwidth và ambient noise.</td>
+</tr>
+<tr>
+<td><strong>3. Type-specimen</strong></td>
+<td>Âm thoa/giao thoa; Doppler của nguồn chuyển động; schlieren ảnh hóa shock; nón Mach và sonic boom. NASA mô tả shock hình thành gần/trên Mach 1 và hypersonic thường tính từ Mach 5 (<a href="https://www.grc.nasa.gov/www/k-12/VirtualAero/BottleRocket/airplane/mach.html" target="_blank" rel="noopener noreferrer">NASA Mach Number</a>).</td>
+</tr>
+<tr>
+<td><strong>4. Áp vào UAP</strong></td>
+<td>Các claim “hypersonic không sonic boom” trong <code>Five Observables</code>, <code>USS Nimitz Encounters</code> hoặc lời kể Roosevelt chỉ có sức nặng khi tốc độ, cao độ, đường bay và vùng thu âm đã được đo. Một video không có audio phù hợp hoặc một nhân chứng không nghe boom chưa phải phép đo overpressure.</td>
+</tr>
+<tr>
+<td><strong>5. Giả thuyết quy ước mạnh</strong></td>
+<td>Tốc độ thực thấp hơn suy ra; nguồn ở xa; đường bay không hướng shock tới observer; khúc xạ khí quyển; boom dưới ngưỡng nghe/ghi; thiếu microphone phù hợp. NASA ghi nhận trong một số điều kiện shock của chuyến bay khoảng Mach 1,2 ở cao độ lớn có thể không tới mặt đất (<a href="https://www.nasa.gov/aeronautics/nasa-investigates-the-faint-side-of-sonic-booms/" target="_blank" rel="noopener noreferrer">NASA FaINT</a>).</td>
+</tr>
+<tr>
+<td><strong>6. Chỗ cổ điển hết</strong></td>
+<td>Plasma, phản ứng hóa học và khí phi cân bằng ở hypersonic cao cần mô hình chuyên biệt; tốc độ tương đối tính cần SR. Dù vậy, một cơ chế thay thế vẫn phải dự báo dấu áp suất, nhiệt và năng lượng có thể kiểm.</td>
+</tr>
+<tr>
+<td><strong>7. Nhầm phạm trù</strong></td>
+<td>Sonic boom không chỉ là tiếng nổ đúng khoảnh khắc “vượt tường âm”; shock được tạo liên tục trong bay siêu âm và điều kiện lan truyền quyết định nơi nó đến. “Im lặng với tai người” không bằng “không có shock”.</td>
+</tr>
+<tr>
+<td><strong>8. Phân loại</strong></td>
+<td>Lý thuyết sóng, Mach và shock trong miền đã kiểm là <strong>Phân loại 1</strong>; propagation model cho weather/terrain cụ thể là <strong>Phân loại 2</strong>. “Không nghe boom ⇒ vật thể nằm ngoài vật lý” là suy luận <strong>Phân loại 5</strong>.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="05-chất-lưu-lực-cản-và-chuyển-môi-trường">05. Chất lưu, lực cản và chuyển môi trường<a class="heading-anchor" href="#05-chất-lưu-lực-cản-và-chuyển-môi-trường" aria-label="Liên kết tới đề mục"></a></h2>
+<table>
+<thead>
+<tr>
+<th>Trường</th>
+<th>Nội dung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>1. Định nghĩa vận hành và miền áp dụng</strong></td>
+<td>Cơ học chất lưu mô tả khí và chất lỏng như môi trường liên tục. Chuyển từ không khí sang nước làm đổi mạnh mật độ, impedance, drag và tải xung; cavitation là tạo khoang hơi khi áp suất cục bộ xuống đủ thấp, không phải “biến mất trong nước”.</td>
+</tr>
+<tr>
+<td><strong>2. Định luật / đại lượng</strong></td>
+<td>Navier–Stokes; continuity; Bernoulli trong đúng giả thiết; drag coefficient; Reynolds, Mach, Froude và cavitation number. Cần hình học vật, vận tốc tương đối, mật độ/độ nhớt, góc vào, pressure history và trajectory liên tục qua interface.</td>
+</tr>
+<tr>
+<td><strong>3. Type-specimen</strong></td>
+<td>Ống Reynolds cho chuyển laminar–turbulent; vật rơi đạt terminal speed; chân vịt tạo cavitation; projectile đi vào nước tạo splash, cavity và deceleration. Reynolds number giúp phân biệt regime dòng nhưng không tự xác định hình dạng target (<a href="https://openstax.org/books/university-physics-volume-1/pages/14-7-viscosity-and-turbulence" target="_blank" rel="noopener noreferrer">OpenStax, Viscosity and Turbulence</a>).</td>
+</tr>
+<tr>
+<td><strong>4. Áp vào UAP</strong></td>
+<td><code>USS Omaha sphere</code>: câu “it splashed” và mất lock sát chân trời không đủ chứng minh transmedium; cần track liên tục và xác nhận dưới nước độc lập. <code>Shag Harbour</code>: splash/search là dữ kiện hồ sơ, còn loại vật thể và trajectory dưới nước vẫn mở. <code>Aguadilla</code>: apparent crossing đường bờ hoặc mặt nước phải tái dựng line-of-sight, range và track trước.</td>
+</tr>
+<tr>
+<td><strong>5. Giả thuyết quy ước mạnh</strong></td>
+<td>Mất lock/occlusion; target đi sau đường chân trời; chim/balloon/drone; splash của vật khác; segmentation tạo hai blob; sai range. Mỗi giả thuyết phải được đối chiếu video gốc, camera model, weather và geometry của đúng hồ sơ.</td>
+</tr>
+<tr>
+<td><strong>6. Chỗ cổ điển hết</strong></td>
+<td>Rarefied gas, multiphase flow cực đoan, plasma sheath, vật liệu biến dạng/ablation hoặc propulsion mới cần CFD/lab chuyên biệt. Nếu claim nói không có splash, drag hay deceleration thì chính các đại lượng đó phải được đo với uncertainty.</td>
+</tr>
+<tr>
+<td><strong>7. Nhầm phạm trù</strong></td>
+<td>“Mất khỏi màn hình tại mặt nước” không đồng nghĩa “đi xuyên nước”; “không tìm thấy mảnh vỡ” không chứng minh không có vật thể quy ước. Transmedium là kết luận trajectory, không phải nhãn cho một frame mơ hồ.</td>
+</tr>
+<tr>
+<td><strong>8. Phân loại</strong></td>
+<td>Bảo toàn khối lượng/động lượng là <strong>Phân loại 1</strong>; Navier–Stokes/drag model dùng theo regime là <strong>Phân loại 2</strong>. “Không splash nhìn thấy ⇒ triệt tiêu quán tính” là <strong>Phân loại 5</strong>.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="06-quang-học-ảnh-số-và-khí-quyển">06. Quang học, ảnh số và khí quyển<a class="heading-anchor" href="#06-quang-học-ảnh-số-và-khí-quyển" aria-label="Liên kết tới đề mục"></a></h2>
+<table>
+<thead>
+<tr>
+<th>Trường</th>
+<th>Nội dung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>1. Định nghĩa vận hành và miền áp dụng</strong></td>
+<td>Quang học nối scene với ảnh qua propagation, aperture, focus, detector và processing. Ảnh là phép đo bức xạ sau chuỗi biến đổi này; đường viền sáng trong frame không mặc định là biên hình học của vật.</td>
+</tr>
+<tr>
+<td><strong>2. Định luật / đại lượng</strong></td>
+<td>Phản xạ; Snell/refraction; diffraction; point-spread function (PSF); angular resolution; parallax; scattering. Cần focal length/FOV, aperture shape, focus, exposure, pixel scale, line-of-sight, range, atmospheric visibility và processing history.</td>
+</tr>
+<tr>
+<td><strong>3. Type-specimen</strong></td>
+<td>Đồng xu gần che vật xa cho parallax; sao out-of-focus nhận hình aperture; mirage trên mặt đường; cầu vồng/scattering; vật chìm trông nông hơn do refraction. Snell và diffraction xác định miền của ray/wave optics (<a href="https://openstax.org/books/university-physics-volume-3/pages/1-key-equations" target="_blank" rel="noopener noreferrer">OpenStax, Geometric Optics</a>).</td>
+</tr>
+<tr>
+<td><strong>4. Áp vào UAP</strong></td>
+<td><code>GOFAST</code>: parallax và geometry quyết định apparent speed. <code>USS Russell swarm / “pyramid”</code>: hình tam giác được giải thích bởi đường quang qua NVG rồi SLR; nó không phải silhouette tin cậy của craft (<a href="https://www.congress.gov/117/meeting/house/114761/documents/HHRG-117-IG05-Transcript-20220517.pdf" target="_blank" rel="noopener noreferrer">HPSCI hearing transcript, 17/05/2022, tr. 15–16</a>). <code>O'Hare Airport</code>: cavum là cơ chế mây có thật, nhưng sự tồn tại của lỗ mây không tự xác định object được nhân chứng báo cáo.</td>
+</tr>
+<tr>
+<td><strong>5. Giả thuyết quy ước mạnh</strong></td>
+<td>Defocus/bokeh, saturation/blooming, motion blur, lens flare, rolling shutter, compression, parallax, mirage/refraction, scattering, Venus/balloon/bird. Cavum hình thành khi máy bay làm đông giọt nước siêu lạnh và tạo fallstreak (<a href="https://science.nasa.gov/earth/earth-observatory/making-sense-of-holes-in-the-clouds-152486/" target="_blank" rel="noopener noreferrer">NASA Earth Observatory, 2024</a>); muốn áp vào O’Hare vẫn phải khớp thời tiết và trình tự quan sát.</td>
+</tr>
+<tr>
+<td><strong>6. Chỗ cổ điển hết</strong></td>
+<td>Suy thành phần vật liệu cần spectroscopy/polarimetry đã hiệu chuẩn; photon-counting yếu có thể cần detector/QM; atmospheric retrieval cần mô hình chuyên sâu. Super-resolution hoặc AI enhancement không được tạo chi tiết rồi coi là dữ liệu gốc.</td>
+</tr>
+<tr>
+<td><strong>7. Nhầm phạm trù</strong></td>
+<td>Bokeh cho hình aperture, không nhận dạng nguồn; pixel sáng không cho kích thước khi thiếu range; “mắt thấy giống đĩa” không cho thickness/khối lượng. Ảnh không rõ không phải bằng chứng của cloaking hay “rung động ngoài tần số”.</td>
+</tr>
+<tr>
+<td><strong>8. Phân loại</strong></td>
+<td>Định luật quang học và calibration đã kiểm là <strong>Phân loại 1</strong>; atmospheric/image formation model cho điều kiện cụ thể là <strong>Phân loại 2</strong>. Gán artifact ảnh thành thuộc tính craft mà không kiểm optical chain là <strong>Phân loại 5</strong>.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="ma-trận-tín-hiệu-nào-cho-phép-suy-ra-điều-gì">Ma trận: tín hiệu nào cho phép suy ra điều gì?<a class="heading-anchor" href="#ma-trận-tín-hiệu-nào-cho-phép-suy-ra-điều-gì" aria-label="Liên kết tới đề mục"></a></h2>
+<table>
+<thead>
+<tr>
+<th>Tín hiệu gốc</th>
+<th>Có thể suy trực tiếp hoặc gần trực tiếp</th>
+<th>Chưa thể kết luận nếu thiếu dữ liệu bổ sung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pixel/centroid theo frame</td>
+<td>Vị trí ảnh và tốc độ góc nếu timebase/FOV đã biết</td>
+<td>Range, kích thước thật, ground speed, gia tốc ba chiều</td>
+</tr>
+<tr>
+<td>Radar range/azimuth/elevation</td>
+<td>Vị trí theo năng lực và uncertainty của radar</td>
+<td>Vật liệu, kích thước thật, nguồn gốc; một track liên tục nếu association chưa khóa</td>
+</tr>
+<tr>
+<td>Doppler radar</td>
+<td>Thành phần vận tốc xuyên tâm</td>
+<td>Toàn vector vận tốc hoặc acceleration nếu chỉ có một beam</td>
+</tr>
+<tr>
+<td>IR intensity/polarity</td>
+<td>Radiance tương đối trong band và mode cụ thể</td>
+<td>Nhiệt độ tuyệt đối, tổng nhiệt, exhaust hoặc “không tỏa nhiệt”</td>
+</tr>
+<tr>
+<td>Âm thanh/lời kể “không boom”</td>
+<td>Âm tại vị trí, band và ngưỡng của người/microphone</td>
+<td>Không có shock ở mọi nơi trên đường bay</td>
+</tr>
+<tr>
+<td>Mất lock tại horizon/waterline</td>
+<td>Cảm biến không còn duy trì track</td>
+<td>Target đã vào nước, biến mất vật lý hoặc đổi môi trường</td>
+</tr>
+<tr>
+<td>Thiết bị lỗi gần sự kiện</td>
+<td>Tương quan thời gian nếu log đủ</td>
+<td>EMP, nguồn trường, chủ ý gây nhiễu hoặc công nghệ của target</td>
+</tr>
+</tbody>
+</table>
+<h2 id="quy-trình-đọc-tối-thiểu">Quy trình đọc tối thiểu<a class="heading-anchor" href="#quy-trình-đọc-tối-thiểu" aria-label="Liên kết tới đề mục"></a></h2>
+<ol>
+<li>Giữ observation gốc: thời gian, cảm biến, mode, hệ tọa độ, weather và dữ liệu thiếu.</li>
+<li>Tách <strong>đo trực tiếp</strong> khỏi <strong>đại lượng suy ra</strong> và ghi assumption cho từng phép suy.</li>
+<li>Dựng error budget: calibration, resolution, range, platform motion, atmosphere và processing.</li>
+<li>Thử mô hình đơn giản nhất có dự đoán bác bỏ được; không dùng danh sách “có thể là” thay cho phân tích.</li>
+<li>Đòi tương quan độc lập trước khi gộp radar, quang, IR và lời kể thành cùng một object.</li>
+<li>Chỉ chuyển sang SR/GR, vật liệu mới hoặc propulsion giả thuyết khi dữ liệu đã hiệu chuẩn thực sự vượt miền cổ điển.</li>
+<li>Giữ “chưa phân loại” là trạng thái dữ liệu, không phải nguồn gốc.</li>
+</ol>
+<h2 id="biên-phân-loại">Biên phân loại<a class="heading-anchor" href="#biên-phân-loại" aria-label="Liên kết tới đề mục"></a></h2>
+<p>Không gắn một Phân loại duy nhất cho toàn bộ “vật lý cổ điển”:</p>
+<ul>
+<li><strong>Phân loại 1 — Established:</strong> các định luật bảo toàn, Maxwell, nhiệt động lực học, lý thuyết sóng–shock, quang học và các hiệu ứng đã kiểm trong miền công bố.</li>
+<li><strong>Phân loại 2 — Effective model:</strong> Newton thay GR ở trường yếu; continuum/Navier–Stokes; ray optics; radar/atmospheric/IR retrieval với assumption cụ thể.</li>
+<li><strong>Phân loại 3:</strong> chỉ bắt đầu khi có một mô hình propulsion, vật liệu hoặc trường mới nhất quán và cho hệ quả kiểm tra được.</li>
+<li><strong>Phân loại 5:</strong> nhảy từ artifact, dữ liệu thiếu hoặc unidentified sang anti-gravity, cloaking, free energy hay “năng lượng tâm linh”.</li>
+</ul>
+<p>Phân loại chấm <strong>mệnh đề</strong>, không chấm độ “hay” của hồ sơ và không xác nhận/bác bỏ nguồn gốc NHI.</p>
+<h2 id="tài-liệu-nền">Tài liệu nền<a class="heading-anchor" href="#tài-liệu-nền" aria-label="Liên kết tới đề mục"></a></h2>
+<ul>
+<li>NASA, <em>UAP Independent Study Team Final Report</em> (2023): <a href="https://science.nasa.gov/uap/" target="_blank" rel="noopener noreferrer">https://science.nasa.gov/uap/</a>.</li>
+<li>AARO, <em>GOFAST Case Resolution Card: Methodology</em> (2025): <a href="https://www.aaro.mil/Portals/136/PDFs/case_resolution_reports/AARO_GoFast_Case_Resolution_Card_Methodology_Final.pdf" target="_blank" rel="noopener noreferrer">https://www.aaro.mil/Portals/136/PDFs/case_resolution_reports/AARO_GoFast_Case_Resolution_Card_Methodology_Final.pdf</a>.</li>
+<li>OpenStax, <em>Physics</em> và <em>University Physics</em>, các chương cơ học, chất lưu, sóng, nhiệt, điện từ và quang: <a href="https://openstax.org/subjects/science" target="_blank" rel="noopener noreferrer">https://openstax.org/subjects/science</a>.</li>
+<li>NOAA/NWS, <em>Radar Basics — Propagation</em>: <a href="https://training.weather.gov/nwstc/NEXRAD/RADAR/Section1-2.html" target="_blank" rel="noopener noreferrer">https://training.weather.gov/nwstc/NEXRAD/RADAR/Section1-2.html</a>.</li>
+<li>NISTIR 8098, <em>Calibration and Measurement Procedures for a High Magnification Thermal Camera</em> (2016), DOI: <a href="https://doi.org/10.6028/NIST.IR.8098" target="_blank" rel="noopener noreferrer">https://doi.org/10.6028/NIST.IR.8098</a>.</li>
+<li>NASA Glenn, <em>Mach Number</em> và dòng hypersonic: <a href="https://www.grc.nasa.gov/www/k-12/VirtualAero/BottleRocket/airplane/mach.html" target="_blank" rel="noopener noreferrer">https://www.grc.nasa.gov/www/k-12/VirtualAero/BottleRocket/airplane/mach.html</a>.</li>
+<li>U.S. House Permanent Select Committee on Intelligence, <em>Hearing on Unidentified Aerial Phenomena</em> (17/05/2022): <a href="https://www.congress.gov/117/meeting/house/114761/documents/HHRG-117-IG05-Transcript-20220517.pdf" target="_blank" rel="noopener noreferrer">https://www.congress.gov/117/meeting/house/114761/documents/HHRG-117-IG05-Transcript-20220517.pdf</a>.</li>
+</ul>
+</div></article></main><footer class="lite-footer"><div><span>Project Knowledge Disclosure · Chế độ đọc tối giản</span></div><div><a href="#main-content">Lên đầu trang ↑</a></div></footer></div></body></html>

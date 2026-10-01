@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-01T23:17:34.316Z",
+  "commitSha": "8a7e3b58891f92885a572a2dd9ccc1e678712588",
+  "totalTests": 40,
+  "passed": 34,
+  "failed": 0,
+  "flaky": 0,
+  "skipped": 6,
+  "durationMs": 21620,
+  "status": "passed",
+  "projects": [
+    "chromium-desktop",
+    "chromium-mobile"
+  ]
+}

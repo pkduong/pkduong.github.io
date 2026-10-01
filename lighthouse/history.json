@@ -1,0 +1,119 @@
+[
+  {
+    "generatedAt": "2026-10-01T23:17:24.513Z",
+    "commitSha": "8a7e3b58891f92885a572a2dd9ccc1e678712588",
+    "routes": [
+      {
+        "id": "home",
+        "path": "/",
+        "performance": 0.97,
+        "accessibility": 1,
+        "bestPractices": 1,
+        "seo": 1,
+        "lcpMs": 758.7844,
+        "cls": 0,
+        "tbtMs": 194.5
+      },
+      {
+        "id": "article",
+        "path": "/ai/articles/thoat-bay-vibe-coding-voi-sdd/",
+        "performance": 1,
+        "accessibility": 1,
+        "bestPractices": 1,
+        "seo": 1,
+        "lcpMs": 1209.054,
+        "cls": 0,
+        "tbtMs": 0
+      },
+      {
+        "id": "search",
+        "path": "/search/",
+        "performance": 1,
+        "accessibility": 1,
+        "bestPractices": 1,
+        "seo": 1,
+        "lcpMs": 1058.7425,
+        "cls": 0,
+        "tbtMs": 9
+      }
+    ]
+  },
+  {
+    "generatedAt": "2026-09-27T06:00:00.000Z",
+    "commitSha": "5a7a87054a652e7d0376d0d95c174a2606e7a021",
+    "routes": [
+      {
+        "id": "home",
+        "path": "/",
+        "performance": 1,
+        "accessibility": 1,
+        "bestPractices": 1,
+        "seo": 1,
+        "lcpMs": 700,
+        "cls": 0,
+        "tbtMs": 0
+      },
+      {
+        "id": "search",
+        "path": "/search/",
+        "performance": 0.99,
+        "accessibility": 1,
+        "bestPractices": 1,
+        "seo": 1,
+        "lcpMs": 800,
+        "cls": 0,
+        "tbtMs": 10
+      },
+      {
+        "id": "article",
+        "path": "/ai/articles/thoat-bay-vibe-coding-voi-sdd/",
+        "performance": 1,
+        "accessibility": 1,
+        "bestPractices": 1,
+        "seo": 1,
+        "lcpMs": 750,
+        "cls": 0,
+        "tbtMs": 0
+      }
+    ]
+  },
+  {
+    "generatedAt": "2026-09-27T04:00:00.000Z",
+    "commitSha": "0d02bf901aad0f81029774ee2e08626160ed76e2",
+    "routes": [
+      {
+        "id": "home",
+        "path": "/",
+        "performance": 1,
+        "accessibility": 1,
+        "bestPractices": 1,
+        "seo": 1,
+        "lcpMs": 720,
+        "cls": 0,
+        "tbtMs": 0
+      },
+      {
+        "id": "search",
+        "path": "/search/",
+        "performance": 0.99,
+        "accessibility": 1,
+        "bestPractices": 1,
+        "seo": 1,
+        "lcpMs": 810,
+        "cls": 0,
+        "tbtMs": 15
+      },
+      {
+        "id": "article",
+        "path": "/ai/articles/thoat-bay-vibe-coding-voi-sdd/",
+        "performance": 1,
+        "accessibility": 1,
+        "bestPractices": 1,
+        "seo": 1,
+        "lcpMs": 780,
+        "cls": 0,
+        "tbtMs": 0
+      }
+    ]
+  }
+]

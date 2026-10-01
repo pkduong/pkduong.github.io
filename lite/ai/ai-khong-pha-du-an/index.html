@@ -1,0 +1,148 @@
+<!DOCTYPE html><html lang="vi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Bạn Không Cần AI Viết Code Nhanh Hơn — Bạn Cần Nó Không Phá Dự Án · PKD Lite</title><meta name="description" content="AI chỉ thật sự hữu ích khi hiểu đúng task, phân tích impact, làm từng lát nhỏ và đưa ra bằng chứng rằng thay đổi không phá flow cũ."><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="stylesheet" href="/_astro/LiteLayout.DFVAyc4m.css"></head><body data-pagefind-ignore="all"><div class="lite-container"><header class="lite-nav"><div><a class="lite-brand" href="/lite/">PKD / LITE</a></div><nav class="lite-nav-links" aria-label="Điều hướng Lite"><a href="/lite/">Mục lục</a><span aria-hidden="true">·</span><a href="/ai/articles/ai-khong-pha-du-an/" title="Chuyển sang giao diện đầy đủ ban đầu">Sang bản đầy đủ ↗</a></nav></header><main id="main-content"><article><header class="lite-article-header"><h1>Bạn Không Cần AI Viết Code Nhanh Hơn — Bạn Cần Nó Không Phá Dự Án</h1><p class="lite-article-meta"><span>Lĩnh vực: <strong>AI</strong></span><span aria-hidden="true">·</span><span>Cập nhật: 2026-09-20</span><span aria-hidden="true">·</span><span>Thời gian đọc: ~4 phút</span><span aria-hidden="true">·</span><a href="/ai/articles/ai-khong-pha-du-an/" title="Xem bài viết này ở giao diện chuẩn">Xem bản chuẩn ↗</a></p></header><div class="lite-prose"><blockquote>
+<p>AI viết code rất nhanh. Nhưng một dòng code sai có thể kéo theo cả tuần sửa lỗi.</p>
+</blockquote>
+<pre><code class="language-text">Yêu cầu mơ hồ
+      ↓
+AI đoán business rule
+      ↓
+Code chạy được
+      ↓
+Flow cũ bị phá
+      ↓
+Developer trả giá
+</code></pre>
+<p>AI không nên chỉ là autocomplete cao cấp.</p>
+<p>AI nên làm việc như một kỹ sư trong team: hiểu mục tiêu, biết giới hạn, nhìn thấy rủi ro và chứng minh kết quả.</p>
+<h2 id="1-đừng-đưa-task-hãy-đưa-một-hợp-đồng">🧭 1. Đừng đưa task, hãy đưa một “hợp đồng”<a class="heading-anchor" href="#1-đừng-đưa-task-hãy-đưa-một-hợp-đồng" aria-label="Liên kết tới đề mục"></a></h2>
+<p>Một câu như:</p>
+<blockquote>
+<p>“Hãy implement task này.”</p>
+</blockquote>
+<p>chưa đủ để AI làm đúng.</p>
+<p>Trước khi code, task cần trả lời:</p>
+<pre><code class="language-text">Business goal   → Vì sao cần thay đổi?
+In scope        → Được sửa những gì?
+Out of scope    → Không được đụng vào gì?
+Expected        → Hành vi nào phải xảy ra?
+Acceptance      → Dựa vào đâu để biết đã đúng?
+Risk            → Flow cũ nào có thể bị ảnh hưởng?
+</code></pre>
+<p>Nếu acceptance criteria chưa rõ, việc đầu tiên của AI phải là hỏi và phát hiện phần thiếu — không phải tự đoán.</p>
+<blockquote>
+<p>Không có tiêu chí đúng thì không thể chứng minh code đúng.</p>
+</blockquote>
+<h2 id="️-2-trước-khi-sửa-code-hãy-vẽ-impact-map">🗺️ 2. Trước khi sửa code, hãy vẽ Impact Map<a class="heading-anchor" href="#️-2-trước-khi-sửa-code-hãy-vẽ-impact-map" aria-label="Liên kết tới đề mục"></a></h2>
+<p>Một thay đổi nhỏ trên UI có thể đi xuyên qua nhiều tầng:</p>
+<pre><code class="language-text">Route
+  ↓
+Page / Component
+  ↓
+Helper / Store
+  ↓
+Service
+  ↓
+API
+  ↓
+Flow khác dùng chung logic
+</code></pre>
+<p>AI cần tìm trước:</p>
+<ul>
+<li>file xử lý route và component chính;</li>
+<li>helper, store hoặc service dùng chung;</li>
+<li>pattern xử lý warning/error;</li>
+<li>test hiện có;</li>
+<li>các consumer có thể bị regression.</li>
+</ul>
+<p>Kết quả không phải là một danh sách file, mà là bản đồ ảnh hưởng:</p>
+<pre><code class="language-text">Task: thay đổi channel selection
+          │
+          ├─ channel helper
+          │      └─ business rule chọn channel
+          │
+          ├─ Export A
+          │      └─ dùng channel đã chọn
+          │
+          ├─ Export B
+          │      └─ dùng chung helper
+          │
+          └─ tests
+                 └─ kiểm tra behavior cũ và mới
+</code></pre>
+<p>Không có Impact Map, AI rất dễ sửa đúng một component nhưng bỏ sót ba flow đang dùng cùng logic.</p>
+<h2 id="3-chia-thay-đổi-thành-những-lát-nhỏ">🧱 3. Chia thay đổi thành những lát nhỏ<a class="heading-anchor" href="#3-chia-thay-đổi-thành-những-lát-nhỏ" aria-label="Liên kết tới đề mục"></a></h2>
+<p>AI thường muốn “tiện tay” refactor thêm: đổi tên, tách component, thay pattern error và dọn cả module.</p>
+<p>Đó là cách một task nhỏ biến thành một PR không thể review.</p>
+<pre><code class="language-text">Ghi nhận behavior cũ
+        ↓
+Viết hoặc cập nhật test
+        ↓
+Sửa một rule / helper
+        ↓
+Kiểm tra consumer thứ nhất
+        ↓
+Kiểm tra consumer thứ hai
+        ↓
+Chạy regression
+</code></pre>
+<p>Mỗi lát thay đổi phải trả lời được:</p>
+<ol>
+<li>Nó đổi behavior nào?</li>
+<li>Kiểm tra bằng gì?</li>
+<li>Có thể rollback riêng không?</li>
+</ol>
+<p>Với code legacy chưa có test, hãy tạo characterization test trước. Test này ghi lại behavior hiện tại để biết thay đổi mới có phá nó hay không; nó không mặc định rằng behavior cũ là tối ưu.</p>
+<blockquote>
+<p>AI được phép đề xuất mở rộng. Kỹ sư quyết định phạm vi.</p>
+</blockquote>
+<h2 id="4-đừng-báo-xong-khi-chưa-có-bằng-chứng">🔍 4. Đừng báo “xong” khi chưa có bằng chứng<a class="heading-anchor" href="#4-đừng-báo-xong-khi-chưa-có-bằng-chứng" aria-label="Liên kết tới đề mục"></a></h2>
+<p>“Chạy được trên máy local” chưa phải là bằng chứng đủ mạnh.</p>
+<pre><code class="language-text">Code change
+    │
+    ├─ Static check / lint
+    ├─ Unit test cho business rule
+    ├─ Flow test cho consumer
+    ├─ Regression test
+    └─ Build giống CI
+</code></pre>
+<p>Một báo cáo tốt phải nói rõ:</p>
+<ul>
+<li>đã đổi gì;</li>
+<li>flow nào bị ảnh hưởng;</li>
+<li>flow nào cố ý không đổi;</li>
+<li>command/test nào đã pass;</li>
+<li>rủi ro nào vẫn còn.</li>
+</ul>
+<p>AI có thể giúp tạo code, test và báo cáo. Người chịu trách nhiệm cuối cùng vẫn là kỹ sư review thay đổi.</p>
+<h2 id="5-tóm-tắt-bỏ-túi-take-away">🎯 5. Tóm tắt bỏ túi (Take away)<a class="heading-anchor" href="#5-tóm-tắt-bỏ-túi-take-away" aria-label="Liên kết tới đề mục"></a></h2>
+<p>Nếu bạn quên hết những gì vừa đọc, chỉ cần nhớ bảng này là đủ:</p>
+<table>
+<thead>
+<tr>
+<th>Điều cần nhớ</th>
+<th>Ý nghĩa</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Đừng bắt AI đoán</td>
+<td>Chốt business goal và acceptance criteria trước</td>
+</tr>
+<tr>
+<td>Vẽ Impact Map</td>
+<td>Biết route, helper, service và consumer nào bị ảnh hưởng</td>
+</tr>
+<tr>
+<td>Làm từng lát nhỏ</td>
+<td>PR nhỏ thì dễ review, test và rollback</td>
+</tr>
+<tr>
+<td>Legacy phải có baseline</td>
+<td>Characterization test giúp giữ behavior cũ trước khi đổi</td>
+</tr>
+<tr>
+<td>Code phải có evidence</td>
+<td>Lint, test, regression và build mới tạo confidence</td>
+</tr>
+</tbody>
+</table>
+</div></article></main><footer class="lite-footer"><div><span>Project Knowledge Disclosure · Chế độ đọc tối giản</span></div><div><a href="#main-content">Lên đầu trang ↑</a></div></footer></div></body></html>

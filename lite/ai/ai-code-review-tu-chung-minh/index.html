@@ -1,0 +1,138 @@
+<!DOCTYPE html><html lang="vi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Đừng Tin Code AI Vừa Viết: Hãy Bắt Nó Tự Chứng Minh · PKD Lite</title><meta name="description" content="AI code review không phải cuộc thi tìm comment. Giá trị thật nằm ở test, evidence và quyết định của human trước khi merge."><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="stylesheet" href="/_astro/LiteLayout.DFVAyc4m.css"></head><body data-pagefind-ignore="all"><div class="lite-container"><header class="lite-nav"><div><a class="lite-brand" href="/lite/">PKD / LITE</a></div><nav class="lite-nav-links" aria-label="Điều hướng Lite"><a href="/lite/">Mục lục</a><span aria-hidden="true">·</span><a href="/ai/articles/ai-code-review-tu-chung-minh/" title="Chuyển sang giao diện đầy đủ ban đầu">Sang bản đầy đủ ↗</a></nav></header><main id="main-content"><article><header class="lite-article-header"><h1>Đừng Tin Code AI Vừa Viết: Hãy Bắt Nó Tự Chứng Minh</h1><p class="lite-article-meta"><span>Lĩnh vực: <strong>AI</strong></span><span aria-hidden="true">·</span><span>Cập nhật: 2026-09-20</span><span aria-hidden="true">·</span><span>Thời gian đọc: ~4 phút</span><span aria-hidden="true">·</span><a href="/ai/articles/ai-code-review-tu-chung-minh/" title="Xem bài viết này ở giao diện chuẩn">Xem bản chuẩn ↗</a></p></header><div class="lite-prose"><p>AI vừa viết xong một feature.</p>
+<p>Nó nói:</p>
+<blockquote>
+<p>“Đã hoàn thành.”</p>
+</blockquote>
+<p>Nhưng câu hỏi quan trọng hơn là:</p>
+<blockquote>
+<p>“Dựa vào đâu để tin?”</p>
+</blockquote>
+<pre><code class="language-text">AI sinh code
+      ↓
+AI tự nhận code đúng
+      ✕
+      ↓
+Diff + test + CI + human judgment
+      ↓
+Quyết định merge có bằng chứng
+</code></pre>
+<p>AI review không sinh ra để thay con người. Nó sinh ra để bắt những lỗi routine sớm hơn, trước khi reviewer phải tiêu tốn thời gian vào chúng.</p>
+<h2 id="1-comment-không-phải-là-bằng-chứng">🚨 1. Comment không phải là bằng chứng<a class="heading-anchor" href="#1-comment-không-phải-là-bằng-chứng" aria-label="Liên kết tới đề mục"></a></h2>
+<p>Một review chỉ có comment như “có thể tối ưu” hoặc “hãy thêm validation” mới chỉ là ý kiến.</p>
+<p>Một vòng review có giá trị phải đi xa hơn:</p>
+<pre><code class="language-text">Đọc diff
+   ↓
+Phát hiện rủi ro
+   ↓
+Đề xuất test mục tiêu
+   ↓
+Chạy test trong CI / PR
+   ↓
+Hiển thị pass / fail
+   ↓
+Human quyết định merge
+</code></pre>
+<p>Mục tiêu không phải tạo ra nhiều comment nhất.</p>
+<p>Mục tiêu là biến nghi ngờ thành evidence có thể kiểm tra.</p>
+<h2 id="2-ai-nên-kiểm-tra-phần-nào">🔎 2. AI nên kiểm tra phần nào?<a class="heading-anchor" href="#2-ai-nên-kiểm-tra-phần-nào" aria-label="Liên kết tới đề mục"></a></h2>
+<p>AI phù hợp với các việc có pattern và có thể kiểm chứng:</p>
+<pre><code class="language-text">AI có thể làm tốt
+├─ syntax và style bất thường
+├─ lỗi logic hiển nhiên trong diff
+├─ thiếu test cho nhánh mới
+├─ rủi ro security phổ biến
+├─ regression ở các edge case đã biết
+└─ gợi ý test mục tiêu
+</code></pre>
+<p>Nhưng AI không tự quyết định được:</p>
+<pre><code class="language-text">Human phải giữ
+├─ business intent
+├─ architecture
+├─ trade-off hiệu năng / chi phí
+├─ maintainability dài hạn
+├─ tác động sản phẩm
+└─ quyết định cuối cùng trước merge
+</code></pre>
+<p>Nguyên tắc ngắn gọn:</p>
+<blockquote>
+<p>AI nói điều gì có thể sai. Human quyết định điều gì thật sự quan trọng.</p>
+</blockquote>
+<h2 id="3-review-phải-gắn-với-test-và-ci">🧪 3. Review phải gắn với test và CI<a class="heading-anchor" href="#3-review-phải-gắn-với-test-và-ci" aria-label="Liên kết tới đề mục"></a></h2>
+<p>AI code review đặt ở một dashboard riêng sẽ dễ bị bỏ quên. Giá trị tăng lên khi nó nằm ngay trong nơi team làm việc:</p>
+<pre><code class="language-text">IDE / Pull Request
+          ↓
+AI scan phần diff
+          ↓
+Tạo finding và test mục tiêu
+          ↓
+CI chạy test
+          ↓
+Kết quả trở thành evidence
+          ↓
+Human review architecture và business logic
+</code></pre>
+<p>Một review tối thiểu nên kiểm tra:</p>
+<ul>
+<li>thay đổi có đúng acceptance criteria không;</li>
+<li>có branch hoặc edge case nào chưa được test không;</li>
+<li>payload, route hoặc API contract có bị đổi ngoài phạm vi không;</li>
+<li>flow cũ dùng chung helper có bị ảnh hưởng không;</li>
+<li>lint, unit test, flow test và build có pass không.</li>
+</ul>
+<p>AI có thể giúp sinh test, nhưng test vẫn phải phản ánh behavior thật. Một test vô nghĩa chỉ làm CI xanh giả tạo.</p>
+<h2 id="️-4-bốn-cái-bẫy-trước-khi-merge">⚠️ 4. Bốn cái bẫy trước khi merge<a class="heading-anchor" href="#️-4-bốn-cái-bẫy-trước-khi-merge" aria-label="Liên kết tới đề mục"></a></h2>
+<pre><code class="language-text">1. Silver bullet
+   Tin AI tuyệt đối vì nó nói rất tự tin
+
+2. Comment inflation
+   Có quá nhiều comment nhưng không có test hoặc evidence
+
+3. Coverage gap
+   Review được style nhưng bỏ sót business logic và downstream impact
+
+4. Manual only
+   Chỉ review khi ai đó nhớ bấm chạy, nên nhiều thay đổi lọt qua
+</code></pre>
+<p>Cách phòng thủ:</p>
+<pre><code class="language-text">AI xử lý routine
+        +
+CI tạo evidence
+        +
+Human giữ judgment
+        ↓
+Merge với confidence cao hơn
+</code></pre>
+<p>Confidence cao hơn không có nghĩa là rủi ro bằng không. Nó có nghĩa là team biết mình đã kiểm tra gì và còn mù ở đâu.</p>
+<h2 id="5-tóm-tắt-bỏ-túi-take-away">🎯 5. Tóm tắt bỏ túi (Take away)<a class="heading-anchor" href="#5-tóm-tắt-bỏ-túi-take-away" aria-label="Liên kết tới đề mục"></a></h2>
+<p>Nếu bạn quên hết những gì vừa đọc, chỉ cần nhớ bảng này là đủ:</p>
+<table>
+<thead>
+<tr>
+<th>Điều cần nhớ</th>
+<th>Ý nghĩa</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Comment chưa đủ</td>
+<td>Review tốt phải tạo ra test hoặc evidence kiểm chứng được</td>
+</tr>
+<tr>
+<td>AI kiểm tra routine</td>
+<td>Human giữ architecture, business logic và trade-off</td>
+</tr>
+<tr>
+<td>Review phải ở trong flow</td>
+<td>Gắn vào IDE, PR và CI để không phụ thuộc trí nhớ</td>
+</tr>
+<tr>
+<td>Test phải có nghĩa</td>
+<td>Test xanh nhưng không kiểm tra behavior thật vẫn là rủi ro</td>
+</tr>
+<tr>
+<td>Không có confidence tuyệt đối</td>
+<td>Hãy biết đã kiểm tra gì và coverage gap còn lại ở đâu</td>
+</tr>
+</tbody>
+</table>
+</div></article></main><footer class="lite-footer"><div><span>Project Knowledge Disclosure · Chế độ đọc tối giản</span></div><div><a href="#main-content">Lên đầu trang ↑</a></div></footer></div></body></html>

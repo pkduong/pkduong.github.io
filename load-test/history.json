@@ -1,0 +1,46 @@
+[
+  {
+    "generatedAt": "2026-09-27T07:26:05.982Z",
+    "sourceCommitSha": "65edf75386534b24b687f942652194297445631c",
+    "peakVUs": 100,
+    "p95ResponseMs": 3.8534725999999986,
+    "errorRate": 0,
+    "throughputRps": 24.458481258406305,
+    "requestCount": 10327,
+    "checksRate": 1,
+    "assessment": "improved"
+  },
+  {
+    "generatedAt": "2026-09-27T06:47:02.959Z",
+    "sourceCommitSha": "e333d55ffbf1b15018c7e186a01bd36e274d36f3",
+    "peakVUs": 100,
+    "p95ResponseMs": 16.9141034,
+    "errorRate": 0,
+    "throughputRps": 24.27934326050979,
+    "requestCount": 10264,
+    "checksRate": 1,
+    "assessment": "review"
+  },
+  {
+    "generatedAt": "2026-09-27T06:00:06.990Z",
+    "sourceCommitSha": "5a7a87054a652e7d0376d0d95c174a2606e7a021",
+    "peakVUs": 100,
+    "p95ResponseMs": 4.35,
+    "errorRate": 0,
+    "throughputRps": 24.42,
+    "requestCount": 10298,
+    "checksRate": 1,
+    "assessment": "within-noise"
+  },
+  {
+    "generatedAt": "2026-09-27T04:10:00.000Z",
+    "sourceCommitSha": "0d02bf901aad0f81029774ee2e08626160ed76e2",
+    "peakVUs": 100,
+    "p95ResponseMs": 4.15,
+    "errorRate": 0,
+    "throughputRps": 24.38,
+    "requestCount": 10297,
+    "checksRate": 1,
+    "assessment": "baseline"
+  }
+]
